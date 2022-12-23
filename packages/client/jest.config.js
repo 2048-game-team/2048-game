@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+
 dotenv.config()
 
 export default {
@@ -8,4 +9,5 @@ export default {
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
+  moduleDirectories: ['node_modules', 'src'],
 }

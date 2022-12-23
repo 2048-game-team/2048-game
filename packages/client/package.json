@@ -7,19 +7,24 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write .",
+    "lint:fix": "eslint --ext .ts,.tsx src --fix",
+    "prettier": "prettier --write .",
+    "format": "npm run lint:fix && npm run prettier",
     "test": "jest ./"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "antd": "^5.1.0",
+    "axios": "^1.2.1",
     "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.6.0"
+    "react-router-dom": "^6.6.0",
+    "redux-logger": "^3.0.6",
+    "vite-tsconfig-paths": "^4.0.3"
   },
   "devDependencies": {
     "@testing-library/react": "^13.3.0",
@@ -28,6 +33,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
+    "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "@vitejs/plugin-react": "^2.0.1",

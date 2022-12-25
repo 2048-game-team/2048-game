@@ -1,7 +1,7 @@
-import App from './App'
+import { AppWithProviders } from 'app/ui'
 import { render, screen } from '@testing-library/react'
 
-const appContent = 'Вот тут будет жить ваше приложение :)'
+const appContent = 'Домашняя страница приложения'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -9,6 +9,6 @@ global.fetch = jest.fn(() =>
 )
 
 test('Example test', async () => {
-  render(<App />)
+  render(<AppWithProviders />)
   expect(screen.getByText(appContent)).toBeDefined()
 })

@@ -17,6 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
+      "root/*": ["../*"],
       "app/*": ["./app/*"],
       "entities/*": ["./entities/*"],
       "pages/*": ["./pages/*"],

@@ -4,8 +4,8 @@ import { useRoutes } from 'react-router-dom'
 import { WithProviders } from './providers'
 import { Spin } from 'antd'
 import { LayoutGame } from 'processes/layout'
-import './index.css'
 import { WithTheme } from 'app/providers/withTheme'
+import './index.css'
 
 const Application = () => {
   const router = useRoutes(routes)

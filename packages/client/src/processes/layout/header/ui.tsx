@@ -12,8 +12,7 @@ export const Header = () => {
         title="Ваня Иванов"
         trigger={['hover', 'click', 'focus']}
         placement="bottomRight"
-        content={UserMenu}
-        open>
+        content={UserMenu}>
         <Avatar icon={<UserOutlined />} />
       </Popover>
     </Space>

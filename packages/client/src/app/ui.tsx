@@ -4,7 +4,6 @@ import { useRoutes } from 'react-router-dom'
 import { WithProviders } from './providers'
 import { Spin } from 'antd'
 import { LayoutGame } from 'processes/layout'
-import { WithTheme } from 'app/providers/withTheme'
 import './index.css'
 
 const Application = () => {
@@ -20,9 +19,7 @@ const Application = () => {
 export const AppWithProviders = () => {
   return (
     <WithProviders>
-      <WithTheme>
-        <Application />
-      </WithTheme>
+      <Application />
     </WithProviders>
   )
 }

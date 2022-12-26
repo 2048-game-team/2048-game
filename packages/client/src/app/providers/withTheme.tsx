@@ -1,14 +1,12 @@
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { ConfigProvider, theme as themeConfig } from 'antd'
 import 'antd/dist/reset.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { Theme } from 'entities/ui/state'
-import { switchTheme } from 'entities/ui/reducer'
 import { useMediaPredicate } from 'react-media-hook'
+import { useStore } from 'effector-react'
+import { $theme, setTheme, Theme } from 'entities/ui'
 
 export const WithTheme: FC<PropsWithChildren> = ({ children }) => {
-  const { theme } = useSelector(state => state.ui)
-  const dispatch = useDispatch()
+  const theme = useStore($theme)
   const biggerThan400 = useMediaPredicate('(prefers-color-scheme: dark)')
 
   const algorithm =
@@ -17,11 +15,8 @@ export const WithTheme: FC<PropsWithChildren> = ({ children }) => {
       : themeConfig.darkAlgorithm
 
   useEffect(() => {
-    if (biggerThan400) {
-      dispatch(switchTheme({ theme: Theme.Dark }))
-    } else {
-      dispatch(switchTheme({ theme: Theme.Light }))
-    }
+    if (biggerThan400) setTheme(Theme.Dark)
+    else setTheme(Theme.Light)
   }, [biggerThan400])
 
   return (

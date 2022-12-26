@@ -1,16 +1,12 @@
 import { Space, Switch, Typography } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
-import { Theme } from 'entities/ui/state'
-import { switchTheme } from 'entities/ui/reducer'
+import { $theme, setTheme, Theme } from 'entities/ui'
+import { useStore } from 'effector-react'
 
 export const UserMenu = () => {
-  const { theme } = useSelector(state => state.ui)
-  const dispatch = useDispatch()
+  const theme = useStore($theme)
 
   const toggleTheme = () =>
-    dispatch(
-      switchTheme({ theme: theme === Theme.Dark ? Theme.Light : Theme.Dark })
-    )
+    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)
 
   const checked = theme === Theme.Light
 

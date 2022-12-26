@@ -1,11 +1,11 @@
 import { FC, JSXElementConstructor, PropsWithChildren } from 'react'
 
 import { WithRouter } from './withRouter'
-import { WithRedux } from './withRedux'
+import { WithTheme } from './withTheme'
 
 type TCComponents = Array<JSXElementConstructor<PropsWithChildren<unknown>>>
 
-const components: TCComponents = [WithRouter, WithRedux]
+const components: TCComponents = [WithRouter, WithTheme]
 
 export const WithProviders: FC<PropsWithChildren> = ({ children }) => {
   return (

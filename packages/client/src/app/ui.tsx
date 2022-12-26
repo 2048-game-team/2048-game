@@ -1,24 +1,19 @@
 import { routes } from 'processes/routes'
-import { Suspense, useEffect } from 'react'
+import { Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { WithProviders } from './providers'
 import { Spin } from 'antd'
+import { LayoutGame } from 'processes/layout'
+import './index.css'
 
 const Application = () => {
   const router = useRoutes(routes)
 
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
-
-    fetchServerData()
-  }, [])
-
-  return <Suspense fallback={<Spin />}>{router}</Suspense>
+  return (
+    <Suspense fallback={<Spin />}>
+      <LayoutGame>{router}</LayoutGame>
+    </Suspense>
+  )
 }
 
 export const AppWithProviders = () => {

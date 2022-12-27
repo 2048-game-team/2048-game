@@ -11,16 +11,14 @@ export const UserMenu = () => {
   const checked = theme === Theme.Light
 
   return (
-    <Space>
-      <Space align="center" style={{ justifyContent: 'space-between' }}>
-        <Typography.Text>Тема</Typography.Text>
-        <Switch
-          checkedChildren="День"
-          unCheckedChildren="Ночь"
-          checked={checked}
-          onChange={toggleTheme}
-        />
-      </Space>
+    <Space wrap>
+      <Typography.Text>Тема</Typography.Text>
+      <Switch
+        checkedChildren='День'
+        unCheckedChildren='Ночь'
+        checked={checked}
+        onChange={toggleTheme}
+      />
     </Space>
   )
 }

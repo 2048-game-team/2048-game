@@ -2,17 +2,18 @@ import React from 'react'
 import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { LoginFields } from 'pages/login'
+import { routesPath } from 'processes/routes'
 
 export const Login = () => {
   const navigate = useNavigate()
 
   const handleCancel = () => {
-    navigate('/')
+    navigate(routesPath.home)
   }
 
   const onFinish = (data: LoginFields) => {
     console.log(data)
-    navigate('/')
+    navigate(routesPath.home)
   }
 
   const onFinishFailed = () => {
@@ -59,7 +60,7 @@ export const Login = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to='/register'>
+            <Link to={routesPath.register}>
               Регистрация
             </Link>
           </Form.Item>

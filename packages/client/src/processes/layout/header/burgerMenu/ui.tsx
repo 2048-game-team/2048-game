@@ -1,17 +1,11 @@
 import React from 'react'
 import { Dropdown, MenuProps, Typography } from 'antd'
-import { LoginOutlined, LogoutOutlined, MenuOutlined, ProfileOutlined } from '@ant-design/icons'
-import { routesPath } from 'processes/routes'
+import { MenuOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { navList } from './const'
 
 export const BurgerMenu = () => {
-  const navArr = [
-    { path: routesPath.login,icon: <LoginOutlined />, title: 'Вход' },
-    { path: routesPath.profile,icon: <ProfileOutlined />, title: 'Профиль пользователя' },
-    { path: routesPath.logout,icon: <LogoutOutlined />, title: 'Выход' }
-  ]
-
-  const items: MenuProps['items'] = navArr.map((nav, i) => (
+  const items: MenuProps['items'] = navList.map((nav, i) => (
     {
       key: i,
       label: <Link to={nav.path}>{nav.title}</Link>,
@@ -19,10 +13,9 @@ export const BurgerMenu = () => {
     }
   ))
 
-
   return (
     <Dropdown menu={{ items }} placement='bottomLeft' arrow>
-      <Typography style={{fontSize:'200%'}}>
+      <Typography style={{ fontSize: '200%' }}>
         <MenuOutlined />
       </Typography>
     </Dropdown>

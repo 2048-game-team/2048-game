@@ -3,7 +3,7 @@ import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { LoginFields } from 'pages/login'
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate()
 
   const handleCancel = () => {
@@ -68,5 +68,3 @@ const Login = () => {
     </Modal>
   )
 }
-
-export default Login

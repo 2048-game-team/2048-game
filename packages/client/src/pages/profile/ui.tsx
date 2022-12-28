@@ -6,20 +6,16 @@ import {
     Divider,
     Form,
     Input,
-    Modal,
     Tooltip,
     Typography,
-    Upload,
-    UploadFile,
-    UploadProps
 } from "antd";
 import {LeftOutlined, UserOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
-import ImgCrop from "antd-img-crop";
+import {routesPath} from "processes/routes";
+import { AvatarModal } from './avatarModal';
 
 export const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
 
     const showAvatarModal = () => {
         setIsModalOpen(true)
@@ -33,15 +29,11 @@ export const Profile = () => {
         setIsModalOpen(false);
     };
 
-    const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-        setFileList(newFileList);
-    };
-
     return (
         <Card>
             <Typography>
                 <Link
-                    to='/'
+                    to={routesPath.home}
                 >
                     <LeftOutlined />
                     Назад
@@ -49,7 +41,7 @@ export const Profile = () => {
                 <Form
                     name='profile'
                     labelCol={{ span: 6 }}
-                    wrapperCol={{ span: 17 }}
+                    wrapperCol={{ span: 15 }}
                     initialValues={{ remember: true }}
                     autoComplete='off'
                 >
@@ -113,31 +105,10 @@ export const Profile = () => {
                     </Form.Item>
                 </Form>
             </Typography>
-            <Modal title="Добавление аватара"
-                   open={isModalOpen}
-                   footer={[
-                       <Button key="back" onClick={handleCancel}>
-                           Закрыть
-                       </Button>,
-                       <Button key="submit"
-                               type="primary"
-                               onClick={handleOk}>
-                           Сохранить
-                       </Button>,
-                   ]}
-                   onCancel={handleCancel}
-            >
-                <ImgCrop rotate>
-                    <Upload
-                        action=""
-                        listType="picture-card"
-                        fileList={fileList}
-                        onChange={onChange}
-                    >
-                        {fileList.length < 1 && '+ Загрузить'}
-                    </Upload>
-                </ImgCrop>
-            </Modal>
+            <AvatarModal isModalOpen={isModalOpen}
+                         onClose={()=>handleCancel()}
+                         onOk={()=>handleOk()}
+            />
         </Card>
     )
 }

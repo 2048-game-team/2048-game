@@ -14,6 +14,6 @@ export default {
     '^root/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/$1',
     '^entities/(.*)$': '<rootDir>/src/entities/$1',
-    '\\.(css|less)$': 'identity-obj-proxy',
+    '\\.(css|less|png|jpg|svg|gif)$': 'identity-obj-proxy'
   },
 }

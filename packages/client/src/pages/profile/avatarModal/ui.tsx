@@ -22,6 +22,7 @@ export const AvatarModal = ({isModalOpen=false, onClose, onOk}:AvatarModalProps)
                    </Button>,
                ]}
                onCancel={onClose}
+               style={{ textAlign: 'center' }}
         >
             <ImgCrop rotate>
                 <Upload

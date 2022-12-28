@@ -4,7 +4,7 @@ import { StartSpace, StartButton, StartTypography } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { routesPath } from 'processes/routes'
 import gameLogo from './gameLogo.gif'
-import { aboutGameText } from './aboutGameText'
+import { aboutGameText } from './const'
 
 export const Start = () => {
 

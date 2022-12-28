@@ -2,7 +2,7 @@ import { AppWithProviders } from 'app/ui'
 import { render, screen } from '@testing-library/react'
 import 'root/jest.mock'
 
-const appContent = 'Домашняя страница приложения'
+const appContent = 'Старт!'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

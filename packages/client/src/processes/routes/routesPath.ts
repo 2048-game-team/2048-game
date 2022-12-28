@@ -3,5 +3,6 @@ export const routesPath = {
   login: '/login',
   profile: '/profile',
   register: '/register',
-  logout: '/logout'
+  logout: '/logout',
+  game: '/game'
 }

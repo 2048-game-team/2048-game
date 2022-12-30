@@ -3,25 +3,36 @@ import ImgCrop from "antd-img-crop";
 import React, {useState} from "react";
 import {AvatarModalProps} from "./types";
 
-export const AvatarModal = ({isModalOpen=false, onClose, onOk}:AvatarModalProps) => {
+export const AvatarModal = ({...props}:AvatarModalProps) => {
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
 
     const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
         setFileList(newFileList);
     };
 
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const handleOk = () => {
+        props.onOk();
+    };
 
-    return !isModalOpen ? null : (
+    const handleCancel = () => {
+        props.onClose();
+    };
+
+    if(!props.isModalOpen) {
+        return null;
+    }
+
+    return (
         <Modal title="Добавление аватара"
-               open={isModalOpen}
+               open={props.isModalOpen}
                footer={[
                    <Button key="submit"
                            type="primary"
-                           onClick={onOk}>
+                           onClick={handleOk}>
                        Сохранить
                    </Button>,
                ]}
-               onCancel={onClose}
+               onCancel={handleCancel}
                style={{ textAlign: 'center' }}
         >
             <ImgCrop rotate>

@@ -10,24 +10,27 @@ import {
     Typography,
 } from "antd";
 import {LeftOutlined, UserOutlined} from "@ant-design/icons";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {routesPath} from "processes/routes";
 import { AvatarModal } from './avatarModal';
+import {ProfileFields} from "pages/profile/types";
 
 export const Profile = () => {
+    const navigate = useNavigate()
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showAvatarModal = () => {
         setIsModalOpen(true)
     }
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+    const onFinish = (data: ProfileFields) => {
+        console.log(data)
+        navigate(routesPath.home)
+    }
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+    const onFinishFailed = () => {
+        console.log('Finish Failed')
+    }
 
     return (
         <Card>
@@ -44,6 +47,8 @@ export const Profile = () => {
                     wrapperCol={{ span: 15 }}
                     initialValues={{ remember: true }}
                     autoComplete='off'
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
                 >
                     <Form.Item
                         name='avatar'
@@ -106,8 +111,8 @@ export const Profile = () => {
                 </Form>
             </Typography>
             <AvatarModal isModalOpen={isModalOpen}
-                         onClose={()=>handleCancel()}
-                         onOk={()=>handleOk()}
+                         onClose={()=>setIsModalOpen(false)}
+                         onOk={()=>setIsModalOpen(false)}
             />
         </Card>
     )

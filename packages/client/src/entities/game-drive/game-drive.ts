@@ -1,128 +1,166 @@
-import { createEvent, createStore, Event, forward, Store } from 'effector'
-import { IGameData, GameStatusType, Array2D } from './types'
+import { IGameData, GameStatus, IMovementResult, CellList, Array2D } from './types'
+import { setGameData, setgameStatus } from './model'
 
-export class GameDrive {
-  static __instance: GameDrive;
-  static defaultBoardSize = { rows: 4, cols: 4 }
-  
-  $gameData!: Store<IGameData>
-  $gameStatus!: Store<GameStatusType>
+const defaultBoardSize = { rows: 4, cols: 4 }
+const maxBoardSize = { rows: 40, cols: 40 }
+const winCreteria = 2048
+let gameData: IGameData = {boardData: [], score: 0}
 
-  rowCount!: number;
-  colCount!: number;
-
-  leftMove!: Event<void>
-  topMove!: Event<void>
-  rightMove!: Event<void>
-  bottomMove!: Event<void>
-  updateGameStatus!: Event<void>
-
-  constructor(rowCount?: number, colCount?: number) {
-    if (GameDrive.__instance) {
-      return GameDrive.__instance
-    }
-    GameDrive.__instance = this
-
-    this.rowCount = rowCount ?? GameDrive.defaultBoardSize.rows
-    this.colCount = colCount ?? GameDrive.defaultBoardSize.cols
-    this.createNewGame(this.rowCount, this.colCount)
-    this.createEvents();
-    this.subscribeEvents();
+export const createNewGame = (rowCount?: number, colCount?: number) => {
+  rowCount = rowCount ?? defaultBoardSize.rows
+  colCount = colCount ?? defaultBoardSize.cols
+  if(rowCount <= 0 || rowCount > maxBoardSize.rows || colCount <= 0 || colCount > maxBoardSize.cols) {
+    throw new Error('Invalid board size')
   }
+  gameData.boardData = new Array(rowCount).fill(null).map(() => new Array(colCount).fill(0))
+  gameData.score = 0
+  setGameData(gameData)
+  setgameStatus(GameStatus.OnGame)
+  insertNewNumber()
+  insertNewNumber() 
+}
 
-  public createNewGame(rowCount: number, colCount: number) {
-    const newBoard: Array2D = new Array(rowCount).fill(null).map(() => new Array(colCount).fill(0))
-    // for test only!!!!, TODO: random placement
-    newBoard[1][1] = 2
-    this.$gameData = createStore<IGameData>({boardData: newBoard, score: 0})
-    this.$gameStatus = createStore<GameStatusType>("on-game");
+export const setGame = (data: IGameData) => {
+  gameData = data
+  setGameData(gameData)
+}
+
+export const leftMove = () => {
+  makeNewGameData('left')
+}
+
+export const topMove = () => {
+  makeNewGameData('top')
+}
+
+export const rightMove = () => {
+  makeNewGameData('right')
+}
+
+export const bottomMove = () => {
+  makeNewGameData('bottom')
+}
+
+const makeNewGameData = (move: 'left' | 'top' | 'right' | 'bottom') => {
+  switch (move) {
+    case 'left': 
+      leftMoveProcess()
+      break
+    case 'top': 
+      topMoveProcess()
+      break
+    case 'right': 
+      rightMoveProcess()
+      break
+    case 'bottom': 
+      bottomMoveProcess()
+      break
   }
+  setGameData(gameData)
+  insertNewNumber()
+}
 
-  private createEvents() {
-    this.leftMove = createEvent();
-    this.topMove = createEvent();
-    this.rightMove = createEvent();
-    this.bottomMove = createEvent();
-    this.updateGameStatus = createEvent();
+const leftMoveProcess = () => {
+  gameData.boardData = gameData.boardData.map(row => {
+    const res: IMovementResult = makeMove(row);
+    gameData.score += res.addToScore
+    return res.newRaw
+  })
+}
+
+const topMoveProcess = () => {
+  transposeMatrix()
+  leftMoveProcess()
+  transposeMatrix()
+}
+
+const rightMoveProcess = () => {
+  gameData.boardData = gameData.boardData.map(row => {
+    const res: IMovementResult = makeMove(row.reverse());
+    gameData.score += res.addToScore
+    return res.newRaw.reverse()
+  })
+}
+
+const bottomMoveProcess = () => {
+  transposeMatrix()
+  rightMoveProcess()
+  transposeMatrix()
+}
+
+const insertNewNumber = () => {
+  const newNumber = Math.random() < 0.9 ? 2 : 4
+  const freeCells = getFreeCells()
+  if(freeCells.length > 0){
+    const randomCellIdx = getRandomInt(freeCells.length)
+    gameData.boardData[freeCells[randomCellIdx].row][freeCells[randomCellIdx].col] = newNumber
+    setGameData(gameData)
   }
+  if(freeCells.length <= 1){
+    if(noWayToMove()) setgameStatus(GameStatus.Lost)
+  }
+}
 
-  private subscribeEvents() {
-    this.$gameData
-      .on(this.leftMove, this.leftMoveHandler.bind(this))
-      .on(this.topMove, this.topMoveHandler.bind(this))
-      .on(this.rightMove, this.rightMoveHandler.bind(this))
-      .on(this.bottomMove, this.bottomMoveHandler.bind(this))
-    forward({
-      from: this.$gameData,
-      to: this.updateGameStatus
+const getRandomInt = (max: number): number => {
+  return Math.floor(Math.random() * max)
+}
+
+const getFreeCells = (): CellList => {
+  const res: CellList = [];
+  gameData.boardData.forEach((row, rowIndex) => {
+    row.forEach((col, colIndex) => {
+      if(col === 0) res.push({row: rowIndex, col: colIndex})
     })
-    this.$gameStatus
-      .on(this.updateGameStatus, this.updateGameStatusHandler.bind(this))
-  }
+  })
+  return res
+}
 
-  private leftMoveHandler(gameData: IGameData): IGameData {
-    // for test only!!!!, TODO: create real handler
-    return {
-      boardData: this.leftShift(gameData.boardData),
-      score: gameData.score + 1
-    };
-  }
-
-  private topMoveHandler(gameData: IGameData): IGameData {
-  // for test only!!!!, TODO: create real handler 
-    return {
-      boardData: this.topShift(gameData.boardData),
-      score: gameData.score + 1
+const makeMove = (raw: number[]): IMovementResult => {
+  let addToScore = 0
+  const rawLength = raw.length
+  const onlyNumbers = raw.filter(item => item > 0)
+  let i = onlyNumbers.length - 1
+  while (i > 0) {
+    if(onlyNumbers[i - 1] === onlyNumbers[i]) {
+      onlyNumbers.splice(i, 1)
+      onlyNumbers[i - 1] = 2 * onlyNumbers[i - 1]
+      addToScore += onlyNumbers[i - 1]
+      if(onlyNumbers[i - 1] >= winCreteria) setgameStatus(GameStatus.Win)
+      i--
     }
+    i--
   }
+  raw = onlyNumbers.concat(new Array(rawLength - onlyNumbers.length).fill(0))
+  return { newRaw: raw, addToScore: addToScore }
+}
 
-  private rightMoveHandler(gameData: IGameData): IGameData {
-    // for test only!!!!, TODO: create real handler 
-    return {
-      boardData: this.rightShift(gameData.boardData),
-      score: gameData.score + 1
-    }
-  }
+const noWayToMove = (): boolean => {
+  const horPossible = isCoupleInRow()
+  transposeMatrix()
+  const vertPossible = isCoupleInRow()
+  transposeMatrix()
+  return !horPossible && !vertPossible
+}
 
-  private bottomMoveHandler(gameData: IGameData): IGameData {
-    // for test only!!!!, TODO: create real handler 
-    return {
-      boardData: this.bottomShift(gameData.boardData),
-      score: gameData.score + 1
-    }
-  }
+const isCoupleInRow = (): boolean => {
+  return gameData.boardData.reduce((res, row) => {
+    let prev = -1
+    return res || row.reduce((rowRes, value) => {
+      const res = prev === value
+      prev = value
+      return rowRes || res
+    }, false)
+  }, false)
+}
 
-  private leftShift(arr: Array2D): Array2D {
-    return arr.map((row: number[]) => {
-      row.shift()
-      row.push(0)
-      return row
+const transposeMatrix = () => {
+  if(!gameData.boardData[0].length) throw new Error('Invalid matrix')
+  const res: Array2D = 
+    new Array(gameData.boardData[0].length).fill(null).map(() => new Array(gameData.boardData.length).fill(0))
+  gameData.boardData.forEach((row, rowIndex) => {
+    row.forEach((value, colIndex) => {
+      res[colIndex][rowIndex] = value
     })
-  }
-
-  private topShift(arr: Array2D): Array2D {
-    arr.shift()
-    arr.push(new Array(this.colCount).fill(0))
-    return arr
-  } 
-
-  private rightShift(arr: Array2D): Array2D {
-    return arr.map((row: number[]) => {
-      row.unshift(0)
-      return row.slice(0, -1)
-    })
-  }
-
-  private bottomShift(arr: Array2D): Array2D {
-    arr.unshift(new Array(this.colCount).fill(0))
-    return arr.slice(0, -1)
-  } 
-
-  private updateGameStatusHandler(): GameStatusType {
-    // for test only!!!!, TODO: create real handler 
-    let currentScore = 0;
-    this.$gameData.watch(data => {currentScore = data.score})
-    return currentScore < 4 ? "on-game": "win"
-  }
-
+  })
+  gameData.boardData = res
 }

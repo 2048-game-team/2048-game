@@ -1,5 +1,5 @@
 import { IGameData, GameStatus, IMovementResult, CellList, Array2D } from './types'
-import { setGameData, setgameStatus } from './model'
+import { setGameData, setGameStatus } from './model'
 
 const defaultBoardSize = { rows: 4, cols: 4 }
 const maxBoardSize = { rows: 40, cols: 40 }
@@ -15,7 +15,7 @@ export const createNewGame = (rowCount?: number, colCount?: number) => {
   gameData.boardData = new Array(rowCount).fill(null).map(() => new Array(colCount).fill(0))
   gameData.score = 0
   setGameData(gameData)
-  setgameStatus(GameStatus.OnGame)
+  setGameStatus(GameStatus.OnGame)
   insertNewNumber()
   insertNewNumber() 
 }
@@ -97,7 +97,7 @@ const insertNewNumber = () => {
     setGameData(gameData)
   }
   if(freeCells.length <= 1){
-    if(noWayToMove()) setgameStatus(GameStatus.Lost)
+    if(noWayToMove()) setGameStatus(GameStatus.Lost)
   }
 }
 
@@ -125,7 +125,7 @@ const makeMove = (raw: number[]): IMovementResult => {
       onlyNumbers.splice(i, 1)
       onlyNumbers[i - 1] = 2 * onlyNumbers[i - 1]
       addToScore += onlyNumbers[i - 1]
-      if(onlyNumbers[i - 1] >= winCreteria) setgameStatus(GameStatus.Win)
+      if(onlyNumbers[i - 1] >= winCreteria) setGameStatus(GameStatus.Win)
       i--
     }
     i--

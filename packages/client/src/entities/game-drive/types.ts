@@ -1,8 +1,19 @@
 export type Array2D = number[][]
 
 export interface IGameData  {
-    boardData: Array2D,
-    score: number, 
+  boardData: Array2D,
+  score: number, 
 }
 
-export type GameStatusType = "on-game" | "win" | "lost";
+export enum GameStatus {
+  OnGame = 'on-game',
+  Win = 'win',
+  Lost = 'lost'
+}
+
+export type CellList = {row: number, col: number}[]
+
+export interface IMovementResult {
+    newRaw: number[],
+    addToScore: number,
+}

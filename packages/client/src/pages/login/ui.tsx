@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { LoginFields } from 'pages/login'
 import { routesPath } from 'processes/routes'
 
-export const Login = () => {
+export const Login: React.FC = () => {
   const navigate = useNavigate()
 
   const handleCancel = () => {

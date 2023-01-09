@@ -5,7 +5,7 @@ import { Header } from 'processes/layout/header'
 
 export const LayoutGame: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Layout style={{ height: '100%' }}>
+    <Layout style={{ minHeight: '100%' }}>
       <FullLayout>
         <Header />
         <Layout.Content>{children}</Layout.Content>

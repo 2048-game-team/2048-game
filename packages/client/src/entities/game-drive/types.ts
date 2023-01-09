@@ -11,6 +11,13 @@ export enum GameStatus {
   Lost = 'lost'
 }
 
+export enum Movements {
+  Left = 'left',
+  Top = 'top',
+  Right = 'right',
+  Bottom = 'bottom'
+}
+
 export type CellList = {row: number, col: number}[]
 
 export interface IMovementResult {

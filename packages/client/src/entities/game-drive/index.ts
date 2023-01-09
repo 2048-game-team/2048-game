@@ -1,3 +1,5 @@
 export * from './model'
 export * from './types'
-export * from './game-drive'
+export * from './createNewGame'
+export * from './makeMove'
+export * from './setGame'

@@ -1,5 +1,5 @@
-import { createNewGame, setGame, leftMove, topMove, rightMove, bottomMove } from 'entities/game-drive/game-drive'
-import { IGameData, GameStatus } from 'entities/game-drive/types'
+import { createNewGame, setGame, makeMove } from 'entities/game-drive'
+import { IGameData, GameStatus, Movements } from 'entities/game-drive/types'
 import { $gameData, $gameStatus } from 'entities/game-drive/model'
 import 'root/jest.mock'
 
@@ -34,7 +34,7 @@ test('Set board test', () => {
 })
 
 test('Try left movement', () => {
-  leftMove()
+  makeMove(Movements.Left)
   expect(gameData.boardData[1][0]).toEqual(2)
 })
 
@@ -45,7 +45,7 @@ test('Try right movement', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  rightMove()
+  makeMove(Movements.Right)
   expect(gameData.boardData[1][2]).toEqual(2)
 })
 
@@ -56,7 +56,7 @@ test('Try top movement', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  topMove()
+  makeMove(Movements.Top)
   expect(gameData.boardData[0][1]).toEqual(2)
 })
 
@@ -67,7 +67,7 @@ test('Try bottom movement', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  bottomMove()
+  makeMove(Movements.Bottom)
   expect(gameData.boardData[2][1]).toEqual(2)
 })
 
@@ -78,7 +78,7 @@ test('Test1 chips collapse', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  topMove()
+  makeMove(Movements.Top)
   expect(gameData.boardData[0][0]).toEqual(4)
 })
 
@@ -89,7 +89,7 @@ test('Test2 chips collapse', () => {
   setRows.push([2,0,0])
 
   setGame({boardData: setRows, score: 0})
-  topMove()
+  makeMove(Movements.Top)
   expect(gameData.boardData[0][0]).toEqual(4)
 })
 
@@ -100,7 +100,7 @@ test('Test3 chips collapse', () => {
   setRows.push([2,0,0])
 
   setGame({boardData: setRows, score: 0})
-  topMove()
+  makeMove(Movements.Top)
   expect(gameData.boardData[0][0]).toEqual(2)
   expect(gameData.boardData[1][0]).toEqual(4)
 })
@@ -112,7 +112,7 @@ test('Test4 chips collapse', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  rightMove()
+  makeMove(Movements.Right)
   expect(gameData.boardData[1][2]).toEqual(8)
 })
 
@@ -123,7 +123,7 @@ test('Test5 chips collapse', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  bottomMove()
+  makeMove(Movements.Bottom)
   expect(gameData.boardData[2][2]).toEqual(32)
 })
 
@@ -134,7 +134,7 @@ test('Test6 chips collapse, score test', () => {
   setRows.push([0,0,0])
 
   setGame({boardData: setRows, score: 0})
-  leftMove()
+  makeMove(Movements.Left)
   expect(gameData.boardData[0][0]).toEqual(32)
   expect(gameData.boardData[1][0]).toEqual(32)
   expect(gameData.score).toEqual(64)
@@ -147,7 +147,7 @@ test('Test on-game status', () => {
   setRows.push([8,16,2])
 
   setGame({boardData: setRows, score: 0})
-  bottomMove()
+  makeMove(Movements.Bottom)
   expect(gameStatus).toEqual(GameStatus.OnGame)
 })
 
@@ -158,7 +158,7 @@ test('Test win status', () => {
   setRows.push([0,0,1024])
 
   setGame({boardData: setRows, score: 0})
-  bottomMove()
+  makeMove(Movements.Bottom)
   expect(gameStatus).toEqual(GameStatus.Win)
 })
 
@@ -169,6 +169,6 @@ test('Test lost status', () => {
   setRows.push([8,16,2])
 
   setGame({boardData: setRows, score: 0})
-  bottomMove()
+  makeMove(Movements.Bottom)
   expect(gameStatus).toEqual(GameStatus.Lost)
 })

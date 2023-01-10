@@ -12,10 +12,11 @@ const WIDTH = 500;
 const SCORE = 2484;
 
 const GAME_STATE = [
-  [0, 0, 2, 4],
-  [0, 0, 0, 4],
-  [0, 0, 0, 8],
-  [0, 0, 0, 4],
+  [0, 0, 0, 2, 4],
+  [0, 0, 0, 0, 4],
+  [0, 0, 0, 0, 8],
+  [0, 0, 0, 0, 4],
+  [0, 0, 0, 0, 4],
 ];
 
 type GameCanvasProps = { width?: number, height?: number };

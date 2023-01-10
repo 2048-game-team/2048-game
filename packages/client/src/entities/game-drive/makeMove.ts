@@ -4,16 +4,16 @@ import { Movements, IMovementResult } from './types'
 
 export const makeMove = (move: Movements) => {
   switch (move) {
-    case Movements.Left: 
+    case Movements.Left:
       leftMoveProcess()
       break
-    case Movements.Top: 
+    case Movements.Top:
       topMoveProcess()
       break
-    case Movements.Right: 
+    case Movements.Right:
       rightMoveProcess()
       break
-    case Movements.Bottom: 
+    case Movements.Bottom:
       bottomMoveProcess()
       break
   }
@@ -21,29 +21,29 @@ export const makeMove = (move: Movements) => {
 }
 
 const leftMoveProcess = () => {
-    gameData.boardData = gameData.boardData.map(row => {
-      const res: IMovementResult = oneLineHandler(row);
-      gameData.score += res.addToScore
-      return res.newRaw
-    })
-  }
-  
-  const topMoveProcess = () => {
-    transposeMatrix()
-    leftMoveProcess()
-    transposeMatrix()
-  }
-  
-  const rightMoveProcess = () => {
-    gameData.boardData = gameData.boardData.map(row => {
-      const res: IMovementResult = oneLineHandler(row.reverse());
-      gameData.score += res.addToScore
-      return res.newRaw.reverse()
-    })
-  }
-  
-  const bottomMoveProcess = () => {
-    transposeMatrix()
-    rightMoveProcess()
-    transposeMatrix()
-  }
+  gameData.boardData = gameData.boardData.map(row => {
+    const res: IMovementResult = oneLineHandler(row)
+    gameData.score += res.addToScore
+    return res.newRaw
+  })
+}
+
+const topMoveProcess = () => {
+  transposeMatrix()
+  leftMoveProcess()
+  transposeMatrix()
+}
+
+const rightMoveProcess = () => {
+  gameData.boardData = gameData.boardData.map(row => {
+    const res: IMovementResult = oneLineHandler(row.reverse())
+    gameData.score += res.addToScore
+    return res.newRaw.reverse()
+  })
+}
+
+const bottomMoveProcess = () => {
+  transposeMatrix()
+  rightMoveProcess()
+  transposeMatrix()
+}

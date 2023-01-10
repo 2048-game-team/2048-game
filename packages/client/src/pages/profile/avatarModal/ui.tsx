@@ -1,5 +1,4 @@
 import {Button, Modal, Upload, UploadFile, UploadProps} from "antd";
-import ImgCrop from "antd-img-crop";
 import React, {useState} from "react";
 import {AvatarModalProps} from "./types";
 
@@ -35,7 +34,6 @@ export const AvatarModal = ({...props}:AvatarModalProps) => {
                onCancel={handleCancel}
                style={{ textAlign: 'center' }}
         >
-            <ImgCrop rotate>
                 <Upload
                     action=""
                     listType="picture-card"
@@ -44,7 +42,6 @@ export const AvatarModal = ({...props}:AvatarModalProps) => {
                 >
                     {fileList.length < 1 && '+ Загрузить'}
                 </Upload>
-            </ImgCrop>
         </Modal>
     )
 }

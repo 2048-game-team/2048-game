@@ -1,6 +1,6 @@
 import React from 'react'
 import { MessagesProps, SpaceMessages } from 'pages/forum'
-import { ForumMessage } from 'pages/forum/forumTheme/forumThemeMessages/forumMessage/ui'
+import { ForumMessage } from './forumMessage/ui'
 
 export const ForumThemeMessages = ({ messages }: MessagesProps) => {
   if (!messages) {
@@ -8,13 +8,10 @@ export const ForumThemeMessages = ({ messages }: MessagesProps) => {
   }
 
   return (
-    <SpaceMessages direction='vertical'>
-        {messages.map(message => (
-          <ForumMessage
-            key={message.id}
-            message={message}
-          />
-        ))}
+    <SpaceMessages direction="vertical">
+      {messages.map(message => (
+        <ForumMessage key={message.id} message={message} />
+      ))}
     </SpaceMessages>
   )
 }

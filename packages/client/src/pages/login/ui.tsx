@@ -21,48 +21,43 @@ export const Login: React.FC = () => {
   }
 
   return (
-    <Modal title='Вход' open={true} onCancel={handleCancel} footer={null}>
+    <Modal title="Вход" open={true} onCancel={handleCancel} footer={null}>
       <Typography>
         <Form
-          name='login'
+          name="login"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          autoComplete='off'
-        >
+          autoComplete="off">
           <Form.Item
-            label='Email'
-            name='email'
+            label="Email"
+            name="email"
             rules={[
               { required: true, message: 'Пожалуйста введите email!' },
-              { type: 'email', message: 'Неверный email' }
-            ]}
-          >
+              { type: 'email', message: 'Неверный email' },
+            ]}>
             <Input />
           </Form.Item>
 
           <Form.Item
-            label='Пароль'
-            name='password'
-            rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-          >
+            label="Пароль"
+            name="password"
+            rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}>
             <Input.Password />
           </Form.Item>
 
-          <Divider/>
+          <Divider />
 
           <Form.Item wrapperCol={{ offset: 8, span: 26 }}>
-            <Button type='primary' htmlType='submit'>
+            <Button type="primary" htmlType="submit">
               Войти
             </Button>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to={routesPath.register}>
-              Регистрация
-            </Link>
+            <Link to={routesPath.register}>Регистрация</Link>
           </Form.Item>
         </Form>
       </Typography>

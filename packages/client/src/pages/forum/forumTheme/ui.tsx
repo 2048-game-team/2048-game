@@ -21,33 +21,30 @@ export const ForumTheme: React.FC = () => {
   return (
     <>
       <Collapse accordion onChange={toggleTheme}>
-        {
-          mocForumData.map(theme => (
-            <Collapse.Panel
-              key={theme.id}
-              header={
-                <ForumThemeHeader
-                  title={theme.title}
-                  date={theme.date}
-                  author={theme.author}
-                  active={theme.id === activeTheme}
-                />
-              }
-            >
-              <SpaceTheme direction='vertical'>
-                {theme.content}
+        {mocForumData.map(theme => (
+          <Collapse.Panel
+            key={theme.id}
+            header={
+              <ForumThemeHeader
+                title={theme.title}
+                date={theme.date}
+                author={theme.author}
+                active={theme.id === activeTheme}
+              />
+            }>
+            <SpaceTheme direction="vertical">
+              {theme.content}
 
-                <ForumThemeMessages messages={theme.messages} />
+              <ForumThemeMessages messages={theme.messages} />
 
-                <SpaceEnd>
-                  <Button type='primary' onClick={handleButtonNewMessage}>
-                    Добавить комментарий
-                  </Button>
-                </SpaceEnd>
-              </SpaceTheme>
-            </Collapse.Panel>
-          ))
-        }
+              <SpaceEnd>
+                <Button type="primary" onClick={handleButtonNewMessage}>
+                  Добавить комментарий
+                </Button>
+              </SpaceEnd>
+            </SpaceTheme>
+          </Collapse.Panel>
+        ))}
       </Collapse>
 
       <FormNewMessage modalOpen={modalOpen} setModalOpen={setModalOpen} />

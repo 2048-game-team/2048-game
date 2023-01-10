@@ -7,7 +7,7 @@ export const mocForumData: ForumData = [
     content: 'Текст раскрывающий первую тему форума. '.repeat(10),
     date: '25.01.2022',
     author: {
-      name: 'Ваня Иванов'
+      name: 'Ваня Иванов',
     },
     messages: [
       {
@@ -15,16 +15,16 @@ export const mocForumData: ForumData = [
         content: 'Первый комментарий',
         date: '27.01.2022',
         author: {
-          name: 'Ваня Иванов'
-        }
+          name: 'Ваня Иванов',
+        },
       },
       {
         id: '12',
         content: 'Второй комментарий',
         date: '28.01.2022',
         author: {
-          name: 'Ваня Иванов'
-        }
+          name: 'Ваня Иванов',
+        },
       },
       {
         id: '13',
@@ -32,10 +32,11 @@ export const mocForumData: ForumData = [
         date: '28.01.2022',
         author: {
           name: 'Петр Евгеньевич',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-        }
-      }
-    ]
+          avatar:
+            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+        },
+      },
+    ],
   },
   {
     id: '2',
@@ -44,7 +45,8 @@ export const mocForumData: ForumData = [
     date: '24.01.2022',
     author: {
       name: 'Саша Александров',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-    }
-  }
+      avatar:
+        'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+    },
+  },
 ]

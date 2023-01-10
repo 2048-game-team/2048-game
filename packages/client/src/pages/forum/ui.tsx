@@ -13,20 +13,17 @@ export const Forum: React.FC = () => {
 
   return (
     <>
-      <SpaceForum direction='vertical'>
+      <SpaceForum direction="vertical">
         <ForumTheme />
 
         <SpaceEnd>
-          <Button type='primary' onClick={handleButtonNewTheme}>
+          <Button type="primary" onClick={handleButtonNewTheme}>
             Новая тема
           </Button>
         </SpaceEnd>
       </SpaceForum>
 
-      <FormNewTheme
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-      />
+      <FormNewTheme modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
   )
 }

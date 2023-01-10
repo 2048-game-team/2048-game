@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Space, Typography } from 'antd'
 
 export const ThemeTitle = styled(Typography.Title)`
-  margin: 0!important;
+  margin: 0 !important;
 `
 
 export const MessageAuthor = styled(Typography.Text)`
@@ -16,21 +16,21 @@ export const MessageDate = styled(Typography.Text)`
 export const SpaceForum = styled(Space)`
   height: 100%;
   width: 100%;
-  gap: 1.5rem!important;
+  gap: 1.5rem !important;
 `
 export const SpaceTheme = styled(Space)`
   width: 100%;
-  gap: 1rem!important;
+  gap: 1rem !important;
 `
 
 export const SpaceMessages = styled(Space)`
   width: 100%;
-  gap: 1.5rem!important;
+  gap: 1.5rem !important;
 `
 
 export const SpaceMessageHeader = styled(Space)`
   width: 100%;
-  gap: 0!important;
+  gap: 0 !important;
 `
 
 export const SpaceBetween = styled(Space)`

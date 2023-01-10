@@ -8,5 +8,5 @@ export const routes: RouteObject[] = [
   { path: routesPath.login, element: <Login /> },
   { path: routesPath.profile, element: <div>PROFILE</div> },
   { path: routesPath.forum, element: <Forum /> },
-  { path: routesPath.logout, element: <div>LOGOUT</div> }
+  { path: routesPath.logout, element: <div>LOGOUT</div> },
 ]

@@ -4,17 +4,13 @@ import { UserMenu } from './userMenu'
 import { BurgerMenu } from './burgerMenu'
 
 export const Header = () => {
-
   return (
     <Space
       align="center"
       style={{ marginBottom: '1rem', justifyContent: 'space-between' }}>
+      <BurgerMenu />
 
-      <BurgerMenu/>
-
-      <Typography.Title style={{ marginBottom: 0 }}>
-        2048
-      </Typography.Title>
+      <Typography.Title style={{ marginBottom: 0 }}>2048</Typography.Title>
 
       <Popover
         title="Ваня Иванов"

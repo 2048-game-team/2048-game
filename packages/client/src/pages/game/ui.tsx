@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useRef } from 'react'
-import { Button, Col, Row, Typography } from 'antd'
+import { Button, Typography } from 'antd'
 import { GameSpace } from './styles';
+import { drawGame } from './drawGame';
 
 const restart = () => { 
   console.log('Restart game.')
@@ -11,17 +12,11 @@ const WIDTH = 500;
 const SCORE = 2484;
 
 const GAME_STATE = [
-  [0, 2, 4],
-  [0, 0, 4],
-  [0, 0, 0]
+  [0, 0, 2, 4],
+  [0, 0, 0, 4],
+  [0, 0, 0, 8],
+  [0, 0, 0, 4],
 ];
-
-const drawGameField = (ctx: CanvasRenderingContext2D, GAME_STATE: number[][]) => {
-  ctx.beginPath();
-  ctx.arc(95, 50, 40, 0, 2 * Math.PI);
-  ctx.stroke();
-  console.log(GAME_STATE)
-};
 
 type GameCanvasProps = { width?: number, height?: number };
 
@@ -31,7 +26,7 @@ const GameCanvas: FC<GameCanvasProps> = ({ width = WIDTH, height = HEIGHT}) => {
   useEffect(() => {
     const ctx: CanvasRenderingContext2D | null | undefined = canvasRef.current?.getContext('2d');
     if (ctx) { 
-      drawGameField(ctx, GAME_STATE);
+      drawGame(ctx, GAME_STATE, width, height);
     }
   }, []);
 

@@ -10,5 +10,5 @@ export const routes: RouteObject[] = [
   { path: routesPath.profile, element: <div>PROFILE</div> },
   { path: routesPath.forum, element: <Forum /> },
   { path: routesPath.logout, element: <div>LOGOUT</div> },
-  { path: routesPath.game, element: <div>GAME</div> }
+  { path: routesPath.game, element: <div>GAME</div> },
 ]

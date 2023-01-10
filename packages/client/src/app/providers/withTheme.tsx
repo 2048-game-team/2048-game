@@ -7,7 +7,7 @@ import { $theme, setTheme, Theme } from 'entities/ui'
 
 export const WithTheme: FC<PropsWithChildren> = ({ children }) => {
   const theme = useStore($theme)
-  const biggerThan400 = useMediaPredicate('(prefers-color-scheme: dark)')
+  const darkThemePrefer = useMediaPredicate('(prefers-color-scheme: dark)')
 
   const algorithm =
     theme === Theme.Light
@@ -15,9 +15,9 @@ export const WithTheme: FC<PropsWithChildren> = ({ children }) => {
       : themeConfig.darkAlgorithm
 
   useEffect(() => {
-    if (biggerThan400) setTheme(Theme.Dark)
+    if (darkThemePrefer) setTheme(Theme.Dark)
     else setTheme(Theme.Light)
-  }, [biggerThan400])
+  }, [darkThemePrefer])
 
   return (
     <ConfigProvider

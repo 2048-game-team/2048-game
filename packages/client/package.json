@@ -10,7 +10,8 @@
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
     "prettier": "prettier --write .",
     "format": "npm run lint:fix && npm run prettier",
-    "test": "jest ./"
+    "test": "jest ./",
+    "swagger": "swagger-typescript-api --axios --responses --extract-enums -p ./src/shared/api/swagger.json -o ./src/shared/api -n swagger.ts"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.0",
@@ -28,6 +29,7 @@
     "react-media-hook": "0.5.0",
     "react-router-dom": "6.6.0",
     "styled-components": "5.3.6",
+    "swagger-typescript-api": "^12.0.2",
     "vite-tsconfig-paths": "4.0.3"
   },
   "devDependencies": {

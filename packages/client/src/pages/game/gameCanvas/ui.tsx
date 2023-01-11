@@ -22,7 +22,7 @@ export const GameCanvas: FC<GameCanvasProps> = ({
       })
 
       window.addEventListener('keydown', keyDownHandler)
-      
+
       return () => {
         unwatch()
         window.removeEventListener('keydown', keyDownHandler)

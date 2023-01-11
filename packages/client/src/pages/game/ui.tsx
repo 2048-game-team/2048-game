@@ -1,23 +1,20 @@
 import { FC, PropsWithChildren, useEffect } from 'react'
-import { useStore } from 'effector-react'
-import { Typography } from 'antd'
 import { GameSpace } from './styles'
-import { $gameData, setGame } from 'entities/game-drive'
+import { setGame } from 'entities/game-drive'
 import { GameCanvas } from './gameCanvas'
-import { RestartButton } from './restartButton'
+import { GameRestartButton } from './gameRestartButton'
+import { GameInfo } from './gameInfo'
 
 export const Game: FC<PropsWithChildren> = () => {
-  const { score } = useStore($gameData)
-
   useEffect(() => {
     return () => setGame({ boardData: [], score: 0 })
   }, [])
 
   return (
-    <GameSpace direction="vertical" align="center" size="large">
-      <Typography.Title level={5}>Score: {score}</Typography.Title>
+    <GameSpace direction="vertical" align="center" size="small">
+      <GameInfo />
       <GameCanvas />
-      <RestartButton />
+      <GameRestartButton />
     </GameSpace>
   )
 }

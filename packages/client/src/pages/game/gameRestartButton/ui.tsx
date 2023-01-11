@@ -6,6 +6,6 @@ const restartHandler = () => {
   createNewGame()
 }
 
-export const RestartButton: FC<PropsWithChildren> = () => {
+export const GameRestartButton: FC<PropsWithChildren> = () => {
   return <Button onClick={restartHandler}>Рестарт</Button>
 }

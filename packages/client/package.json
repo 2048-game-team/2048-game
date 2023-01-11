@@ -11,7 +11,7 @@
     "prettier": "prettier --write .",
     "format": "npm run lint:fix && npm run prettier",
     "test": "jest ./",
-    "swagger": "swagger-typescript-api --axios --responses --extract-enums -p ./src/shared/api/swagger.json -o ./src/shared/api -n swagger.ts"
+    "swagger": "swagger-typescript-api --axios --responses --extract-enums --extract-request-params -p ./src/shared/api/swagger.json -o ./src/shared/api -n swagger.ts"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.0",

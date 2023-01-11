@@ -385,6 +385,69 @@ export enum StaticChartRequestChartSize {
   Large = 'large',
 }
 
+export interface ChatsListParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** Chat's title to filter by */
+  title?: string
+}
+
+export interface ArchiveListParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** Chat's title to filter by */
+  title?: string
+}
+
+export interface UsersDetailParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** User's '{first_name} {second_name}' to filter */
+  name?: string
+  /** User's email to filter */
+  email?: string
+  /** Numeric chat id */
+  id: number
+}
+
+export interface YandexServiceIdListParams {
+  /** Redirect uri that you are using for oauth */
+  redirect_uri?: string
+}
+
+export interface StickersListParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** Sticker's title to filter by */
+  title?: string
+}
+
+export interface StickersDetailParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** Numeric sticker pack id */
+  id: number
+}
+
+export interface FavoriteListParams {
+  /** The number of items to skip before starting to collect the result set */
+  offset?: number
+  /** The numbers of items to return */
+  limit?: number
+  /** Sticker pack title to filter by */
+  title?: string
+}
+
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
 
 export type QueryParamsType = Record<string | number, any>
@@ -616,17 +679,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    chatsList: (
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-        /** Chat's title to filter by */
-        title?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    chatsList: (query: ChatsListParams, params: RequestParams = {}) =>
       this.request<ChatsResponse[], void>({
         path: `/chats`,
         method: 'GET',
@@ -710,17 +763,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    archiveList: (
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-        /** Chat's title to filter by */
-        title?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    archiveList: (query: ArchiveListParams, params: RequestParams = {}) =>
       this.request<ChatsResponse[], void>({
         path: `/chats/archive`,
         method: 'GET',
@@ -806,20 +849,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `void` Not found chat
      * @response `500` `void` Unexpected error
      */
-    usersDetail: (
-      id: number,
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-        /** User's '{first_name} {second_name}' to filter */
-        name?: string
-        /** User's email to filter */
-        email?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    usersDetail: ({ id, ...query }: UsersDetailParams, params: RequestParams = {}) =>
       this.request<ChatUserResponse[], void>({
         path: `/chats/${id}/users`,
         method: 'GET',
@@ -1038,13 +1068,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `400` `BadRequestError` Bad Request (No such redirect_uri refistered)
      * @response `500` `void` Unexpected error
      */
-    yandexServiceIdList: (
-      query?: {
-        /** Redirect uri that you are using for oauth */
-        redirect_uri?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    yandexServiceIdList: (query: YandexServiceIdListParams, params: RequestParams = {}) =>
       this.request<ServiceId, BadRequestError | void>({
         path: `/oauth/yandex/service-id`,
         method: 'GET',
@@ -1345,17 +1369,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersList: (
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-        /** Sticker's title to filter by */
-        title?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    stickersList: (query: StickersListParams, params: RequestParams = {}) =>
       this.request<StickerPacksResponse[], void>({
         path: `/stickers`,
         method: 'GET',
@@ -1407,16 +1421,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersDetail: (
-      id: number,
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-      },
-      params: RequestParams = {},
-    ) =>
+    stickersDetail: ({ id, ...query }: StickersDetailParams, params: RequestParams = {}) =>
       this.request<StickersResponse[], void>({
         path: `/stickers/${id}/`,
         method: 'GET',
@@ -1466,17 +1471,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    favoriteList: (
-      query?: {
-        /** The number of items to skip before starting to collect the result set */
-        offset?: number
-        /** The numbers of items to return */
-        limit?: number
-        /** Sticker pack title to filter by */
-        title?: string
-      },
-      params: RequestParams = {},
-    ) =>
+    favoriteList: (query: FavoriteListParams, params: RequestParams = {}) =>
       this.request<StickerPacksResponse, void>({
         path: `/stickers/favorite`,
         method: 'GET',

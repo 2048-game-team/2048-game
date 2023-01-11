@@ -1,34 +1,24 @@
-import {
-  FC,
-  KeyboardEvent,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { FC, PropsWithChildren, useEffect, useRef } from 'react'
 import { Button, Typography } from 'antd'
 import { GameSpace } from './styles'
 import { drawGame } from './drawGame'
 import {
   createNewGame,
-  setGame,
   $gameData,
-  $gameStatus,
   Movements,
-  makeMove
+  makeMove,
 } from 'entities/game-drive'
 
 const restart = () => {
   createNewGame(3, 3)
   console.log('Restart game.')
-  console.log($gameData.getState())
 }
 
 const HEIGHT = 400
 const WIDTH = 500
 const SCORE = 2484
 
-const keyMoveMap = {
+const keyMoveMap: Record<string, Movements> = {
   ArrowLeft: Movements.Left,
   ArrowUp: Movements.Top,
   ArrowRight: Movements.Right,
@@ -50,15 +40,14 @@ const GameCanvas: FC<GameCanvasProps> = ({
 
     if (ctx) {
       const unwatch = $gameData.watch(store => {
-        console.log('watch')
         drawGame(ctx, store.boardData, width, height)
       })
 
-      const keyDownHandler: EventListenerOrEventListenerObject = event => {
-        const { key } = event;
-        makeMove(keyMoveMap[key])
-        console.log('keydown', key)
-        console.log(event)
+      const keyDownHandler: EventListenerOrEventListenerObject = (event) => {
+        const { key } = event as KeyboardEvent;
+        if (key in keyMoveMap) {
+          makeMove(keyMoveMap[key])
+        }
       }
 
       window.addEventListener('keydown', keyDownHandler)

@@ -1,7 +1,7 @@
 import { gameData } from './common'
 import { insertNewNumber } from './insertNewNumber'
 import { GameStatus } from './types'
-import { setGameStatus } from './model'
+import { setGameData, setGameStatus } from './model'
 
 const defaultBoardSize = { rows: 4, cols: 4 }
 const maxBoardSize = { rows: 40, cols: 40 }
@@ -22,6 +22,7 @@ export const createNewGame = (rowCount?: number, colCount?: number) => {
     .map(() => new Array(colCount).fill(0))
   gameData.score = 0
   setGameStatus(GameStatus.OnGame)
+  setGameData({ ...gameData })
   insertNewNumber()
   insertNewNumber()
 }

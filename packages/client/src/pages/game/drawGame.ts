@@ -59,7 +59,6 @@ export const drawGame = (
   )
 
   gameState.forEach((row, rowIndex) => {
-    // console.log('row', row)
     row.forEach((cellValue, cellIndex) => {
       const x = BORDER + (BORDER + cellWidth) * cellIndex
       const y = BORDER + (BORDER + cellHeigth) * rowIndex

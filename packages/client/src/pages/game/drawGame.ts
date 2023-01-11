@@ -1,11 +1,14 @@
+import { Array2D } from 'entities/game-drive'
+
 const BORDER = 10
 const FONT_STYLE = '20px serif'
-const FIELD_COLOR = 'green'
-const TEXT_COLOR = 'white'
-const CELL_COLOR = 'pink'
+const FIELD_COLOR = '#BBADA0'
+const TEXT_COLOR = '#776E65'
+const ZERO_CELL_COLOR = '#CDC1B4'
+const CELL_COLOR = '#EEE4DA'
 
 const calculateCellWidthAndHeight = (
-  gameState: number[][],
+  gameState: Array2D,
   width: number,
   height: number
 ) => {
@@ -34,7 +37,7 @@ const drawCell = (
   height: number,
   value: number
 ): void => {
-  ctx.fillStyle = CELL_COLOR
+  ctx.fillStyle = value ? CELL_COLOR : ZERO_CELL_COLOR;
   ctx.fillRect(x, y, width, height)
   ctx.font = FONT_STYLE
   ctx.fillStyle = TEXT_COLOR
@@ -43,7 +46,7 @@ const drawCell = (
 
 export const drawGame = (
   ctx: CanvasRenderingContext2D,
-  gameState: number[][],
+  gameState: Array2D,
   width: number,
   height: number
 ): void => {
@@ -56,6 +59,7 @@ export const drawGame = (
   )
 
   gameState.forEach((row, rowIndex) => {
+    // console.log('row', row)
     row.forEach((cellValue, cellIndex) => {
       const x = BORDER + (BORDER + cellWidth) * cellIndex
       const y = BORDER + (BORDER + cellHeigth) * rowIndex

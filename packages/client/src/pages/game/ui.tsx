@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react'
 import { Button, Typography } from 'antd'
 import { GameSpace } from './styles'
 import { drawGame } from './drawGame'
@@ -8,6 +8,7 @@ import {
   Movements,
   makeMove,
 } from 'entities/game-drive'
+import { GameCanvasProps } from './types'
 
 const restart = () => {
   createNewGame(3, 3)
@@ -16,7 +17,6 @@ const restart = () => {
 
 const HEIGHT = 400
 const WIDTH = 500
-const SCORE = 2484
 
 const keyMoveMap: Record<string, Movements> = {
   ArrowLeft: Movements.Left,
@@ -24,8 +24,6 @@ const keyMoveMap: Record<string, Movements> = {
   ArrowRight: Movements.Right,
   ArrowDown: Movements.Bottom,
 }
-
-type GameCanvasProps = { width?: number; height?: number }
 
 const GameCanvas: FC<GameCanvasProps> = ({
   width = WIDTH,
@@ -43,8 +41,8 @@ const GameCanvas: FC<GameCanvasProps> = ({
         drawGame(ctx, store.boardData, width, height)
       })
 
-      const keyDownHandler: EventListenerOrEventListenerObject = (event) => {
-        const { key } = event as KeyboardEvent;
+      const keyDownHandler: EventListenerOrEventListenerObject = event => {
+        const { key } = event as KeyboardEvent
         if (key in keyMoveMap) {
           makeMove(keyMoveMap[key])
         }
@@ -62,9 +60,16 @@ const GameCanvas: FC<GameCanvasProps> = ({
 }
 
 export const Game: FC<PropsWithChildren> = () => {
+  const [score, setScore] = useState(0)
+
+  useEffect(() => {
+    const unwatch = $gameData.watch(({ score }) => setScore(score))
+    return unwatch
+  }, [])
+
   return (
     <GameSpace direction="vertical" align="center" size="large">
-      <Typography.Title level={5}>Score: {SCORE}</Typography.Title>
+      <Typography.Title level={5}>Score: {score}</Typography.Title>
       <GameCanvas width={WIDTH} height={HEIGHT} />
       <Button onClick={restart}>Рестарт</Button>
     </GameSpace>

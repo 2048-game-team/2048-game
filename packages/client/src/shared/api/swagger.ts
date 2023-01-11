@@ -416,9 +416,32 @@ export interface UsersDetailParams {
   id: number
 }
 
+export interface AvatarUpdatePayload {
+  /** Chat id */
+  chatId: number
+  /**
+   * Avatar
+   * @format binary
+   */
+  avatar: File
+}
+
 export interface YandexServiceIdListParams {
   /** Redirect uri that you are using for oauth */
   redirect_uri?: string
+}
+
+export interface ProfileAvatarUpdatePayload {
+  /**
+   * Avatar
+   * @format binary
+   */
+  avatar: File
+}
+
+export interface ResourcesCreatePayload {
+  /** @format binary */
+  resource: File
 }
 
 export interface StickersListParams {
@@ -430,6 +453,16 @@ export interface StickersListParams {
   title?: string
 }
 
+export interface StickersCreatePayload {
+  /** Sticker pack title */
+  title: string
+  /**
+   * Sticker image (can be multiple images, just attach multiple files)
+   * @format binary
+   */
+  resource: File
+}
+
 export interface StickersDetailParams {
   /** The number of items to skip before starting to collect the result set */
   offset?: number
@@ -437,6 +470,11 @@ export interface StickersDetailParams {
   limit?: number
   /** Numeric sticker pack id */
   id: number
+}
+
+export interface StickersCreate2Payload {
+  /** Sticker image (can be multiple images, just attach multiple files) */
+  resource: File
 }
 
 export interface FavoriteListParams {
@@ -889,18 +927,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    avatarUpdate: (
-      data: {
-        /** Chat id */
-        chatId: number
-        /**
-         * Avatar
-         * @format binary
-         */
-        avatar: File
-      },
-      params: RequestParams = {},
-    ) =>
+    avatarUpdate: (data: AvatarUpdatePayload, params: RequestParams = {}) =>
       this.request<ChatsResponse, BadRequestError | void>({
         path: `/chats/avatar`,
         method: 'PUT',
@@ -1112,16 +1139,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    profileAvatarUpdate: (
-      data: {
-        /**
-         * Avatar
-         * @format binary
-         */
-        avatar: File
-      },
-      params: RequestParams = {},
-    ) =>
+    profileAvatarUpdate: (data: ProfileAvatarUpdatePayload, params: RequestParams = {}) =>
       this.request<UserResponse, BadRequestError | void>({
         path: `/user/profile/avatar`,
         method: 'PUT',
@@ -1322,13 +1340,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    resourcesCreate: (
-      data: {
-        /** @format binary */
-        resource: File
-      },
-      params: RequestParams = {},
-    ) =>
+    resourcesCreate: (data: ResourcesCreatePayload, params: RequestParams = {}) =>
       this.request<Resource, void>({
         path: `/resources`,
         method: 'POST',
@@ -1390,18 +1402,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersCreate: (
-      data: {
-        /** Sticker pack title */
-        title: string
-        /**
-         * Sticker image (can be multiple images, just attach multiple files)
-         * @format binary
-         */
-        resource: File
-      },
-      params: RequestParams = {},
-    ) =>
+    stickersCreate: (data: StickersCreatePayload, params: RequestParams = {}) =>
       this.request<void, BadRequestError | void>({
         path: `/stickers`,
         method: 'POST',
@@ -1444,14 +1445,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersCreate2: (
-      id: number,
-      data: {
-        /** Sticker image (can be multiple images, just attach multiple files) */
-        resource: File
-      },
-      params: RequestParams = {},
-    ) =>
+    stickersCreate2: (id: number, data: StickersCreate2Payload, params: RequestParams = {}) =>
       this.request<void, BadRequestError | void>({
         path: `/stickers/${id}/`,
         method: 'POST',

@@ -14,8 +14,8 @@ export const UserMenu = () => {
     <Space wrap>
       <Typography.Text>Тема</Typography.Text>
       <Switch
-        checkedChildren='День'
-        unCheckedChildren='Ночь'
+        checkedChildren="День"
+        unCheckedChildren="Ночь"
         checked={checked}
         onChange={toggleTheme}
       />

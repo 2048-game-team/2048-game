@@ -1,5 +1,5 @@
 export interface ProfileFields {
-  avatar: any;
+  avatar: string;
   login: string;
   email: string;
   password: string;

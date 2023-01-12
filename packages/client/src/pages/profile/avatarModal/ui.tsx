@@ -2,7 +2,7 @@ import {Button, Modal, Upload, UploadFile, UploadProps} from "antd";
 import React, {useState} from "react";
 import {AvatarModalProps} from "./types";
 
-export const AvatarModal = ({...props}:AvatarModalProps) => {
+export const AvatarModal = ({isModalOpen, onOk, onClose}:AvatarModalProps) => {
     const [fileList, setFileList] = useState<UploadFile[]>([]);
 
     const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
@@ -10,20 +10,20 @@ export const AvatarModal = ({...props}:AvatarModalProps) => {
     };
 
     const handleOk = () => {
-        props.onOk();
+        onOk();
     };
 
     const handleCancel = () => {
-        props.onClose();
+        onClose();
     };
 
-    if(!props.isModalOpen) {
+    if(!isModalOpen) {
         return null;
     }
 
     return (
         <Modal title="Добавление аватара"
-               open={props.isModalOpen}
+               open={isModalOpen}
                footer={[
                    <Button key="submit"
                            type="primary"

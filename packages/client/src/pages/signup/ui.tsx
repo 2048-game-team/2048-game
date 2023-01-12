@@ -1,17 +1,21 @@
 import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
 import React from 'react'
-import { LoginFields } from 'pages/login'
 import { useNavigate } from 'react-router-dom'
 import { routesPath } from 'processes/routes'
+import { createNewUser, signupCreateFx } from './model'
+import './model/init'
+import { SignUpRequest } from 'shared/api/swagger'
+import { useStore } from 'effector-react'
 
 export const SignUp = () => {
   const navigate = useNavigate()
+  const loading = useStore(signupCreateFx.pending)
 
   const handleCancel = () => {
     navigate(routesPath.home)
   }
-  const onFinish = (data: LoginFields) => {
-    console.log(data)
+  const onFinish = (data: SignUpRequest) => {
+    createNewUser(data)
   }
 
   return (
@@ -77,7 +81,11 @@ export const SignUp = () => {
           <Divider />
 
           <Form.Item wrapperCol={{ offset: 8, span: 26 }}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              disabled={loading}>
               Зарегистрироваться
             </Button>
           </Form.Item>

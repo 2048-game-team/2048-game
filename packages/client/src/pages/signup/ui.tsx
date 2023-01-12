@@ -35,7 +35,7 @@ export const SignUp = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            label="Фамилия"
+            label="Имя"
             name="second_name"
             rules={[{ required: true, message: 'Введите имя' }]}>
             <Input />

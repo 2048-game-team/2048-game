@@ -2,12 +2,15 @@ import { render, screen } from '@testing-library/react'
 import { WithTheme } from 'app/providers/withTheme'
 import { SignUpPage } from 'pages/signup'
 import userEvent from '@testing-library/user-event'
+import { WithRouter } from 'app/providers/withRouter'
 
 describe('<SignUpPage />', () => {
   beforeEach(() => {
     render(
       <WithTheme>
-        <SignUpPage />
+        <WithRouter>
+          <SignUpPage />
+        </WithRouter>
       </WithTheme>
     )
   })

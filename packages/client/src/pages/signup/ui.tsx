@@ -4,7 +4,7 @@ import { LoginFields } from 'pages/login'
 import { useNavigate } from 'react-router-dom'
 import { routesPath } from 'processes/routes'
 
-export const SignUpPage = () => {
+export const SignUp = () => {
   const navigate = useNavigate()
 
   const handleCancel = () => {

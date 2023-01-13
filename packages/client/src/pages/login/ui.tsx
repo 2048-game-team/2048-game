@@ -57,7 +57,7 @@ export const Login: React.FC = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to={routesPath.register}>Регистрация</Link>
+            <Link to={routesPath.signup}>Регистрация</Link>
           </Form.Item>
         </Form>
       </Typography>

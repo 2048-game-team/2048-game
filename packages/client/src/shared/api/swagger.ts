@@ -486,11 +486,18 @@ export interface FavoriteListParams {
   title?: string
 }
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  HeadersDefaults,
+  ResponseType,
+} from 'axios'
 
 export type QueryParamsType = Record<string | number, any>
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+export interface FullRequestParams
+  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean
   /** request path */
@@ -505,11 +512,15 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'pa
   body?: unknown
 }
 
-export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>
+export type RequestParams = Omit<
+  FullRequestParams,
+  'body' | 'method' | 'query' | 'path'
+>
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+export interface ApiConfig<SecurityDataType = unknown>
+  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
   securityWorker?: (
-    securityData: SecurityDataType | null,
+    securityData: SecurityDataType | null
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void
   secure?: boolean
   format?: ResponseType
@@ -529,8 +540,16 @@ export class HttpClient<SecurityDataType = unknown> {
   private secure?: boolean
   private format?: ResponseType
 
-  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || 'https://ya-praktikum.tech/api/v2' })
+  constructor({
+    securityWorker,
+    secure,
+    format,
+    ...axiosConfig
+  }: ApiConfig<SecurityDataType> = {}) {
+    this.instance = axios.create({
+      ...axiosConfig,
+      baseURL: axiosConfig.baseURL || 'https://ya-praktikum.tech/api/v2',
+    })
     this.secure = secure
     this.format = format
     this.securityWorker = securityWorker
@@ -540,7 +559,10 @@ export class HttpClient<SecurityDataType = unknown> {
     this.securityData = data
   }
 
-  protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
+  protected mergeRequestParams(
+    params1: AxiosRequestConfig,
+    params2?: AxiosRequestConfig
+  ): AxiosRequestConfig {
     const method = params1.method || (params2 && params2.method)
 
     return {
@@ -548,7 +570,11 @@ export class HttpClient<SecurityDataType = unknown> {
       ...params1,
       ...(params2 || {}),
       headers: {
-        ...((method && this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) || {}),
+        ...((method &&
+          this.instance.defaults.headers[
+            method.toLowerCase() as keyof HeadersDefaults
+          ]) ||
+          {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
       },
@@ -566,11 +592,15 @@ export class HttpClient<SecurityDataType = unknown> {
   protected createFormData(input: Record<string, unknown>): FormData {
     return Object.keys(input || {}).reduce((formData, key) => {
       const property = input[key]
-      const propertyContent: any[] = property instanceof Array ? property : [property]
+      const propertyContent: any[] =
+        property instanceof Array ? property : [property]
 
       for (const formItem of propertyContent) {
         const isFileType = formItem instanceof Blob || formItem instanceof File
-        formData.append(key, isFileType ? formItem : this.stringifyFormItem(formItem))
+        formData.append(
+          key,
+          isFileType ? formItem : this.stringifyFormItem(formItem)
+        )
       }
 
       return formData
@@ -594,11 +624,21 @@ export class HttpClient<SecurityDataType = unknown> {
     const requestParams = this.mergeRequestParams(params, secureParams)
     const responseFormat = format || this.format || undefined
 
-    if (type === ContentType.FormData && body && body !== null && typeof body === 'object') {
+    if (
+      type === ContentType.FormData &&
+      body &&
+      body !== null &&
+      typeof body === 'object'
+    ) {
       body = this.createFormData(body as Record<string, unknown>)
     }
 
-    if (type === ContentType.Text && body && body !== null && typeof body !== 'string') {
+    if (
+      type === ContentType.Text &&
+      body &&
+      body !== null &&
+      typeof body !== 'string'
+    ) {
       body = JSON.stringify(body)
     }
 
@@ -606,7 +646,9 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
+        ...(type && type !== ContentType.FormData
+          ? { 'Content-Type': type }
+          : {}),
       },
       params: query,
       responseType: responseFormat,
@@ -623,7 +665,9 @@ export class HttpClient<SecurityDataType = unknown> {
  *
  * Web middle chats API
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown
+> extends HttpClient<SecurityDataType> {
   auth = {
     /**
      * No description
@@ -738,7 +782,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    chatsCreate: (createChatRequest: CreateChatRequest, params: RequestParams = {}) =>
+    chatsCreate: (
+      createChatRequest: CreateChatRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/chats`,
         method: 'POST',
@@ -760,7 +807,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    chatsDelete: (deleteChatRequest: ChatDeleteRequest, params: RequestParams = {}) =>
+    chatsDelete: (
+      deleteChatRequest: ChatDeleteRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatDeleteResponse, void>({
         path: `/chats`,
         method: 'DELETE',
@@ -823,7 +873,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    archiveCreate: (archiveChatRequest: ChatArchiveRequest, params: RequestParams = {}) =>
+    archiveCreate: (
+      archiveChatRequest: ChatArchiveRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatArchiveResponse, void>({
         path: `/chats/archive`,
         method: 'POST',
@@ -845,7 +898,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    unarchiveCreate: (unarchiveChatRequest: ChatArchiveRequest, params: RequestParams = {}) =>
+    unarchiveCreate: (
+      unarchiveChatRequest: ChatArchiveRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatArchiveResponse, void>({
         path: `/chats/unarchive`,
         method: 'POST',
@@ -887,7 +943,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `void` Not found chat
      * @response `500` `void` Unexpected error
      */
-    usersDetail: ({ id, ...query }: UsersDetailParams, params: RequestParams = {}) =>
+    usersDetail: (
+      { id, ...query }: UsersDetailParams,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatUserResponse[], void>({
         path: `/chats/${id}/users`,
         method: 'GET',
@@ -1009,7 +1068,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    leaderboardCreate: (leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest, params: RequestParams = {}) =>
+    leaderboardCreate: (
+      leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/leaderboard`,
         method: 'POST',
@@ -1030,7 +1092,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    postLeaderboard: (leaderboardRequest: LeaderboardRequest, params: RequestParams = {}) =>
+    postLeaderboard: (
+      leaderboardRequest: LeaderboardRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/leaderboard/all`,
         method: 'POST',
@@ -1053,7 +1118,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    leaderboardCreate2: (teamName: string, leaderboardRequest: LeaderboardRequest, params: RequestParams = {}) =>
+    leaderboardCreate2: (
+      teamName: string,
+      leaderboardRequest: LeaderboardRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/leaderboard/${teamName}`,
         method: 'POST',
@@ -1075,7 +1144,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    yandexCreate: (OauthSignInRequest: OauthSignInRequest, params: RequestParams = {}) =>
+    yandexCreate: (
+      OauthSignInRequest: OauthSignInRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/oauth/yandex`,
         method: 'POST',
@@ -1095,7 +1167,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `400` `BadRequestError` Bad Request (No such redirect_uri refistered)
      * @response `500` `void` Unexpected error
      */
-    yandexServiceIdList: (query: YandexServiceIdListParams, params: RequestParams = {}) =>
+    yandexServiceIdList: (
+      query: YandexServiceIdListParams,
+      params: RequestParams = {}
+    ) =>
       this.request<ServiceId, BadRequestError | void>({
         path: `/oauth/yandex/service-id`,
         method: 'GET',
@@ -1117,7 +1192,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    profileUpdate: (userRequest: UserUpdateRequest, params: RequestParams = {}) =>
+    profileUpdate: (
+      userRequest: UserUpdateRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse, BadRequestError | void>({
         path: `/user/profile`,
         method: 'PUT',
@@ -1139,7 +1217,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    profileAvatarUpdate: (data: ProfileAvatarUpdatePayload, params: RequestParams = {}) =>
+    profileAvatarUpdate: (
+      data: ProfileAvatarUpdatePayload,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse, BadRequestError | void>({
         path: `/user/profile/avatar`,
         method: 'PUT',
@@ -1161,7 +1242,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    passwordUpdate: (changePasswordRequest: ChangePasswordRequest, params: RequestParams = {}) =>
+    passwordUpdate: (
+      changePasswordRequest: ChangePasswordRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/user/password`,
         method: 'PUT',
@@ -1201,7 +1285,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    searchCreate: (findUserRequest: FindUserRequest, params: RequestParams = {}) =>
+    searchCreate: (
+      findUserRequest: FindUserRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse[], BadRequestError | void>({
         path: `/user/search`,
         method: 'POST',
@@ -1318,7 +1405,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    liveInfoCreate: (iteration: LiveVideoInfoRequest, params: RequestParams = {}) =>
+    liveInfoCreate: (
+      iteration: LiveVideoInfoRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/videos/live/info`,
         method: 'POST',
@@ -1340,7 +1430,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    resourcesCreate: (data: ResourcesCreatePayload, params: RequestParams = {}) =>
+    resourcesCreate: (
+      data: ResourcesCreatePayload,
+      params: RequestParams = {}
+    ) =>
       this.request<Resource, void>({
         path: `/resources`,
         method: 'POST',
@@ -1422,7 +1515,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersDetail: ({ id, ...query }: StickersDetailParams, params: RequestParams = {}) =>
+    stickersDetail: (
+      { id, ...query }: StickersDetailParams,
+      params: RequestParams = {}
+    ) =>
       this.request<StickersResponse[], void>({
         path: `/stickers/${id}/`,
         method: 'GET',
@@ -1445,7 +1541,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersCreate2: (id: number, data: StickersCreate2Payload, params: RequestParams = {}) =>
+    stickersCreate2: (
+      id: number,
+      data: StickersCreate2Payload,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/stickers/${id}/`,
         method: 'POST',

@@ -9,14 +9,12 @@ const maxBoardSize = { rows: 40, cols: 40 }
 export const createNewGame = (rowCount?: number, colCount?: number) => {
   rowCount = rowCount ?? defaultBoardSize.rows
   colCount = colCount ?? defaultBoardSize.cols
-  if (
+  const isInvalidBoardSize = 
     rowCount <= 0 ||
     rowCount > maxBoardSize.rows ||
     colCount <= 0 ||
     colCount > maxBoardSize.cols
-  ) {
-    throw new Error('Invalid board size')
-  }
+  if(isInvalidBoardSize) throw new Error('Invalid board size')
   gameData.boardData = new Array(rowCount)
     .fill(null)
     .map(() => new Array(colCount).fill(0))

@@ -10,7 +10,7 @@ export const insertNewNumber = () => {
     gameData.boardData[freeCells[randomCellIdx].row][
       freeCells[randomCellIdx].col
     ] = newNumber
-    setGameData(gameData)
+    setGameData({ ...gameData })
   }
   if (freeCells.length <= 1) {
     if (noWayToMove()) setGameStatus(GameStatus.Lost)

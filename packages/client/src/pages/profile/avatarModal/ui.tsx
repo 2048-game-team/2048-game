@@ -1,13 +1,28 @@
-import {Button, Modal, Upload, UploadFile, UploadProps} from "antd";
+import {Button, Modal, Upload} from "antd";
 import React, {useState} from "react";
 import {AvatarModalProps} from "./types";
+import {LoadingOutlined, PlusOutlined} from "@ant-design/icons";
 
 export const AvatarModal = ({isModalOpen, onOk, onClose}:AvatarModalProps) => {
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState<string>();
+    const [previewImage, setPreviewImage] = useState<string>();
 
-    const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-        setFileList(newFileList);
+    const handleChange = (info: any) => {
+        if (info.file.status === "uploading") {
+            setLoading(true);
+            return;
+        }
+        setImageUrl(info.file.originFileObj);
+        setPreviewImage(URL.createObjectURL(info.file.originFileObj));
     };
+
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Загрузить</div>
+        </div>
+    );
 
     const handleOk = () => {
         onOk();
@@ -34,14 +49,19 @@ export const AvatarModal = ({isModalOpen, onOk, onClose}:AvatarModalProps) => {
                onCancel={handleCancel}
                style={{ textAlign: 'center' }}
         >
-                <Upload
-                    action=""
-                    listType="picture-card"
-                    fileList={fileList}
-                    onChange={onChange}
+            <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                onChange={handleChange}
                 >
-                    {fileList.length < 1 && '+ Загрузить'}
-                </Upload>
+                {imageUrl ? (
+                    <img src={previewImage} alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover"}} />
+                ) : (
+                    uploadButton
+                )}
+            </Upload>
         </Modal>
     )
 }

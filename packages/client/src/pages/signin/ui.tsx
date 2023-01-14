@@ -8,17 +8,17 @@ import { useStore } from 'effector-react'
 import { signin, signinFx } from './model'
 
 export const SignIn: React.FC = () => {
-  const navigate = useNavigate()
-  const loading = useStore(signinFx.pending)
+  const navigate = useNavigate();
+  const loading = useStore(signinFx.pending);
 
   const handleCancel = () => {
-    navigate(routesPath.home)
-  }
+    navigate(routesPath.home);
+  };
 
   const onFinish = (data: SignInRequest) => {
     signin(data)
     navigate(routesPath.home)
-  }
+  };
 
   return (
     <Modal title="Вход" open onCancel={handleCancel} footer={null}>
@@ -62,5 +62,5 @@ export const SignIn: React.FC = () => {
         </Form>
       </Typography>
     </Modal>
-  )
-}
+  );
+};

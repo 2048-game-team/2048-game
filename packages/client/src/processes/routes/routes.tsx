@@ -6,6 +6,8 @@ import { SignIn } from 'pages/signin'
 import { Logout } from 'pages/logout'
 import { Game } from 'pages/game'
 import { SignUp } from 'pages/signup'
+import { Finish } from 'pages/finish';
+
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },
@@ -14,6 +16,6 @@ export const routes: RouteObject[] = [
   { path: routesPath.profile, element: <div>PROFILE</div> },
   { path: routesPath.forum, element: <Forum /> },
   { path: routesPath.logout, element: <Logout /> },
-  { path: routesPath.game, element: <div>GAME</div> },
-  { path: routesPath.game, element: <Game /> }
-]
+  { path: routesPath.game, element: <Game /> },
+  { path: routesPath.finish, element: <Finish /> },
+];

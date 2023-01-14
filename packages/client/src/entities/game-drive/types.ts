@@ -1,8 +1,9 @@
-export type Array2D = number[][]
+export type Array2D = number[][];
+export type OneLine = number[];
 
 export interface IGameData {
-  boardData: Array2D
-  score: number
+  boardData: Array2D;
+  score: number;
 }
 
 export enum GameStatus {
@@ -18,9 +19,13 @@ export enum Movements {
   Bottom = 'bottom',
 }
 
-export type CellList = { row: number; col: number }[]
+export type CellList = { row: number; col: number }[];
 
 export interface IMovementResult {
-  newRaw: number[]
-  addToScore: number
+  newLine: number[];
+}
+
+export interface ICollapsedData {
+  line: number[];
+  newValue: number;
 }

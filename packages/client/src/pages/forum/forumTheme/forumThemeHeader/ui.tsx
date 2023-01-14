@@ -1,7 +1,7 @@
-import React from 'react'
-import { Avatar, Space } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
-import { ThemeHeaderProps, ThemeTitle, SpaceBetween } from 'pages/forum'
+import React from 'react';
+import { Avatar, Space } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { ThemeHeaderProps, ThemeTitle, SpaceBetween } from 'pages/forum';
 
 export const ForumThemeHeader = ({
   title,
@@ -10,7 +10,7 @@ export const ForumThemeHeader = ({
   active,
 }: ThemeHeaderProps) => {
   if (!active) {
-    return <Space>{title}</Space>
+    return <Space>{title}</Space>;
   }
 
   return (
@@ -26,5 +26,5 @@ export const ForumThemeHeader = ({
 
       <Space>{date}</Space>
     </SpaceBetween>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 export interface NavItem {
-  path: string
-  icon: ReactNode
-  title: string
+  path: string;
+  icon: ReactNode;
+  title: string;
 }

@@ -5,11 +5,11 @@ const keyMoveMap: Record<string, Movements> = {
   ArrowUp: Movements.Top,
   ArrowRight: Movements.Right,
   ArrowDown: Movements.Bottom,
-}
+};
 
 export const keyDownHandler: EventListenerOrEventListenerObject = event => {
-  const { key } = event as KeyboardEvent
+  const { key } = event as KeyboardEvent;
   if (key in keyMoveMap) {
-    makeMove(keyMoveMap[key])
+    makeMove(keyMoveMap[key]);
   }
-}
+};

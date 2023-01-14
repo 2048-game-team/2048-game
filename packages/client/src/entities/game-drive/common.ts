@@ -1,38 +1,78 @@
-import { IGameData, GameStatus, IMovementResult, Array2D } from './types'
-import { setGameStatus } from './model'
+import {
+  IGameData,
+  GameStatus,
+  IMovementResult,
+  Array2D,
+  OneLine,
+  ICollapsedData,
+} from './types';
+import { setGameData, setGameStatus } from './model';
 
-export const gameData: IGameData = { boardData: [], score: 0 }
+export const gameData: IGameData = { boardData: [], score: 0 };
 
-const winCreteria = 2048
+const winCreteria = 2048;
 
-export const oneLineHandler = (raw: number[]): IMovementResult => {
-  let addToScore = 0
-  const rawLength = raw.length
-  const onlyNumbers = raw.filter(item => item > 0)
-  let i = onlyNumbers.length - 1
+export const createEmpty2DArray = (
+  rowCount: number,
+  colCount: number
+): Array2D => {
+  return new Array(rowCount).fill(null).map(() => new Array(colCount).fill(0));
+};
+
+export const oneLineHandler = (line: OneLine): IMovementResult => {
+  const lineLength = line.length;
+  const withoutZeroLine = line.filter(item => item > 0);
+  const collapsedLine = collapseEqualChips(withoutZeroLine);
+  line = restoreLineLength(collapsedLine, lineLength);
+  return { newLine: line };
+};
+
+const collapseEqualChips = (line: OneLine): OneLine => {
+  let i = line.length - 1;
   while (i > 0) {
-    if (onlyNumbers[i - 1] === onlyNumbers[i]) {
-      onlyNumbers.splice(i, 1)
-      onlyNumbers[i - 1] = 2 * onlyNumbers[i - 1]
-      addToScore += onlyNumbers[i - 1]
-      if (onlyNumbers[i - 1] >= winCreteria) setGameStatus(GameStatus.Win)
-      i--
+    if (isEqualChips(line, i)) {
+      const collapse = makeCollapse(line, i);
+      line = collapse.line;
+      addToScore(collapse.newValue);
+      if (collapse.newValue >= winCreteria) setGameStatus(GameStatus.Win);
+      i--;
     }
-    i--
+    i--;
   }
-  raw = onlyNumbers.concat(new Array(rawLength - onlyNumbers.length).fill(0))
-  return { newRaw: raw, addToScore: addToScore }
-}
+  return line;
+};
+
+const isEqualChips = (line: OneLine, pos: number): boolean =>
+  line[pos - 1] === line[pos];
+
+const makeCollapse = (line: OneLine, pos: number): ICollapsedData => {
+  line.splice(pos, 1);
+  line[pos - 1] = 2 * line[pos - 1];
+  return {
+    line: line,
+    newValue: line[pos - 1],
+  };
+};
+
+const addToScore = (addValue: number) => {
+  gameData.score += addValue;
+  setGameData({ ...gameData });
+};
+
+const restoreLineLength = (line: OneLine, lineLength: number): OneLine => {
+  return line.concat(new Array(lineLength - line.length).fill(0));
+};
 
 export const transposeMatrix = () => {
-  if (!gameData.boardData[0].length) throw new Error('Invalid matrix')
-  const res: Array2D = new Array(gameData.boardData[0].length)
-    .fill(null)
-    .map(() => new Array(gameData.boardData.length).fill(0))
+  const transposeRowCount = gameData.boardData[0].length;
+  const transposeColCount = gameData.boardData.length;
+  if (!transposeRowCount || !transposeColCount)
+    throw new Error('Invalid matrix');
+  const result = createEmpty2DArray(transposeRowCount, transposeColCount);
   gameData.boardData.forEach((row, rowIndex) => {
     row.forEach((value, colIndex) => {
-      res[colIndex][rowIndex] = value
-    })
-  })
-  gameData.boardData = res
-}
+      result[colIndex][rowIndex] = value;
+    });
+  });
+  gameData.boardData = result;
+};

@@ -12,265 +12,265 @@
 /** @example {"id":123,"first_name":"Petya","second_name":"Pupkin","display_name":"Petya Pupkin","login":"userLogin","email":"my@email.com","phone":"89223332211","avatar":"/path/to/avatar.jpg"} */
 export interface UserResponse {
   /** User id */
-  id: number
+  id: number;
   /** First name */
-  first_name: string
+  first_name: string;
   /** Second name */
-  second_name: string
+  second_name: string;
   /** Display name */
-  display_name: string
+  display_name: string;
   /** User login - unique */
-  login: string
+  login: string;
   /** Email */
-  email: string
+  email: string;
   /** Phone */
-  phone: string
+  phone: string;
   /** Avatar */
-  avatar: string
+  avatar: string;
 }
 
 export interface SignUpRequest {
   /** First name */
-  first_name: string
+  first_name: string;
   /** Second name */
-  second_name: string
+  second_name: string;
   /** User login - unique */
-  login: string
+  login: string;
   /** Email /^\S+@\S+$/ */
-  email: string
+  email: string;
   /** Password */
-  password: string
+  password: string;
   /** Phone /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/ */
-  phone: string
+  phone: string;
 }
 
 export interface SignInRequest {
   /** User login */
-  login: string
+  login: string;
   /** Password */
-  password: string
+  password: string;
 }
 
 export interface SignUpResponse {
   /** Created User ID */
-  id: number
+  id: number;
 }
 
 export interface CreateChatRequest {
   /** Chat title */
-  title: string
+  title: string;
 }
 
 export interface UsersRequest {
-  users: number[]
+  users: number[];
   /** Chat id */
-  chatId: number
+  chatId: number;
 }
 
 /** @example {"id":123,"title":"my-chat","avatar":"/123/avatar1.jpg","unread_count":15,"last_message":{"user":{"first_name":"Petya","second_name":"Pupkin","avatar":"/path/to/avatar.jpg","email":"my@email.com","login":"userLogin","phone":"8(911)-222-33-22"},"time":"2020-01-02T14:22:22.000Z","content":"this is message content"}} */
 export interface ChatsResponse {
   /** Chat id */
-  id: number
+  id: number;
   /** Chat title */
-  title: string
+  title: string;
   /** Chat avatar */
-  avatar: string
+  avatar: string;
   /** Number of unread messages in chat for current user */
-  unread_count: number
+  unread_count: number;
   last_message: {
     /**
      * Message user (sender)
      * @format date-time
      */
-    user?: UserResponse
+    user?: UserResponse;
     /**
      * Message timestamp
      * @format timestamp
      */
-    time?: string
+    time?: string;
     /** Message content */
-    content?: string
-  }
+    content?: string;
+  };
 }
 
 export interface ChatDeleteRequest {
   /** Chat id */
-  chatId: number
+  chatId: number;
 }
 
 /** @example {"userId":12,"result":{"id":123,"title":"deleted-chat","avatar":"/123/avatar1.jpg"}} */
 export interface ChatDeleteResponse {
   /** User id */
-  userId: number
-  result: ChatsResponse
+  userId: number;
+  result: ChatsResponse;
 }
 
 export interface ChatArchiveRequest {
   /** Chat id */
-  chatId: number
+  chatId: number;
 }
 
 export interface ChatArchiveResponse {
   /** User id */
-  userId: number
-  result: ChatsResponse
+  userId: number;
+  result: ChatsResponse;
 }
 
 export interface ChatsMessagesTokenResponse {
   /** Token for web socket server */
-  token: string
+  token: string;
 }
 
 /** @example {"unread_count":12} */
 export interface UnreadCountResponse {
   /** New messages count */
-  unread_count: number
+  unread_count: number;
 }
 
 export interface LeaderboardNewLeaderRequest {
   /** Leaderboard data object, any type */
-  data: object
+  data: object;
   /** Which field is used to sort (if new value of the field more than old, data is stored) */
-  ratingFieldName: string
+  ratingFieldName: string;
   /** Your team name. Used to make unique leaderboard for each project. */
-  teamName?: string
+  teamName?: string;
 }
 
 export interface LeaderboardRequest {
   /** Which field is used to sort */
-  ratingFieldName: string
+  ratingFieldName: string;
   /** Used to paginate between pages. If limit is 10, then for the 1st page - cursor=0, for the 2nd page - cursor=10. */
-  cursor: number
+  cursor: number;
   /** Maximum amount of leaders to return */
-  limit: number
+  limit: number;
 }
 
 export interface OauthSignInRequest {
   /** User code from Yandex */
-  code: string
+  code: string;
   /** Redirect uri that you are using for oauth */
-  redirect_uri: string
+  redirect_uri: string;
 }
 
 export interface ServiceId {
   /** Service id */
-  service_id: string
+  service_id: string;
 }
 
 export interface BadRequestError {
   /** Error message */
-  reason: string
+  reason: string;
 }
 
 export interface UserUpdateRequest {
   /** First name */
-  first_name: string
+  first_name: string;
   /** Second name */
-  second_name: string
+  second_name: string;
   /** Display Name */
-  display_name: string
+  display_name: string;
   /** User login - unique */
-  login: string
+  login: string;
   /** Email */
-  email: string
+  email: string;
   /** Phone */
-  phone: string
+  phone: string;
 }
 
 export interface UserRequest {
   /** First name */
-  first_name: string
+  first_name: string;
   /** Second name */
-  second_name: string
+  second_name: string;
   /** Display Name */
-  display_name: string
+  display_name: string;
   /** User login - unique */
-  login: string
+  login: string;
   /** Email */
-  email: string
+  email: string;
   /** Phone */
-  phone: string
+  phone: string;
 }
 
 export interface FindUserRequest {
   /** User login (beginning of login) */
-  login: string
+  login: string;
 }
 
 export interface ChangePasswordRequest {
   /** Old password */
-  oldPassword: string
+  oldPassword: string;
   /** New password */
-  newPassword: string
+  newPassword: string;
 }
 
 /** @example {"id":123,"user_id":231,"path":"/32543654dsf/434534r3rsddfs_my-file.jpg","filename":"my-file.jpg","content_type":"image/jpeg","content_size":543672,"upload_date":"2020-01-02T14:22:22.000Z"} */
 export interface Resource {
   /** Message id */
-  id: number
+  id: number;
   /** User id */
-  user_id: number
+  user_id: number;
   /** Server relative file path */
-  path: string
+  path: string;
   /** Initial file name */
-  filename: string
+  filename: string;
   /** File content type (e.g "image/jpeg" for .jpg images) */
-  content_type: string
+  content_type: string;
   /** File size in bytes */
-  content_size: number
+  content_size: number;
   /**
    * Resource uploading time
    * @format date-time
    */
-  upload_date: string
+  upload_date: string;
 }
 
 /** @example {"id":123,"user_id":231,"chat_id":312,"time":"2020-01-02T14:22:22.000Z","type":"file","content":132,"file":{"id":132,"user_id":231,"path":"/32543654dsf/434534r3rsddfs_my-file.jpg","filename":"my-file.jpg","content_type":"image/jpeg","content_size":543672,"upload_date":"2020-01-02T14:22:22.000Z"}} */
 export interface ChatMessage {
   /** Message id */
-  id: number
+  id: number;
   /** User id */
-  user_id: number
+  user_id: number;
   /** Chat id */
-  chat_id: number
+  chat_id: number;
   /**
    * Message sent time
    * @format date-time
    */
-  time: string
+  time: string;
   /** Message type */
-  type: ChatMessageType
+  type: ChatMessageType;
   /** Message content (message text for messages and resourceId for files) */
-  content: string
+  content: string;
   /** File */
-  file?: Resource
+  file?: Resource;
 }
 
 /** @example {"id":123,"first_name":"petya","second_name":"petrov","display_name":"petya petrov","login":"my-login","email":"my@email.com","phone":"89223332211","avatar":"/path/to/my-file.jpg","role":"admin"} */
 export interface ChatUserResponse {
   /** User id */
-  id: number
+  id: number;
   /** First name */
-  first_name: string
+  first_name: string;
   /** Second name */
-  second_name: string
+  second_name: string;
   /** Display name */
-  display_name: string
+  display_name: string;
   /** User login - unique */
-  login: string
+  login: string;
   /** Email */
-  email: string
+  email: string;
   /** Phone */
-  phone: string
+  phone: string;
   /** Avatar */
-  avatar: string
+  avatar: string;
   /** User role */
-  role: ChatUserResponseRole
+  role: ChatUserResponseRole;
 }
 
 export interface StaticChartRequest {
   /** Number of points in chart (10 / 100 / 1000) */
-  chartSize: StaticChartRequestChartSize
+  chartSize: StaticChartRequestChartSize;
 }
 
 export interface LiveChartRequest {
@@ -279,7 +279,7 @@ export interface LiveChartRequest {
    * @format integer
    * @default 0
    */
-  next: number
+  next: number;
 }
 
 export type ChartSchema = {
@@ -287,16 +287,16 @@ export type ChartSchema = {
    * X axis (datetime)
    * @format date-time
    */
-  x?: string
+  x?: string;
   /** @format float */
-  y1?: number
+  y1?: number;
   /** @format float */
-  y2?: number
-}[]
+  y2?: number;
+}[];
 
 export interface StaticChartResponse {
   /** Chart points */
-  data?: ChartSchema
+  data?: ChartSchema;
 }
 
 export interface LiveChartResponse {
@@ -304,9 +304,9 @@ export interface LiveChartResponse {
    * Used as a cursor (pass this value to the next request)
    * @example 5
    */
-  next?: number
+  next?: number;
   /** Chart points */
-  data?: ChartSchema
+  data?: ChartSchema;
 }
 
 export interface LiveVideoInfoRequest {
@@ -315,7 +315,7 @@ export interface LiveVideoInfoRequest {
    * @format integer
    * @default 0
    */
-  iteration: number
+  iteration: number;
 }
 
 export interface VideoInfoResponse {
@@ -324,7 +324,7 @@ export interface VideoInfoResponse {
    * @format integer
    * @example 4096
    */
-  size: number
+  size: number;
 }
 
 export interface Sticker {
@@ -333,12 +333,12 @@ export interface Sticker {
    * @format integer
    * @example 123
    */
-  id?: number
+  id?: number;
   /**
    * Url for sticker resource(image)
    * @example "/stickers/2346-dfsg-425-sdfs/14534.gif"
    */
-  path?: string
+  path?: string;
 }
 
 export interface StickerPack {
@@ -346,24 +346,24 @@ export interface StickerPack {
    * Sticker pack title
    * @example "pack-title"
    */
-  title?: string
+  title?: string;
   /**
    * User id that created this pack
    * @format integer
    * @example 123
    */
-  user_id?: number
-  stickers?: string[]
+  user_id?: number;
+  stickers?: string[];
 }
 
 export interface StickerPacksResponse {
   /** StickerPacks */
-  data?: StickerPack[]
+  data?: StickerPack[];
 }
 
 export interface StickersResponse {
   /** Stickers */
-  data?: Sticker[]
+  data?: Sticker[];
 }
 
 /** Message type */
@@ -387,48 +387,48 @@ export enum StaticChartRequestChartSize {
 
 export interface ChatsListParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** Chat's title to filter by */
-  title?: string
+  title?: string;
 }
 
 export interface ArchiveListParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** Chat's title to filter by */
-  title?: string
+  title?: string;
 }
 
 export interface UsersDetailParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** User's '{first_name} {second_name}' to filter */
-  name?: string
+  name?: string;
   /** User's email to filter */
-  email?: string
+  email?: string;
   /** Numeric chat id */
-  id: number
+  id: number;
 }
 
 export interface AvatarUpdatePayload {
   /** Chat id */
-  chatId: number
+  chatId: number;
   /**
    * Avatar
    * @format binary
    */
-  avatar: File
+  avatar: File;
 }
 
 export interface YandexServiceIdListParams {
   /** Redirect uri that you are using for oauth */
-  redirect_uri?: string
+  redirect_uri?: string;
 }
 
 export interface ProfileAvatarUpdatePayload {
@@ -436,83 +436,94 @@ export interface ProfileAvatarUpdatePayload {
    * Avatar
    * @format binary
    */
-  avatar: File
+  avatar: File;
 }
 
 export interface ResourcesCreatePayload {
   /** @format binary */
-  resource: File
+  resource: File;
 }
 
 export interface StickersListParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** Sticker's title to filter by */
-  title?: string
+  title?: string;
 }
 
 export interface StickersCreatePayload {
   /** Sticker pack title */
-  title: string
+  title: string;
   /**
    * Sticker image (can be multiple images, just attach multiple files)
    * @format binary
    */
-  resource: File
+  resource: File;
 }
 
 export interface StickersDetailParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** Numeric sticker pack id */
-  id: number
+  id: number;
 }
 
 export interface StickersCreate2Payload {
   /** Sticker image (can be multiple images, just attach multiple files) */
-  resource: File
+  resource: File;
 }
 
 export interface FavoriteListParams {
   /** The number of items to skip before starting to collect the result set */
-  offset?: number
+  offset?: number;
   /** The numbers of items to return */
-  limit?: number
+  limit?: number;
   /** Sticker pack title to filter by */
-  title?: string
+  title?: string;
 }
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  HeadersDefaults,
+  ResponseType,
+} from 'axios';
 
-export type QueryParamsType = Record<string | number, any>
+export type QueryParamsType = Record<string | number, any>;
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+export interface FullRequestParams
+  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
-  secure?: boolean
+  secure?: boolean;
   /** request path */
-  path: string
+  path: string;
   /** content type of request body */
-  type?: ContentType
+  type?: ContentType;
   /** query params */
-  query?: QueryParamsType
+  query?: QueryParamsType;
   /** format of response (i.e. response.json() -> format: "json") */
-  format?: ResponseType
+  format?: ResponseType;
   /** request body */
-  body?: unknown
+  body?: unknown;
 }
 
-export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>
+export type RequestParams = Omit<
+  FullRequestParams,
+  'body' | 'method' | 'query' | 'path'
+>;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+export interface ApiConfig<SecurityDataType = unknown>
+  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
   securityWorker?: (
-    securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void
-  secure?: boolean
-  format?: ResponseType
+    securityData: SecurityDataType | null
+  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
+  secure?: boolean;
+  format?: ResponseType;
 }
 
 export enum ContentType {
@@ -523,58 +534,77 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public instance: AxiosInstance
-  private securityData: SecurityDataType | null = null
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker']
-  private secure?: boolean
-  private format?: ResponseType
+  public instance: AxiosInstance;
+  private securityData: SecurityDataType | null = null;
+  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
+  private secure?: boolean;
+  private format?: ResponseType;
 
-  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || 'https://ya-praktikum.tech/api/v2' })
-    this.secure = secure
-    this.format = format
-    this.securityWorker = securityWorker
+  constructor({
+    securityWorker,
+    secure,
+    format,
+    ...axiosConfig
+  }: ApiConfig<SecurityDataType> = {}) {
+    this.instance = axios.create({
+      ...axiosConfig,
+      baseURL: axiosConfig.baseURL || 'https://ya-praktikum.tech/api/v2',
+    });
+    this.secure = secure;
+    this.format = format;
+    this.securityWorker = securityWorker;
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {
-    this.securityData = data
-  }
+    this.securityData = data;
+  };
 
-  protected mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
-    const method = params1.method || (params2 && params2.method)
+  protected mergeRequestParams(
+    params1: AxiosRequestConfig,
+    params2?: AxiosRequestConfig
+  ): AxiosRequestConfig {
+    const method = params1.method || (params2 && params2.method);
 
     return {
       ...this.instance.defaults,
       ...params1,
       ...(params2 || {}),
       headers: {
-        ...((method && this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) || {}),
+        ...((method &&
+          this.instance.defaults.headers[
+            method.toLowerCase() as keyof HeadersDefaults
+          ]) ||
+          {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
       },
-    }
+    };
   }
 
   protected stringifyFormItem(formItem: unknown) {
     if (typeof formItem === 'object' && formItem !== null) {
-      return JSON.stringify(formItem)
+      return JSON.stringify(formItem);
     } else {
-      return `${formItem}`
+      return `${formItem}`;
     }
   }
 
   protected createFormData(input: Record<string, unknown>): FormData {
     return Object.keys(input || {}).reduce((formData, key) => {
-      const property = input[key]
-      const propertyContent: any[] = property instanceof Array ? property : [property]
+      const property = input[key];
+      const propertyContent: any[] =
+        property instanceof Array ? property : [property];
 
       for (const formItem of propertyContent) {
-        const isFileType = formItem instanceof Blob || formItem instanceof File
-        formData.append(key, isFileType ? formItem : this.stringifyFormItem(formItem))
+        const isFileType = formItem instanceof Blob || formItem instanceof File;
+        formData.append(
+          key,
+          isFileType ? formItem : this.stringifyFormItem(formItem)
+        );
       }
 
-      return formData
-    }, new FormData())
+      return formData;
+    }, new FormData());
   }
 
   public request = async <T = any, _E = any>({
@@ -590,30 +620,42 @@ export class HttpClient<SecurityDataType = unknown> {
       ((typeof secure === 'boolean' ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
-      {}
-    const requestParams = this.mergeRequestParams(params, secureParams)
-    const responseFormat = format || this.format || undefined
+      {};
+    const requestParams = this.mergeRequestParams(params, secureParams);
+    const responseFormat = format || this.format || undefined;
 
-    if (type === ContentType.FormData && body && body !== null && typeof body === 'object') {
-      body = this.createFormData(body as Record<string, unknown>)
+    if (
+      type === ContentType.FormData &&
+      body &&
+      body !== null &&
+      typeof body === 'object'
+    ) {
+      body = this.createFormData(body as Record<string, unknown>);
     }
 
-    if (type === ContentType.Text && body && body !== null && typeof body !== 'string') {
-      body = JSON.stringify(body)
+    if (
+      type === ContentType.Text &&
+      body &&
+      body !== null &&
+      typeof body !== 'string'
+    ) {
+      body = JSON.stringify(body);
     }
 
     return this.instance.request({
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
+        ...(type && type !== ContentType.FormData
+          ? { 'Content-Type': type }
+          : {}),
       },
       params: query,
       responseType: responseFormat,
       data: body,
       url: path,
-    })
-  }
+    });
+  };
 }
 
 /**
@@ -623,7 +665,9 @@ export class HttpClient<SecurityDataType = unknown> {
  *
  * Web middle chats API
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown
+> extends HttpClient<SecurityDataType> {
   auth = {
     /**
      * No description
@@ -704,7 +748,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: 'POST',
         ...params,
       }),
-  }
+  };
   chats = {
     /**
      * No description
@@ -738,7 +782,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    chatsCreate: (createChatRequest: CreateChatRequest, params: RequestParams = {}) =>
+    chatsCreate: (
+      createChatRequest: CreateChatRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/chats`,
         method: 'POST',
@@ -760,7 +807,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    chatsDelete: (deleteChatRequest: ChatDeleteRequest, params: RequestParams = {}) =>
+    chatsDelete: (
+      deleteChatRequest: ChatDeleteRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatDeleteResponse, void>({
         path: `/chats`,
         method: 'DELETE',
@@ -823,7 +873,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    archiveCreate: (archiveChatRequest: ChatArchiveRequest, params: RequestParams = {}) =>
+    archiveCreate: (
+      archiveChatRequest: ChatArchiveRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatArchiveResponse, void>({
         path: `/chats/archive`,
         method: 'POST',
@@ -845,7 +898,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `void` Forbidden
      * @response `500` `void` Unexpected error
      */
-    unarchiveCreate: (unarchiveChatRequest: ChatArchiveRequest, params: RequestParams = {}) =>
+    unarchiveCreate: (
+      unarchiveChatRequest: ChatArchiveRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatArchiveResponse, void>({
         path: `/chats/unarchive`,
         method: 'POST',
@@ -887,7 +943,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `void` Not found chat
      * @response `500` `void` Unexpected error
      */
-    usersDetail: ({ id, ...query }: UsersDetailParams, params: RequestParams = {}) =>
+    usersDetail: (
+      { id, ...query }: UsersDetailParams,
+      params: RequestParams = {}
+    ) =>
       this.request<ChatUserResponse[], void>({
         path: `/chats/${id}/users`,
         method: 'GET',
@@ -995,7 +1054,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
-  }
+  };
   leaderboard = {
     /**
      * No description
@@ -1009,7 +1068,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    leaderboardCreate: (leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest, params: RequestParams = {}) =>
+    leaderboardCreate: (
+      leaderboardNewLeaderRequest: LeaderboardNewLeaderRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/leaderboard`,
         method: 'POST',
@@ -1030,7 +1092,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    postLeaderboard: (leaderboardRequest: LeaderboardRequest, params: RequestParams = {}) =>
+    postLeaderboard: (
+      leaderboardRequest: LeaderboardRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/leaderboard/all`,
         method: 'POST',
@@ -1053,7 +1118,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    leaderboardCreate2: (teamName: string, leaderboardRequest: LeaderboardRequest, params: RequestParams = {}) =>
+    leaderboardCreate2: (
+      teamName: string,
+      leaderboardRequest: LeaderboardRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/leaderboard/${teamName}`,
         method: 'POST',
@@ -1061,7 +1130,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         type: ContentType.Json,
         ...params,
       }),
-  }
+  };
   oauth = {
     /**
      * No description
@@ -1075,7 +1144,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    yandexCreate: (OauthSignInRequest: OauthSignInRequest, params: RequestParams = {}) =>
+    yandexCreate: (
+      OauthSignInRequest: OauthSignInRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/oauth/yandex`,
         method: 'POST',
@@ -1095,7 +1167,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `400` `BadRequestError` Bad Request (No such redirect_uri refistered)
      * @response `500` `void` Unexpected error
      */
-    yandexServiceIdList: (query: YandexServiceIdListParams, params: RequestParams = {}) =>
+    yandexServiceIdList: (
+      query: YandexServiceIdListParams,
+      params: RequestParams = {}
+    ) =>
       this.request<ServiceId, BadRequestError | void>({
         path: `/oauth/yandex/service-id`,
         method: 'GET',
@@ -1103,7 +1178,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
-  }
+  };
   user = {
     /**
      * No description
@@ -1117,7 +1192,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    profileUpdate: (userRequest: UserUpdateRequest, params: RequestParams = {}) =>
+    profileUpdate: (
+      userRequest: UserUpdateRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse, BadRequestError | void>({
         path: `/user/profile`,
         method: 'PUT',
@@ -1139,7 +1217,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    profileAvatarUpdate: (data: ProfileAvatarUpdatePayload, params: RequestParams = {}) =>
+    profileAvatarUpdate: (
+      data: ProfileAvatarUpdatePayload,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse, BadRequestError | void>({
         path: `/user/profile/avatar`,
         method: 'PUT',
@@ -1161,7 +1242,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    passwordUpdate: (changePasswordRequest: ChangePasswordRequest, params: RequestParams = {}) =>
+    passwordUpdate: (
+      changePasswordRequest: ChangePasswordRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/user/password`,
         method: 'PUT',
@@ -1201,7 +1285,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    searchCreate: (findUserRequest: FindUserRequest, params: RequestParams = {}) =>
+    searchCreate: (
+      findUserRequest: FindUserRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<UserResponse[], BadRequestError | void>({
         path: `/user/search`,
         method: 'POST',
@@ -1210,7 +1297,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
-  }
+  };
   charts = {
     /**
      * No description
@@ -1252,7 +1339,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: 'json',
         ...params,
       }),
-  }
+  };
   videos = {
     /**
      * @description Get static video stream
@@ -1318,7 +1405,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    liveInfoCreate: (iteration: LiveVideoInfoRequest, params: RequestParams = {}) =>
+    liveInfoCreate: (
+      iteration: LiveVideoInfoRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/videos/live/info`,
         method: 'POST',
@@ -1326,7 +1416,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         type: ContentType.Json,
         ...params,
       }),
-  }
+  };
   resources = {
     /**
      * No description
@@ -1340,7 +1430,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    resourcesCreate: (data: ResourcesCreatePayload, params: RequestParams = {}) =>
+    resourcesCreate: (
+      data: ResourcesCreatePayload,
+      params: RequestParams = {}
+    ) =>
       this.request<Resource, void>({
         path: `/resources`,
         method: 'POST',
@@ -1368,7 +1461,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: 'GET',
         ...params,
       }),
-  }
+  };
   stickers = {
     /**
      * No description
@@ -1422,7 +1515,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersDetail: ({ id, ...query }: StickersDetailParams, params: RequestParams = {}) =>
+    stickersDetail: (
+      { id, ...query }: StickersDetailParams,
+      params: RequestParams = {}
+    ) =>
       this.request<StickersResponse[], void>({
         path: `/stickers/${id}/`,
         method: 'GET',
@@ -1445,7 +1541,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `401` `void` Unauthorized
      * @response `500` `void` Unexpected error
      */
-    stickersCreate2: (id: number, data: StickersCreate2Payload, params: RequestParams = {}) =>
+    stickersCreate2: (
+      id: number,
+      data: StickersCreate2Payload,
+      params: RequestParams = {}
+    ) =>
       this.request<void, BadRequestError | void>({
         path: `/stickers/${id}/`,
         method: 'POST',
@@ -1509,5 +1609,5 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: 'DELETE',
         ...params,
       }),
-  }
+  };
 }

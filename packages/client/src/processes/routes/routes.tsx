@@ -1,9 +1,10 @@
-import { RouteObject } from 'react-router-dom'
-import { routesPath } from './routesPath'
-import { Login } from 'pages/login'
-import { Forum } from 'pages/forum'
-import { Start } from 'pages/start'
-import { Game } from 'pages/game'
+import { RouteObject } from 'react-router-dom';
+import { routesPath } from './routesPath';
+import { Login } from 'pages/login';
+import { Forum } from 'pages/forum';
+import { Start } from 'pages/start';
+import { Game } from 'pages/game';
+import { Finish } from 'pages/finish';
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },
@@ -11,5 +12,6 @@ export const routes: RouteObject[] = [
   { path: routesPath.profile, element: <div>PROFILE</div> },
   { path: routesPath.forum, element: <Forum /> },
   { path: routesPath.logout, element: <div>LOGOUT</div> },
-  { path: routesPath.game, element: <Game /> }
-]
+  { path: routesPath.game, element: <Game /> },
+  { path: routesPath.finish, element: <Finish /> },
+];

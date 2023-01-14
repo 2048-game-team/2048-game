@@ -1,27 +1,27 @@
-import { useStore } from 'effector-react'
-import { $gameData, $gameStatus } from 'entities/game-drive'
-import { GameStatus, setGameStatus } from 'entities/game-drive'
-import { Image, Typography } from 'antd'
-import { FinishSpace, StartButton } from './styles'
-import { useNavigate } from 'react-router-dom'
-import { routesPath } from 'processes/routes'
-import finishLogo from './finishLogo.png'
-import { FC, PropsWithChildren } from 'react'
+import { useStore } from 'effector-react';
+import { $gameData, $gameStatus } from 'entities/game-drive';
+import { GameStatus, setGameStatus } from 'entities/game-drive';
+import { Image, Typography } from 'antd';
+import { FinishSpace, StartButton } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { routesPath } from 'processes/routes';
+import finishLogo from './finishLogo.png';
+import { FC, PropsWithChildren } from 'react';
 
-const { Title } = Typography
+const { Title } = Typography;
 
 export const Finish: FC<PropsWithChildren> = () => {
-  const { score } = useStore($gameData)
-  const status = useStore($gameStatus)
-  const navigate = useNavigate()
+  const { score } = useStore($gameData);
+  const status = useStore($gameStatus);
+  const navigate = useNavigate();
 
   const startGameHandler = () => {
-    setGameStatus(GameStatus.OnGame)
-    navigate(routesPath.game)
-  }
+    setGameStatus(GameStatus.OnGame);
+    navigate(routesPath.game);
+  };
 
   if (status !== GameStatus.Lost) {
-    return <p>Игра еще не окончена. Вы попали на эту страницу по ошибке</p>
+    return <p>Игра еще не окончена. Вы попали на эту страницу по ошибке</p>;
   }
 
   return (
@@ -33,5 +33,5 @@ export const Finish: FC<PropsWithChildren> = () => {
         Играть еще
       </StartButton>
     </FinishSpace>
-  )
-}
+  );
+};

@@ -1,10 +1,10 @@
-import React from 'react'
-import { MessagesProps, SpaceMessages } from 'pages/forum'
-import { ForumMessage } from './forumMessage/ui'
+import React from 'react';
+import { MessagesProps, SpaceMessages } from 'pages/forum';
+import { ForumMessage } from './forumMessage/ui';
 
 export const ForumThemeMessages = ({ messages }: MessagesProps) => {
   if (!messages) {
-    return null
+    return null;
   }
 
   return (
@@ -13,5 +13,5 @@ export const ForumThemeMessages = ({ messages }: MessagesProps) => {
         <ForumMessage key={message.id} message={message} />
       ))}
     </SpaceMessages>
-  )
-}
+  );
+};

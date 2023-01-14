@@ -1,6 +1,6 @@
 export const routesPath = {
   home: '/',
-  login: '/login',
+  signin: '/signin',
   profile: '/profile',
   signup: '/signup',
   forum: '/forum',

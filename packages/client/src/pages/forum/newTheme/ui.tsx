@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Button,
   Divider,
@@ -7,32 +7,32 @@ import {
   Modal,
   notification,
   Typography,
-} from 'antd';
-import { FormThemeProps, Theme } from 'pages/forum';
+} from 'antd'
+import { FormThemeProps, Theme } from 'pages/forum'
 
 export const FormNewTheme: React.FC<FormThemeProps> = ({
   modalOpen,
   setModalOpen,
 }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
 
   const handleCancel = () => {
-    form.resetFields();
-    setModalOpen(false);
-  };
+    form.resetFields()
+    setModalOpen(false)
+  }
 
   const handleFinish = (data: Theme) => {
-    console.log(data);
-    form.resetFields();
-    setModalOpen(false);
-  };
+    console.log(data)
+    form.resetFields()
+    setModalOpen(false)
+  }
 
   const handleFinishFailed = () => {
     notification.error({
       message: 'Ошибка',
       description: 'Обнаружена ошибка заполнения полей формы',
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -83,5 +83,5 @@ export const FormNewTheme: React.FC<FormThemeProps> = ({
         </Typography>
       </Modal>
     </>
-  );
-};
+  )
+}

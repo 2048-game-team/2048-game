@@ -1,4 +1,4 @@
-import { ForumData } from 'pages/forum/types';
+import { ForumData } from 'pages/forum/types'
 
 export const mocForumData: ForumData = [
   {
@@ -49,4 +49,4 @@ export const mocForumData: ForumData = [
         'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
     },
   },
-];
+]

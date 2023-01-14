@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Button } from 'antd';
-import { ForumTheme } from './forumTheme/ui';
-import { SpaceForum, SpaceEnd } from 'pages/forum';
-import { FormNewTheme } from './newTheme/ui';
+import React, { useState } from 'react'
+import { Button } from 'antd'
+import { ForumTheme } from './forumTheme/ui'
+import { SpaceForum, SpaceEnd } from 'pages/forum'
+import { FormNewTheme } from './newTheme/ui'
 
 export const Forum: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
 
   const handleButtonNewTheme = () => {
-    setModalOpen(true);
-  };
+    setModalOpen(true)
+  }
 
   return (
     <>
@@ -25,5 +25,5 @@ export const Forum: React.FC = () => {
 
       <FormNewTheme modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
-  );
-};
+  )
+}

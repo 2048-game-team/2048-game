@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Layout } from 'antd';
+import styled from 'styled-components'
+import { Layout } from 'antd'
 
 export const FullLayout = styled(Layout)`
   height: 100%;
@@ -7,4 +7,4 @@ export const FullLayout = styled(Layout)`
   max-width: 50rem;
   margin: 1rem auto;
   padding: 0 1rem;
-`;
+`

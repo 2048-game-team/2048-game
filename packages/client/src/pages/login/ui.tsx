@@ -1,24 +1,24 @@
-import React from 'react';
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { LoginFields } from 'pages/login';
-import { routesPath } from 'processes/routes';
+import React from 'react'
+import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import { LoginFields } from 'pages/login'
+import { routesPath } from 'processes/routes'
 
 export const Login: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleCancel = () => {
-    navigate(routesPath.home);
-  };
+    navigate(routesPath.home)
+  }
 
   const onFinish = (data: LoginFields) => {
-    console.log(data);
-    navigate(routesPath.home);
-  };
+    console.log(data)
+    navigate(routesPath.home)
+  }
 
   const onFinishFailed = () => {
-    console.log('Finish Failed');
-  };
+    console.log('Finish Failed')
+  }
 
   return (
     <Modal title="Вход" open={true} onCancel={handleCancel} footer={null}>
@@ -62,5 +62,5 @@ export const Login: React.FC = () => {
         </Form>
       </Typography>
     </Modal>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 export default {
   preset: 'ts-jest',
@@ -16,4 +16,4 @@ export default {
     '^entities/(.*)$': '<rootDir>/src/entities/$1',
     '\\.(css|less|png|jpg|svg|gif)$': 'identity-obj-proxy',
   },
-};
+}

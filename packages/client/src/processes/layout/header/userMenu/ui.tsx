@@ -1,14 +1,14 @@
-import { Space, Switch, Typography } from 'antd';
-import { $theme, setTheme, Theme } from 'entities/ui';
-import { useStore } from 'effector-react';
+import { Space, Switch, Typography } from 'antd'
+import { $theme, setTheme, Theme } from 'entities/ui'
+import { useStore } from 'effector-react'
 
 export const UserMenu = () => {
-  const theme = useStore($theme);
+  const theme = useStore($theme)
 
   const toggleTheme = () =>
-    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
+    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark)
 
-  const checked = theme === Theme.Light;
+  const checked = theme === Theme.Light
 
   return (
     <Space wrap>
@@ -20,5 +20,5 @@ export const UserMenu = () => {
         onChange={toggleTheme}
       />
     </Space>
-  );
-};
+  )
+}

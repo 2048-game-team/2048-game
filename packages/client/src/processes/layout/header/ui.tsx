@@ -1,7 +1,7 @@
-import { Avatar, Popover, Space, Typography } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import { UserMenu } from './userMenu';
-import { BurgerMenu } from './burgerMenu';
+import { Avatar, Popover, Space, Typography } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+import { UserMenu } from './userMenu'
+import { BurgerMenu } from './burgerMenu'
 
 export const Header = () => {
   return (
@@ -20,5 +20,5 @@ export const Header = () => {
         <Avatar icon={<UserOutlined />} />
       </Popover>
     </Space>
-  );
-};
+  )
+}

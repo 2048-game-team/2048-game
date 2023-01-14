@@ -1,12 +1,12 @@
 import { useStore } from 'effector-react';
-import { $gameData, $gameStatus } from 'entities/game-drive';
+import { $gameData, $gameStatus, setGame } from 'entities/game-drive';
 import { GameStatus, setGameStatus } from 'entities/game-drive';
 import { Image, Typography } from 'antd';
 import { FinishSpace, StartButton } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import finishLogo from './finishLogo.png';
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 
 const { Title } = Typography;
 
@@ -14,6 +14,8 @@ export const Finish: FC<PropsWithChildren> = () => {
   const { score } = useStore($gameData);
   const status = useStore($gameStatus);
   const navigate = useNavigate();
+
+  useEffect(() => () => setGame({ boardData: [], score: 0 }), []);
 
   const startGameHandler = () => {
     setGameStatus(GameStatus.OnGame);

@@ -7,7 +7,7 @@ import './model/init'
 import { useStore } from 'effector-react'
 import { signin, signinFx } from './model'
 
-export const Signin: React.FC = () => {
+export const SignIn: React.FC = () => {
   const navigate = useNavigate()
   const loading = useStore(signinFx.pending)
 
@@ -57,7 +57,7 @@ export const Signin: React.FC = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to={routesPath.register}>Регистрация</Link>
+            <Link to={routesPath.signup}>Регистрация</Link>
           </Form.Item>
         </Form>
       </Typography>

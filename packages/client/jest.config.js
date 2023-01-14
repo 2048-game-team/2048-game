@@ -16,4 +16,5 @@ export default {
     '^entities/(.*)$': '<rootDir>/src/entities/$1',
     '\\.(css|less|png|jpg|svg|gif)$': 'identity-obj-proxy',
   },
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
 }

@@ -6,8 +6,14 @@
   },
   "host": "ya-praktikum.tech",
   "basePath": "/api/v2",
-  "produces": ["application/json", "application/xml"],
-  "schemes": ["https", "http"],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "swagger": "2.0",
   "paths": {
     "/auth/signup": {
@@ -24,7 +30,9 @@
           }
         ],
         "description": "",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -62,7 +70,9 @@
           }
         ],
         "description": "",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -87,7 +97,9 @@
       "get": {
         "parameters": [],
         "description": "",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "An array of user info",
@@ -115,7 +127,9 @@
       "post": {
         "parameters": [],
         "description": "",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -153,7 +167,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -186,7 +202,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -219,7 +237,9 @@
           }
         ],
         "description": "Delete works only for admin role.",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -257,7 +277,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -307,7 +329,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -340,7 +364,9 @@
           }
         ],
         "description": "Archive chat",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -378,7 +404,9 @@
           }
         ],
         "description": "UnArchive chat",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -416,7 +444,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -485,7 +515,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -523,7 +555,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -559,9 +593,13 @@
             "type": "file"
           }
         ],
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -599,7 +637,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -632,7 +672,9 @@
           }
         ],
         "description": "",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -667,7 +709,9 @@
           }
         ],
         "description": "Request token to connect to messages server",
-        "tags": ["Chats"],
+        "tags": [
+          "Chats"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -702,7 +746,9 @@
           }
         ],
         "description": "",
-        "tags": ["Leaderboard"],
+        "tags": [
+          "Leaderboard"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -737,7 +783,9 @@
           }
         ],
         "description": "",
-        "tags": ["Leaderboard"],
+        "tags": [
+          "Leaderboard"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -778,7 +826,9 @@
           }
         ],
         "description": "",
-        "tags": ["Leaderboard"],
+        "tags": [
+          "Leaderboard"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -810,7 +860,9 @@
           }
         ],
         "description": "",
-        "tags": ["Oauth"],
+        "tags": [
+          "Oauth"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -843,7 +895,9 @@
           }
         ],
         "description": "",
-        "tags": ["Oauth"],
+        "tags": [
+          "Oauth"
+        ],
         "responses": {
           "200": {
             "description": "Yandex client id",
@@ -878,7 +932,9 @@
           }
         ],
         "description": "",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -913,9 +969,13 @@
             "type": "file"
           }
         ],
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "description": "",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -953,7 +1013,9 @@
           }
         ],
         "description": "",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -988,7 +1050,9 @@
           }
         ],
         "description": "",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1020,7 +1084,9 @@
           }
         ],
         "description": "",
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1061,7 +1127,9 @@
           }
         ],
         "description": "",
-        "tags": ["Charts"],
+        "tags": [
+          "Charts"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1095,7 +1163,9 @@
           }
         ],
         "description": "",
-        "tags": ["Charts"],
+        "tags": [
+          "Charts"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1127,7 +1197,9 @@
           }
         ],
         "description": "Get static video stream",
-        "tags": ["Videos"],
+        "tags": [
+          "Videos"
+        ],
         "responses": {
           "206": {
             "description": "Partial (with data stream)"
@@ -1147,7 +1219,9 @@
     "/videos/static/info": {
       "get": {
         "description": "Get static full video info (size)",
-        "tags": ["Videos"],
+        "tags": [
+          "Videos"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1185,7 +1259,9 @@
           }
         ],
         "description": "Get live video stream (part of the video will depend on the \"start\" bytes of the range",
-        "tags": ["Videos"],
+        "tags": [
+          "Videos"
+        ],
         "responses": {
           "206": {
             "description": "Partial (with data stream)"
@@ -1217,7 +1293,9 @@
             }
           }
         ],
-        "tags": ["Videos"],
+        "tags": [
+          "Videos"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1245,7 +1323,9 @@
     },
     "/resources": {
       "post": {
-        "produces": ["multipart/form-data"],
+        "produces": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "resource",
@@ -1255,7 +1335,9 @@
           }
         ],
         "description": "",
-        "tags": ["Resources"],
+        "tags": [
+          "Resources"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1290,7 +1372,9 @@
           }
         ],
         "description": "",
-        "tags": ["Resources"],
+        "tags": [
+          "Resources"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -1334,7 +1418,9 @@
           }
         ],
         "description": "",
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1371,9 +1457,13 @@
             "type": "file"
           }
         ],
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "description": "",
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -1422,7 +1512,9 @@
           }
         ],
         "description": "",
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1461,9 +1553,13 @@
             "type": "file"
           }
         ],
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "description": "",
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -1510,7 +1606,9 @@
           }
         ],
         "description": "",
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -1541,7 +1639,9 @@
             "description": "Numeric sticker pack id"
           }
         ],
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -1567,7 +1667,9 @@
             "description": "Numeric sticker pack id"
           }
         ],
-        "tags": ["Stickers"],
+        "tags": [
+          "Stickers"
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -1677,7 +1779,10 @@
       }
     },
     "SignInRequest": {
-      "required": ["login", "password"],
+      "required": [
+        "login",
+        "password"
+      ],
       "properties": {
         "login": {
           "type": "string",
@@ -1690,7 +1795,9 @@
       }
     },
     "SignUpResponse": {
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "type": "number",
@@ -1699,7 +1806,9 @@
       }
     },
     "CreateChatRequest": {
-      "required": ["title"],
+      "required": [
+        "title"
+      ],
       "properties": {
         "title": {
           "type": "string",
@@ -1708,7 +1817,10 @@
       }
     },
     "UsersRequest": {
-      "required": ["users", "chatId"],
+      "required": [
+        "users",
+        "chatId"
+      ],
       "properties": {
         "users": {
           "type": "array",
@@ -1741,7 +1853,13 @@
           "content": "this is message content"
         }
       },
-      "required": ["id", "title", "avatar", "unread_count", "last_message"],
+      "required": [
+        "id",
+        "title",
+        "avatar",
+        "unread_count",
+        "last_message"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -1782,7 +1900,9 @@
       }
     },
     "ChatDeleteRequest": {
-      "required": ["chatId"],
+      "required": [
+        "chatId"
+      ],
       "properties": {
         "chatId": {
           "type": "integer",
@@ -1799,7 +1919,10 @@
           "avatar": "/123/avatar1.jpg"
         }
       },
-      "required": ["userId", "result"],
+      "required": [
+        "userId",
+        "result"
+      ],
       "properties": {
         "userId": {
           "type": "integer",
@@ -1812,7 +1935,9 @@
       }
     },
     "ChatArchiveRequest": {
-      "required": ["chatId"],
+      "required": [
+        "chatId"
+      ],
       "properties": {
         "chatId": {
           "type": "integer",
@@ -1821,7 +1946,10 @@
       }
     },
     "ChatArchiveResponse": {
-      "required": ["userId", "result"],
+      "required": [
+        "userId",
+        "result"
+      ],
       "properties": {
         "userId": {
           "type": "integer",
@@ -1834,7 +1962,9 @@
       }
     },
     "ChatsMessagesTokenResponse": {
-      "required": ["token"],
+      "required": [
+        "token"
+      ],
       "properties": {
         "token": {
           "type": "string",
@@ -1846,7 +1976,9 @@
       "example": {
         "unread_count": 12
       },
-      "required": ["unread_count"],
+      "required": [
+        "unread_count"
+      ],
       "properties": {
         "unread_count": {
           "type": "integer",
@@ -1855,7 +1987,10 @@
       }
     },
     "LeaderboardNewLeaderRequest": {
-      "required": ["data", "ratingFieldName"],
+      "required": [
+        "data",
+        "ratingFieldName"
+      ],
       "properties": {
         "data": {
           "type": "object",
@@ -1872,7 +2007,11 @@
       }
     },
     "LeaderboardRequest": {
-      "required": ["ratingFieldName", "cursor", "limit"],
+      "required": [
+        "ratingFieldName",
+        "cursor",
+        "limit"
+      ],
       "properties": {
         "ratingFieldName": {
           "type": "string",
@@ -1889,7 +2028,10 @@
       }
     },
     "OauthSignInRequest": {
-      "required": ["code", "redirect_uri"],
+      "required": [
+        "code",
+        "redirect_uri"
+      ],
       "properties": {
         "code": {
           "type": "string",
@@ -1902,7 +2044,9 @@
       }
     },
     "ServiceId": {
-      "required": ["service_id"],
+      "required": [
+        "service_id"
+      ],
       "properties": {
         "service_id": {
           "type": "string",
@@ -1911,7 +2055,9 @@
       }
     },
     "BadRequestError": {
-      "required": ["reason"],
+      "required": [
+        "reason"
+      ],
       "properties": {
         "reason": {
           "type": "string",
@@ -1992,7 +2138,9 @@
       }
     },
     "FindUserRequest": {
-      "required": ["login"],
+      "required": [
+        "login"
+      ],
       "properties": {
         "login": {
           "type": "string",
@@ -2001,7 +2149,10 @@
       }
     },
     "ChangePasswordRequest": {
-      "required": ["oldPassword", "newPassword"],
+      "required": [
+        "oldPassword",
+        "newPassword"
+      ],
       "properties": {
         "oldPassword": {
           "type": "string",
@@ -2082,7 +2233,14 @@
           "upload_date": "2020-01-02T14:22:22.000Z"
         }
       },
-      "required": ["id", "user_id", "chat_id", "time", "type", "content"],
+      "required": [
+        "id",
+        "user_id",
+        "chat_id",
+        "time",
+        "type",
+        "content"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -2103,7 +2261,10 @@
         },
         "type": {
           "type": "string",
-          "enum": ["message", "file"],
+          "enum": [
+            "message",
+            "file"
+          ],
           "description": "Message type"
         },
         "content": {
@@ -2174,23 +2335,34 @@
         },
         "role": {
           "type": "string",
-          "enum": ["admin", "regular"],
+          "enum": [
+            "admin",
+            "regular"
+          ],
           "description": "User role"
         }
       }
     },
     "StaticChartRequest": {
-      "required": ["chartSize"],
+      "required": [
+        "chartSize"
+      ],
       "properties": {
         "chartSize": {
           "type": "string",
           "description": "Number of points in chart (10 / 100 / 1000)",
-          "enum": ["small", "medium", "large"]
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
         }
       }
     },
     "LiveChartRequest": {
-      "required": ["next"],
+      "required": [
+        "next"
+      ],
       "properties": {
         "next": {
           "type": "number",
@@ -2243,7 +2415,9 @@
       }
     },
     "LiveVideoInfoRequest": {
-      "required": ["iteration"],
+      "required": [
+        "iteration"
+      ],
       "properties": {
         "iteration": {
           "type": "number",
@@ -2254,7 +2428,9 @@
       }
     },
     "VideoInfoResponse": {
-      "required": ["size"],
+      "required": [
+        "size"
+      ],
       "properties": {
         "size": {
           "type": "number",

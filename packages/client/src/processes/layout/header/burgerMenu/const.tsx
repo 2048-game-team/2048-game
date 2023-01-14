@@ -9,7 +9,7 @@ import {
 import { NavItem } from './types'
 
 export const navList: NavItem[] = [
-  { path: routesPath.login, icon: <LoginOutlined />, title: 'Вход' },
+  { path: routesPath.signin, icon: <LoginOutlined />, title: 'Вход' },
   {
     icon: <ProfileOutlined />,
     path: routesPath.profile,

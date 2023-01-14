@@ -6,4 +6,5 @@ export const routesPath = {
   forum: '/forum',
   logout: '/logout',
   game: '/game',
-}
+  finish: '/finish',
+};

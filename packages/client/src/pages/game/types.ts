@@ -1,1 +1,1 @@
-export type GameCanvasProps = { width?: number; height?: number }
+export type GameCanvasProps = { width?: number; height?: number };

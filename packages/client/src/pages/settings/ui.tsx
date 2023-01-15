@@ -13,7 +13,7 @@ export const Settings: FC<PropsWithChildren> = () => {
     <>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={textRowSpan}>Game rows:</Col>
+        <Col span={textRowSpan}>Ряды:</Col>
         <Col span={valueRowSpan}>
           <InputNumber
             min={minGameSize}
@@ -25,7 +25,7 @@ export const Settings: FC<PropsWithChildren> = () => {
       </Row>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={textRowSpan}>Game cols:</Col>
+        <Col span={textRowSpan}>Столбцы:</Col>
         <Col span={valueRowSpan}>
           <InputNumber
             min={minGameSize}
@@ -37,7 +37,7 @@ export const Settings: FC<PropsWithChildren> = () => {
       </Row>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={textRowSpan}>Game width:</Col>
+        <Col span={textRowSpan}>Ширина:</Col>
         <Col span={valueRowSpan}>
           <InputNumber
             min={minCanvasSideSize}
@@ -50,7 +50,7 @@ export const Settings: FC<PropsWithChildren> = () => {
       </Row>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={textRowSpan}>Game heidth:</Col>
+        <Col span={textRowSpan}>Высота:</Col>
         <Col span={valueRowSpan}>
           <InputNumber
             min={minCanvasSideSize}

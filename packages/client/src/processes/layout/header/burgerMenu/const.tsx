@@ -4,6 +4,7 @@ import {
   ControlOutlined,
   LoginOutlined,
   LogoutOutlined,
+  PlaySquareOutlined,
   ProfileOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
@@ -14,6 +15,11 @@ export const navList: NavItem[] = [
     path: routesPath.signin,
     icon: <LoginOutlined />,
     title: 'Вход',
+  },
+  {
+    path: routesPath.game,
+    icon: <PlaySquareOutlined />,
+    title: 'Играть',
   },
   {
     path: routesPath.profile,

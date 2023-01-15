@@ -1,19 +1,73 @@
-import { Col, Divider, Row } from 'antd';
+import { Col, Divider, InputNumber, Row } from 'antd';
+import { $settings } from 'entities/settings';
 import { FC, PropsWithChildren } from 'react';
+import { useStore } from 'effector-react';
+import { getChangeHandler } from './getChangeHandler';
+import { textRowSpan, valueRowSpan, minGameSize, maxGameSize, minCanvasSideSize, maxCanvasSideSize, canvasSizeStep } from './const';
+
+// const minCanvasSideSize = 300;
+// const maxCanvasSideSize = 900;
+// const canvasSizeStep = 50;
+// const minGameSize = 3;
+// const maxGameSize = 10;
+// const textRowSpan = 8;
+// const valueRowSpan = 16;
 
 export const Settings: FC<PropsWithChildren> = () => {
+  const settings = useStore($settings);
+  const { gameRows, gameCols, gameHeight, gameWidth } = settings;
+
   return (
-    // <Space direction="vertical" align="center" size="small">
     <>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={8}>Game rows:</Col>
-        <Col span={16}>Second</Col>
+        <Col span={textRowSpan}>Game rows:</Col>
+        <Col span={valueRowSpan}>
+          <InputNumber
+            min={minGameSize}
+            max={maxGameSize}
+            defaultValue={gameRows}
+            onChange={getChangeHandler(settings, 'gameRows')}
+          />
+        </Col>
       </Row>
       <Divider orientation="left"></Divider>
       <Row>
-        <Col span={8}>Game cols:</Col>
-        <Col span={16}>Second</Col>
+        <Col span={textRowSpan}>Game cols:</Col>
+        <Col span={valueRowSpan}>
+          <InputNumber
+            min={minGameSize}
+            max={maxGameSize}
+            defaultValue={gameCols}
+            onChange={getChangeHandler(settings, 'gameCols')}
+          />
+        </Col>
+      </Row>
+      <Divider orientation="left"></Divider>
+      <Row>
+        <Col span={textRowSpan}>Game width:</Col>
+        <Col span={valueRowSpan}>
+          <InputNumber
+            min={minCanvasSideSize}
+            max={maxCanvasSideSize}
+            step={canvasSizeStep}
+            defaultValue={gameWidth}
+            onChange={getChangeHandler(settings, 'gameWidth')}
+          />
+        </Col>
+      </Row>
+      <Divider orientation="left"></Divider>
+      <Row>
+        <Col span={textRowSpan}>Game heidth:</Col>
+        <Col span={valueRowSpan}>
+          <InputNumber
+            min={minCanvasSideSize}
+            max={maxCanvasSideSize}
+            step={canvasSizeStep}
+            defaultValue={gameHeight}
+            onChange={getChangeHandler(settings, 'gameHeight')}
+          />
+        </Col>
       </Row>
     </>
   );

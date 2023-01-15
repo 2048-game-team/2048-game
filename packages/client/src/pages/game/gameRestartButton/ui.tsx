@@ -4,12 +4,12 @@ import { createNewGame } from 'entities/game-drive';
 import { $settings } from 'entities/settings';
 import { FC, PropsWithChildren } from 'react';
 
-
-const restartHandler = () => {
-  const { gameRows, gameCols } = useStore($settings);
-  createNewGame(gameRows, gameCols);
-};
-
 export const GameRestartButton: FC<PropsWithChildren> = () => {
+  const { gameRows, gameCols } = useStore($settings);
+  
+  const restartHandler = () => {
+    createNewGame(gameRows, gameCols);
+  };
+
   return <Button onClick={restartHandler}>Рестарт</Button>;
 };

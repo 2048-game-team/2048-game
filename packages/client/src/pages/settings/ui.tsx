@@ -5,14 +5,6 @@ import { useStore } from 'effector-react';
 import { getChangeHandler } from './getChangeHandler';
 import { textRowSpan, valueRowSpan, minGameSize, maxGameSize, minCanvasSideSize, maxCanvasSideSize, canvasSizeStep } from './const';
 
-// const minCanvasSideSize = 300;
-// const maxCanvasSideSize = 900;
-// const canvasSizeStep = 50;
-// const minGameSize = 3;
-// const maxGameSize = 10;
-// const textRowSpan = 8;
-// const valueRowSpan = 16;
-
 export const Settings: FC<PropsWithChildren> = () => {
   const settings = useStore($settings);
   const { gameRows, gameCols, gameHeight, gameWidth } = settings;

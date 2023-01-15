@@ -3,7 +3,7 @@ import { FC, useRef, useEffect } from 'react';
 import { WIDTH, HEIGHT } from './const';
 import { drawGame } from './drawGame';
 import { GameCanvasProps } from '../types';
-import { keyDownHandler } from './keyDownHandler';
+import { getKeydownHandler } from './keydownHandler';
 
 export const GameCanvas: FC<GameCanvasProps> = ({
   width = WIDTH,
@@ -21,11 +21,12 @@ export const GameCanvas: FC<GameCanvasProps> = ({
         drawGame(ctx, store.boardData, width, height);
       });
 
-      window.addEventListener('keydown', keyDownHandler);
+      const keydownHandler = getKeydownHandler(canvasRef.current); 
+      window.addEventListener('keydown', keydownHandler);
 
       return () => {
         unwatch();
-        window.removeEventListener('keydown', keyDownHandler);
+        window.removeEventListener('keydown', keydownHandler);
       };
     }
   }, []);

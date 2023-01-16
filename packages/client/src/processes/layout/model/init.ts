@@ -15,7 +15,7 @@ sample({
 });
 
 sample({
-  clock: [getUser, signinFx.done],
+  clock: [getUser, signinFx.done, GetUserGate.open],
   target: getUserFx,
 });
 
@@ -23,10 +23,6 @@ sample({
   clock: logoutFx.done,
   fn: () => null,
   target: $user,
-});
-
-GetUserGate.open.watch(() => {
-  getUser();
 });
 
 // Контроль стейта юзера

@@ -4,10 +4,10 @@ import { FullLayout } from './styles';
 import { Header } from 'processes/layout/header';
 import './model/init';
 import { useGate } from 'effector-react';
-import { GetUserGate } from 'processes/layout/model/model';
+import { checkAuthGate } from 'processes/layout/model/model';
 
 export const LayoutGame: FC<PropsWithChildren> = ({ children }) => {
-  useGate(GetUserGate);
+  useGate(checkAuthGate);
 
   return (
     <Layout style={{ minHeight: '100%' }}>

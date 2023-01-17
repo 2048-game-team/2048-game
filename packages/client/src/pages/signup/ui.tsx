@@ -1,22 +1,22 @@
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { routesPath } from 'processes/routes'
-import { createNewUser, signupCreateFx } from './model'
-import './model/init'
-import { SignUpRequest } from 'shared/api/swagger'
-import { useStore } from 'effector-react'
+import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routesPath } from 'processes/routes';
+import { createNewUser, signupCreateFx } from './model';
+import './model/init';
+import { SignUpRequest } from 'shared/api/swagger';
+import { useStore } from 'effector-react';
 
 export const SignUp = () => {
-  const navigate = useNavigate()
-  const loading = useStore(signupCreateFx.pending)
+  const navigate = useNavigate();
+  const loading = useStore(signupCreateFx.pending);
 
   const handleCancel = () => {
-    navigate(routesPath.home)
-  }
+    navigate(routesPath.home);
+  };
   const onFinish = (data: SignUpRequest) => {
-    createNewUser(data)
-  }
+    createNewUser(data);
+  };
 
   return (
     <Modal
@@ -92,5 +92,5 @@ export const SignUp = () => {
         </Form>
       </Typography>
     </Modal>
-  )
-}
+  );
+};

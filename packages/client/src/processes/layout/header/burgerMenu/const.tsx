@@ -12,7 +12,7 @@ export const navList: NavItem[] = [
   {
     path: routesPath.signin,
     icon: <LoginOutlined />,
-    title: 'Вход'
+    title: 'Вход',
   },
   {
     path: routesPath.profile,
@@ -22,10 +22,11 @@ export const navList: NavItem[] = [
   {
     path: routesPath.forum,
     icon: <WechatOutlined />,
-    title: 'Форум' },
+    title: 'Форум',
+  },
   {
     path: routesPath.logout,
     icon: <LogoutOutlined />,
     title: 'Выход',
   },
-]
+];

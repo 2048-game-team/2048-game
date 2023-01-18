@@ -7,6 +7,11 @@ import { textRowSpan, valueRowSpan, minGameSize, maxGameSize, minCanvasSideSize,
 
 export const Settings: FC<PropsWithChildren> = () => {
   const settings = useStore($settings);
+
+  if (settings === null) { 
+    return <>Настройки недоступны</>;  
+  }
+
   const { gameRows, gameCols, gameHeight, gameWidth } = settings;
 
   return (

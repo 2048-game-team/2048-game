@@ -7,7 +7,13 @@ import { getKeydownHandler } from './keydownHandler';
 
 export const GameCanvas: FC<PropsWithChildren> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { gameWidth, gameHeight, gameRows, gameCols } = useStore($settings);
+  const settings = useStore($settings);
+  
+  if (settings === null) { 
+    return <>Недоступны настройки игры.</>
+  }
+
+  const { gameWidth, gameHeight, gameRows, gameCols } = settings;
 
   useEffect(() => {
     createNewGame(gameRows, gameCols);
@@ -19,7 +25,7 @@ export const GameCanvas: FC<PropsWithChildren> = () => {
         drawGame(ctx, store.boardData, gameWidth, gameHeight);
       });
 
-      const keydownHandler = getKeydownHandler(canvasRef.current); 
+      const keydownHandler = getKeydownHandler(canvasRef.current);
       window.addEventListener('keydown', keydownHandler);
 
       return () => {

@@ -1,11 +1,11 @@
-import React from 'react'
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
-import { routesPath } from 'processes/routes'
-import { SignInRequest } from 'shared/api/swagger'
-import './model/init'
-import { useStore } from 'effector-react'
-import { signin, signinFx } from './model'
+import React from 'react';
+import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { routesPath } from 'processes/routes';
+import { SignInRequest } from 'shared/api/swagger';
+import './model/init';
+import { useStore } from 'effector-react';
+import { signin, signinFx } from './model';
 
 export const SignIn: React.FC = () => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ export const SignIn: React.FC = () => {
   };
 
   const onFinish = (data: SignInRequest) => {
-    signin(data)
-    navigate(routesPath.home)
+    signin(data);
+    navigate(routesPath.home);
   };
 
   return (

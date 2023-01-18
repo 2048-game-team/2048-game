@@ -1,14 +1,13 @@
-import { RouteObject } from 'react-router-dom'
-import { routesPath } from './routesPath'
-import { Forum } from 'pages/forum'
-import { Start } from 'pages/start'
-import { SignIn } from 'pages/signin'
-import { Logout } from 'pages/logout'
-import { Game } from 'pages/game'
-import { SignUp } from 'pages/signup'
+import { RouteObject } from 'react-router-dom';
+import { routesPath } from './routesPath';
+import { Forum } from 'pages/forum';
+import { Start } from 'pages/start';
+import { SignIn } from 'pages/signin';
+import { Logout } from 'pages/logout';
+import { Game } from 'pages/game';
+import { SignUp } from 'pages/signup';
 import { Finish } from 'pages/finish';
 import { Settings } from 'pages/settings'
-
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },

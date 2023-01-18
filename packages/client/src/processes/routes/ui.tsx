@@ -3,11 +3,13 @@ import { $isAuth } from 'processes/layout/model/model';
 import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute: FC<PropsWithChildren> = ({ children }) => { 
-  const isAuth = useStore($isAuth)
-  if (!isAuth) { 
+export const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
+  const isAuth = useStore($isAuth);
+  if (!isAuth) {
+    // temporary log into console
+    console.log('Access denied! User is not authorized.');
     return <Navigate to="/" />;
   }
 
   return <>{children}</>;
-}
+};

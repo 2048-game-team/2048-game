@@ -7,20 +7,21 @@ import { Logout } from 'pages/logout';
 import { Game } from 'pages/game';
 import { SignUp } from 'pages/signup';
 import { Finish } from 'pages/finish';
+import { Profile } from 'pages/profile';
 import { PrivateRoute } from './ui';
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },
-  { path: routesPath.signin, element: <SignIn /> },
-  { path: routesPath.signup, element: <SignUp /> },
   {
     path: routesPath.profile,
     element: (
       <PrivateRoute>
-        <div>PROFILE</div>
+        <Profile />
       </PrivateRoute>
     ),
   },
+  { path: routesPath.signin, element: <SignIn /> },
+  { path: routesPath.signup, element: <SignUp /> },
   { path: routesPath.forum, element: <Forum /> },
   { path: routesPath.logout, element: <Logout /> },
   { path: routesPath.game, element: <Game /> },

@@ -1,7 +1,17 @@
 import { createEvent, restore } from 'effector';
+import connectLocalStorage from 'effector-localstorage';
 import { defaultSettings } from './const';
 import { Settings } from './types';
 
 export const setSettings = createEvent<Settings>();
 
-export const $settings = restore(setSettings, defaultSettings)
+const settingsLocalStorage = connectLocalStorage('settings').onError(err =>
+  console.log(`settingsLocalStorage error: ${err}`)
+);
+
+export const $settings = restore(
+  setSettings,
+  settingsLocalStorage.init(defaultSettings)
+);
+
+$settings.watch(settingsLocalStorage);

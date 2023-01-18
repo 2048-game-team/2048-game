@@ -3676,6 +3676,11 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
+effector-localstorage@0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/effector-localstorage/-/effector-localstorage-0.5.3.tgz#e48e70fcaa84b9fcb5dcfaa9a17cb4610a5286a8"
+  integrity sha512-66hWWBGlTEe38+uWgUsevr5vHlx/n9v+9fzOLIrb8OukYJU/GG36Jd7GRZ+gzXYLmFnYo6oHQddWDytUoaWZ0g==
+
 effector-react@22.4.0:
   version "22.4.0"
   resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-22.4.0.tgz#ac36cf3db3d4464744cca246baacfb1bfece25f7"

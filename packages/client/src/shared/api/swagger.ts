@@ -578,14 +578,14 @@ export class HttpClient<SecurityDataType = unknown> {
   }
 
   public request = async <T = any, _E = any>({
-    secure,
-    path,
-    type,
-    query,
-    format,
-    body,
-    ...params
-  }: FullRequestParams): Promise<AxiosResponse<T>> => {
+                                               secure,
+                                               path,
+                                               type,
+                                               query,
+                                               format,
+                                               body,
+                                               ...params
+                                             }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
       ((typeof secure === 'boolean' ? secure : this.secure) &&
         this.securityWorker &&

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { $isAuth, $user } from 'processes/layout/model/model';
 import { useStore } from 'effector-react';
 import {
@@ -17,7 +17,6 @@ import { baseURL } from './const';
 export const Profile: React.FC = () => {
   const user = useStore($user);
   const isAuth = useStore($isAuth);
-  const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
     getUser();
@@ -27,7 +26,6 @@ export const Profile: React.FC = () => {
 
   const avatarChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
-      setErrorMsg('');
       setAvatar({ avatar: e.currentTarget.files[0] as File });
     }
   };
@@ -42,7 +40,6 @@ export const Profile: React.FC = () => {
       phone: `${user?.phone ?? ''}`,
       email: `new${user?.email ?? ''}`,
     };
-    setErrorMsg('');
     setUserData(newData);
   };
 
@@ -52,7 +49,6 @@ export const Profile: React.FC = () => {
       oldPassword: 'oldPassword',
       newPassword: 'newPassword',
     };
-    setErrorMsg('');
     setPassword(newData);
   };
 
@@ -63,7 +59,6 @@ export const Profile: React.FC = () => {
         Екатерина @eelarionova)
       </h1>
       <h2>Данные пользователя:</h2>
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
       <p>{JSON.stringify(user, null, 2)}</p>
       <h2>Аватар:</h2>
       <img

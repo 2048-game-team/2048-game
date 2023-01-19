@@ -11,18 +11,18 @@ import { practicumApi } from 'shared/api/api';
 
 export const setAvatarFx = createEffect<
   ProfileAvatarUpdatePayload,
-  UserResponse | null,
+  UserResponse,
   AxiosError
->(async (avatar: ProfileAvatarUpdatePayload) => {
+>(async avatar => {
   const res = await practicumApi.user.profileAvatarUpdate(avatar);
   return res.data;
 });
 
 export const setUserDataFx = createEffect<
   UserUpdateRequest,
-  UserResponse | null,
+  UserResponse,
   AxiosError
->(async (userData: UserUpdateRequest) => {
+>(async userData => {
   const res = await practicumApi.user.profileUpdate(userData);
   return res.data;
 });
@@ -31,7 +31,7 @@ export const setPasswordFx = createEffect<
   ChangePasswordRequest,
   BadRequestError | void,
   AxiosError
->(async (password: ChangePasswordRequest) => {
+>(async password => {
   const res = await practicumApi.user.passwordUpdate(password);
   return res.data;
 });

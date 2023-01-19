@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { $isAuth, $user } from 'processes/layout/model/model';
 import { useStore } from 'effector-react';
 import {
-  UserResponse,
   UserUpdateRequest,
   ChangePasswordRequest,
 } from 'shared/api/swagger';
@@ -11,35 +10,16 @@ import {
   getUser,
   setAvatar,
   setUserData,
-  setPassword,
-  setAvatarFx,
-  setUserDataFx,
-  setPasswordFx,
+  setPassword
 } from './model';
-import { AxiosError } from 'axios';
 import { baseURL } from './const';
 
 export const Profile: React.FC = () => {
-  /*const [user, setUser] = useState<UserResponse | null>(null);
-  const [isAuth, setIsAuth] = useState<boolean>(false);*/
   const user = useStore($user);
   const isAuth = useStore($isAuth);
   const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
-    /*$user.watch(state => setUser(state));
-    $isAuth.watch(state => setIsAuth(state));
-    const errorHandler = ({ error }: { error: AxiosError }) => {
-      try {
-        const errorMessage = JSON.parse(error.request.response).reason;
-        if (errorMessage) setErrorMsg(`Ошибка: ${errorMessage}`);
-      } catch (err) {
-        setErrorMsg('Неизвестная ошибка при выполнении запроса');
-      }
-    };
-    setAvatarFx.fail.watch(errorHandler);
-    setUserDataFx.fail.watch(errorHandler);
-    setPasswordFx.fail.watch(errorHandler);*/
     getUser();
   }, []);
 

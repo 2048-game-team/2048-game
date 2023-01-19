@@ -21,6 +21,11 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "1.1.1",
-    "lerna": "5.4.3"
+    "@testing-library/user-event": "14.4.3",
+    "lerna": "5.4.3",
+    "nx": "15.5.2"
+  },
+  "dependencies": {
+    "typescript-eslint": "0.0.1-alpha.0"
   }
 }

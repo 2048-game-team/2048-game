@@ -1,98 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import { $isAuth, $user } from 'processes/layout/model/model';
+import React, {useState} from 'react'
 import {
-  UserResponse,
-  UserUpdateRequest,
-  ChangePasswordRequest,
-} from 'shared/api/swagger';
-import './model/init';
-import {
-  getUser,
-  setAvatar,
-  setUserData,
-  setPassword,
-  setAvatarFx,
-  setUserDataFx,
-  setPasswordFx,
-} from './model';
-import { AxiosError } from 'axios';
-import { practicumApi } from 'shared/api/api';
+    Avatar,
+    Button,
+    Card,
+    Divider,
+    Form,
+    Input,
+    Tooltip,
+    Typography,
+} from "antd";
+import {LeftOutlined, UserOutlined} from "@ant-design/icons";
+import {Link, useNavigate} from "react-router-dom";
+import {routesPath} from "processes/routes";
+import { AvatarModal } from './avatarModal';
+import {ProfileFields} from "pages/profile/types";
 
-export const Profile: React.FC = () => {
-  const [user, setUser] = useState<UserResponse | null>(null);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+export const Profile = () => {
+    const navigate = useNavigate()
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    $user.watch(state => setUser(state));
-    $isAuth.watch(state => setIsAuth(state));
-    const errorHandler = ({ error }: { error: AxiosError }) => {
-      try {
-        const errorMessage = JSON.parse(error.request.response).reason;
-        if (errorMessage) setErrorMsg(`Ошибка: ${errorMessage}`);
-      } catch (err) {
-        setErrorMsg('Неизвестная ошибка при выполнении запроса');
-      }
-    };
-    setAvatarFx.fail.watch(errorHandler);
-    setUserDataFx.fail.watch(errorHandler);
-    setPasswordFx.fail.watch(errorHandler);
-    getUser();
-  }, []);
-
-  const baseURL = practicumApi.instance.getUri();
-  if (!isAuth) return <p>Пользователь не авторизован</p>;
-
-  const avatarChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    if (e.currentTarget.files) {
-      setErrorMsg('');
-      setAvatar({ avatar: e.currentTarget.files[0] as File });
+    const showAvatarModal = () => {
+        setIsModalOpen(true)
     }
-  };
 
-  const userDataChangeHandler = () => {
-    // test data
-    const newData: UserUpdateRequest = {
-      first_name: `new${user?.first_name ?? ''}`,
-      second_name: `new${user?.second_name ?? ''}`,
-      display_name: `new${user?.display_name ?? ''}`,
-      login: `new${user?.login ?? ''}`,
-      phone: `${user?.phone ?? ''}`,
-      email: `new${user?.email ?? ''}`,
-    };
-    setErrorMsg('');
-    setUserData(newData);
-  };
+    const onFinish = (data: ProfileFields) => {
+        console.log(data)
+        navigate(routesPath.home)
+    }
 
-  const userPasswordChangeHandler = () => {
-    // test data
-    const newData: ChangePasswordRequest = {
-      oldPassword: 'oldPassword',
-      newPassword: 'newPassword',
-    };
-    setErrorMsg('');
-    setPassword(newData);
-  };
+    const onFinishFailed = () => {
+        console.log('Finish Failed')
+    }
 
-  return (
-    <>
-      <h1>
-        Страничка тестирования API профиля (полноценным дизайном занимается
-        Екатерина @eelarionova)
-      </h1>
-      <h2>Данные пользователя:</h2>
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-      <p>{JSON.stringify(user, null, 2)}</p>
-      <h2>Аватар:</h2>
-      <img
-        alt="avatar"
-        src={`${baseURL}/resources/${user?.avatar}`}
-        style={{ display: 'block', width: '200px', height: '200px' }}></img>
-      <input type="file" onChange={avatarChangeHandler} />
-      <h2>Изменение личных данных:</h2>
-      <button onClick={userDataChangeHandler}>Изменить</button>
-      <h2>Изменение пароля:</h2>
-      <button onClick={userPasswordChangeHandler}>Изменить</button>
-    </>
-  );
-};
+    return (
+        <Card>
+            <Typography>
+                <Link
+                    to={routesPath.home}
+                >
+                    <LeftOutlined />
+                    Назад
+                </Link>
+                <Form
+                    name='profile'
+                    labelCol={{ span: 6 }}
+                    wrapperCol={{ span: 15 }}
+                    initialValues={{ remember: true }}
+                    autoComplete='off'
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                >
+                    <Form.Item
+                        name='avatar'
+                        wrapperCol={{ offset: 10, span: 26 }}
+                    >
+                        <Tooltip placement="top" title='Кликните для редактирования'>
+                            <Avatar size={120}
+                                    icon={<UserOutlined />}
+                                    style={{ cursor: 'pointer'}}
+                                    onClick={showAvatarModal}
+                            />
+                        </Tooltip>
+                    </Form.Item>
+                    <Form.Item
+                        label='Логин'
+                        name='login'
+                        rules={[
+                            { required: true, message: 'Пожалуйста введите логин!' },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label='Email'
+                        name='email'
+                        rules={[
+                            { required: true, message: 'Пожалуйста введите email!' },
+                            { type: 'email', message: 'Неверный email' }
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label='Пароль'
+                        name='password'
+                        rules={[
+                            { required: true, message: 'Пожалуйста введите пароль!' },
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                        label='Повторите пароль'
+                        name='passwordRepeat'
+                        rules={[
+                            { required: true, message: 'Пожалуйста введите пароль!' },
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Divider/>
+                    <Form.Item wrapperCol={{ offset: 10, span: 26 }}>
+                        <Button type='primary'
+                                htmlType='submit'
+                                size='large'
+                        >
+                            Сохранить
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Typography>
+            <AvatarModal isModalOpen={isModalOpen}
+                         onClose={()=>setIsModalOpen(false)}
+                         onOk={()=>setIsModalOpen(false)}
+            />
+        </Card>
+    )
+}

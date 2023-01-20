@@ -1,9 +1,5 @@
 import { sample } from 'effector';
-import {
-  $isAuth,
-  $user,
-  checkAuthGate,
-} from 'processes/layout/model/model';
+import { $isAuth, $user, checkAuthGate } from 'processes/layout/model/model';
 import { getUserFx } from 'processes/layout/model/effects';
 import { signinFx } from 'pages/signin/model';
 import { logoutFx } from 'pages/logout/model';

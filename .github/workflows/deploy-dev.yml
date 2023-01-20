@@ -18,6 +18,9 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  DEPLOY: GITHUB_PAGES
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

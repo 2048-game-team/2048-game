@@ -2,11 +2,11 @@ name: Lint
 
 on:
   pull_request:
+  workflow_dispatch:
   push:
     branches:
       - main
       - dev
-  workflow_dispatch:
 
 jobs:
   eslint:

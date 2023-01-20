@@ -17,4 +17,7 @@ export default {
     '\\.(css|less|png|jpg|svg|gif)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
+  testEnvironmentOptions: {
+    url: 'http://test.com/2048-game',
+  },
 };

@@ -5,12 +5,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 dotenv.config();
 
-const base =
-  process.env?.REACT_APP_DEPLOY === 'GITHUB_PAGES' ? '/2048-game' : '';
-
 // https://vitejs.dev/config/
 export default defineConfig({
-  base,
+  base: '2048-game',
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
   },

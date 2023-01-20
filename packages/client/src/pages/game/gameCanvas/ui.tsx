@@ -21,7 +21,7 @@ export const GameCanvas: FC<GameCanvasProps> = ({
         drawGame(ctx, store.boardData, width, height);
       });
 
-      const keydownHandler = getKeydownHandler(canvasRef.current); 
+      const keydownHandler = getKeydownHandler(canvasRef.current);
       window.addEventListener('keydown', keydownHandler);
 
       return () => {

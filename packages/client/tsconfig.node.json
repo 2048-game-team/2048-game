@@ -2,8 +2,17 @@
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
+    "baseUrl": "./src",
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "root/*": ["../*"],
+      "app/*": ["./app/*"],
+      "entities/*": ["./entities/*"],
+      "pages/*": ["./pages/*"],
+      "processes/*": ["./processes/*"],
+      "shared/*": ["./shared/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }

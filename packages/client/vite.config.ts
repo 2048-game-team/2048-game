@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import tsconfigPaths from 'vite-tsconfig-paths';
 // @ts-ignore
-import { base } from './src/shared/const';
+import { BASE_URL } from './const';
 
 dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base,
+  base: BASE_URL,
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
   },

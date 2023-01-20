@@ -2,10 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import tsconfigPaths from 'vite-tsconfig-paths';
+// @ts-ignore
+import { base } from './src/shared/const';
 
 dotenv.config();
-
-export const base = process.env.DEPLOY === 'GITHUB_PAGES' ? '/2048-game' : '';
 
 // https://vitejs.dev/config/
 export default defineConfig({

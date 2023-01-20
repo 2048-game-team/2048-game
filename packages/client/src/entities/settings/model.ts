@@ -9,9 +9,10 @@ const settingsLocalStorage = connectLocalStorage('settings').onError(err =>
   console.log(`settingsLocalStorage error: ${err}`)
 );
 
+
 export const $settings = restore(
   setSettings,
-  settingsLocalStorage.init(defaultSettings)
+  settingsLocalStorage.init(defaultSettings) as Settings
 );
 
 $settings.watch(settingsLocalStorage);

@@ -7,13 +7,7 @@ import { getKeydownHandler } from './keydownHandler';
 
 export const GameCanvas: FC<PropsWithChildren> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const settings = useStore($settings);
-  
-  if (settings === null) { 
-    return <>Недоступны настройки игры.</>
-  }
-
-  const { gameWidth, gameHeight, gameRows, gameCols } = settings;
+  const { gameWidth, gameHeight, gameRows, gameCols } = useStore($settings);
 
   useEffect(() => {
     createNewGame(gameRows, gameCols);

@@ -6,7 +6,8 @@ import { getChangeHandler } from './getChangeHandler';
 import { textRowSpan, valueRowSpan, minGameSize, maxGameSize, minCanvasSideSize, maxCanvasSideSize, canvasSizeStep } from './const';
 
 export const Settings: FC<PropsWithChildren> = () => {
-  const { gameRows, gameCols, gameHeight, gameWidth } = useStore($settings);
+  const settings = useStore($settings);
+  const { gameRows, gameCols, gameHeight, gameWidth } = settings;
 
   return (
     <>

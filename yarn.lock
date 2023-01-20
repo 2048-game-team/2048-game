@@ -1922,9 +1922,9 @@
     "@testing-library/dom" "^8.5.0"
     "@types/react-dom" "^18.0.0"
 
-"@testing-library/user-event@^14.4.3":
+"@testing-library/user-event@14.4.3", "@testing-library/user-event@^14.4.3":
   version "14.4.3"
-  resolved "https://registry.npmjs.org/@testing-library/user-event/-/user-event-14.4.3.tgz"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.4.3.tgz#af975e367743fa91989cd666666aec31a8f50591"
   integrity sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==
 
 "@tootallnate/once@2":
@@ -6627,7 +6627,7 @@ nwsapi@^2.2.0:
   resolved "https://registry.npmjs.org/nwsapi/-/nwsapi-2.2.1.tgz"
   integrity sha512-JYOWTeFoS0Z93587vRJgASD5Ut11fYl5NyihP3KrYBvMe1FRRs6RN7m20SA/16GM4P6hTnZjT+UmDOt38UeXNg==
 
-nx@15.5.2, "nx@>=14.5.4 < 16", nx@^15.5.2:
+nx@15.5.2, "nx@>=14.5.4 < 16":
   version "15.5.2"
   resolved "https://registry.npmjs.org/nx/-/nx-15.5.2.tgz"
   integrity sha512-jo8DG7zt0EorKL6AihkoshaeiFkK25NOeGUEnF05BFCaqsIoS9s3uctrOumh2G9DhaGMEWzakc3kF4/LeLB9pg==
@@ -8932,9 +8932,9 @@ typedarray@^0.0.6:
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-eslint@^0.0.1-alpha.0:
+typescript-eslint@0.0.1-alpha.0:
   version "0.0.1-alpha.0"
-  resolved "https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-0.0.1-alpha.0.tgz"
+  resolved "https://registry.yarnpkg.com/typescript-eslint/-/typescript-eslint-0.0.1-alpha.0.tgz#285d68a4e96588295cd436278801bcb6a6b916c1"
   integrity sha512-1hNKM37dAWML/2ltRXupOq2uqcdRQyDFphl+341NTPXFLLLiDhErXx8VtaSLh3xP7SyHZdcCgpt9boYYVb3fQg==
 
 typescript@4.8.2:

@@ -22,6 +22,7 @@ export const routes: RouteObject[] = [
   },
   { path: routesPath.signin, element: <SignIn /> },
   { path: routesPath.signup, element: <SignUp /> },
+  { path: routesPath.profile, element: <Profile /> },
   { path: routesPath.forum, element: <Forum /> },
   { path: routesPath.logout, element: <Logout /> },
   { path: routesPath.game, element: <Game /> },

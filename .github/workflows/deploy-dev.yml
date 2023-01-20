@@ -24,9 +24,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    defaults:
-      run:
-        working-directory: packages/client
+
     steps:
       - uses: actions/checkout@v3
 
@@ -38,10 +36,10 @@ jobs:
           cache-dependency-path: yarn.lock
 
       - name: Install main deps
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: yarn build:client
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
@@ -49,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./dist
+          path: packages/client/dist
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -5,7 +5,8 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 dotenv.config();
 
-const base = process.env.DEPLOY === 'GITHUB_PAGES' ? '/2048-game' : '';
+const base =
+  process.env?.REACT_APP_DEPLOY === 'GITHUB_PAGES' ? '/2048-game' : '';
 
 // https://vitejs.dev/config/
 export default defineConfig({

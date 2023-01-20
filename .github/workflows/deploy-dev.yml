@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DEPLOY: GITHUB_PAGES
+  REACT_APP_DEPLOY: GITHUB_PAGES
 
 jobs:
   deploy:

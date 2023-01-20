@@ -7,7 +7,7 @@ on:
     branches:
       - main
       - dev
-      - sprint-*
+      - sprint*
 
 permissions:
   contents: read

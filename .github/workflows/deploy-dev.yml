@@ -38,7 +38,7 @@ jobs:
           cache-dependency-path: yarn.lock
 
       - name: Install main deps
-        run: yarn install --frozen-lockfile
+        run: yarn
 
       - name: Build
         run: yarn build

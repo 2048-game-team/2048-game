@@ -1,7 +1,7 @@
 const STATIC_CACHE_NAME = 'static-data-v1';
 const DYNAMIC_CACHE_NAME = 'dynamic-data-v1';
 
-const STATIC_URLS = ['/', '/src/pages/start/gameLogo.gif'];
+const STATIC_URLS = ['/'];
 
 self.addEventListener('install', async event => {
   console.log('SW install');

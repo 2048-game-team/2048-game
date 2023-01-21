@@ -1,7 +1,8 @@
 import { Api } from './swagger';
+import { baseURL } from 'shared/api/consts';
 
 export const practicumApi = new Api({
-  baseURL: `https://ya-praktikum.tech/api/v2`,
+  baseURL,
   timeout: 10000,
   withCredentials: true,
 });

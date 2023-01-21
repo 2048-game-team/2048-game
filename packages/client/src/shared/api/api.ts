@@ -3,9 +3,10 @@ import { AxiosError } from 'axios';
 import { logout } from 'pages/logout/model';
 import { setMessage } from 'entities/notification/model';
 import { codeErrors } from 'shared/api/codeErrors';
+import { baseURL } from 'shared/api/consts';
 
 export const practicumApi = new Api({
-  baseURL: `https://ya-praktikum.tech/api/v2`,
+  baseURL,
   timeout: 10000,
   withCredentials: true,
 });

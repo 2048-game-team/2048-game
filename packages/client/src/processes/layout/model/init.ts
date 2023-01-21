@@ -1,5 +1,5 @@
 import { sample } from 'effector';
-import { $isAuth, $user, checkAuthGate } from 'processes/layout/model/model';
+import { $isAuth, $user, CheckAuthGate } from 'processes/layout/model/model';
 import { getUserFx } from 'processes/layout/model/effects';
 import { signInFx } from 'pages/signin/model';
 import { logoutFx } from 'pages/logout/model';
@@ -10,7 +10,7 @@ sample({
 });
 
 sample({
-  clock: [signInFx.done, checkAuthGate.open],
+  clock: [signInFx.done, CheckAuthGate.open],
   target: getUserFx,
 });
 

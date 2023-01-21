@@ -4,6 +4,7 @@ import { UserMenu } from './userMenu';
 import { BurgerMenu } from './burgerMenu';
 import { useStore } from 'effector-react';
 import { $isAuth, $user } from 'processes/layout/model/model';
+import { resourcesUrl } from 'shared/api/consts';
 
 export const Header = () => {
   const user = useStore($user);
@@ -13,9 +14,7 @@ export const Header = () => {
     ? user?.display_name ?? `${user?.first_name} ${user?.second_name}`
     : 'Неизвестный';
 
-  const avatarSrc = user?.avatar
-    ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}`
-    : null;
+  const avatarSrc = user?.avatar ? `${resourcesUrl}${user.avatar}` : null;
 
   const avatarIcon = isAuth ? <UserSwitchOutlined /> : <UserOutlined />;
 

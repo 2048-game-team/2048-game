@@ -5,11 +5,11 @@ import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';
 import './model/init';
 import { useStore } from 'effector-react';
-import { signin, signinFx } from './model';
+import { signin, signInFx } from './model';
 
 export const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const loading = useStore(signinFx.pending);
+  const loading = useStore(signInFx.pending);
 
   const handleCancel = () => {
     navigate(routesPath.home);

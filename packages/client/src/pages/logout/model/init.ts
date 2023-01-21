@@ -1,5 +1,11 @@
 import { sample } from 'effector';
-import { logout } from 'pages/logout/model/model';
-import { logoutFx } from 'pages/logout/model/effects';
+import { logout } from './model';
+import { logoutFx } from './effects';
+import { $isAuth } from 'processes/layout/model/model';
 
-sample({ clock: logout, target: logoutFx });
+sample({
+  clock: logout,
+  source: $isAuth,
+  filter: auth => Boolean(auth),
+  target: logoutFx,
+});

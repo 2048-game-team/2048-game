@@ -6,7 +6,7 @@ import { FC, PropsWithChildren } from 'react';
 
 export const GameRestartButton: FC<PropsWithChildren> = () => {
   const { gameRows, gameCols } = useStore($settings);
-  
+
   const restartHandler = () => {
     createNewGame(gameRows, gameCols);
   };

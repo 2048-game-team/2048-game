@@ -24,7 +24,9 @@ export const Header = () => {
       style={{ marginBottom: '1rem', justifyContent: 'space-between' }}>
       <BurgerMenu />
 
-      <Typography.Title style={{ marginBottom: 0 }}>2048</Typography.Title>
+      <Typography.Title style={{ marginBottom: 0, caretColor: 'transparent' }}>
+        2048
+      </Typography.Title>
 
       <Popover
         title={userName}

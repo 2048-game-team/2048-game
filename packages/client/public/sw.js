@@ -38,9 +38,12 @@ const networkFirst = async request => {
 };
 
 const checkForLogout = async request => {
-  // При выходе удаляем динамический кэш (с текущим пользователем)
+  // При выходе и при обновлении профиля удаляем динамический кэш (с текущим пользователем)
   const { pathname } = new URL(request.url);
-  if (pathname?.includes('auth/logout')) {
+  if (
+    pathname?.includes('auth/logout') ||
+    pathname?.includes('/user/profile')
+  ) {
     await caches.delete(DYNAMIC_CACHE_NAME);
   }
 };

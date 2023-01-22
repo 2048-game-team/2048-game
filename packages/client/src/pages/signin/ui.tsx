@@ -6,6 +6,7 @@ import { SignInRequest } from 'shared/api/swagger';
 import './model/init';
 import { useStore } from 'effector-react';
 import { signin, signinFx } from './model';
+import { SpaceButtons } from 'pages/profile/styles';
 
 export const SignIn: React.FC = () => {
   const navigate = useNavigate();
@@ -44,9 +45,9 @@ export const SignIn: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Divider />
+          <SpaceButtons>
+            <Link to={routesPath.signup}>Регистрация</Link>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 26 }}>
             <Button
               type="primary"
               htmlType="submit"
@@ -54,11 +55,7 @@ export const SignIn: React.FC = () => {
               disabled={loading}>
               Войти
             </Button>
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to={routesPath.signup}>Регистрация</Link>
-          </Form.Item>
+          </SpaceButtons>
         </Form>
       </Typography>
     </Modal>

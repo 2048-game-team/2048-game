@@ -7,7 +7,7 @@ import { Logout } from 'pages/logout';
 import { Game } from 'pages/game';
 import { SignUp } from 'pages/signup';
 import { Finish } from 'pages/finish';
-import { Settings } from 'pages/settings'
+import { Settings } from 'pages/settings';
 import { Profile } from 'pages/profile';
 import { PrivateRoute } from './ui';
 
@@ -28,5 +28,5 @@ export const routes: RouteObject[] = [
   { path: routesPath.logout, element: <Logout /> },
   { path: routesPath.game, element: <Game /> },
   { path: routesPath.finish, element: <Finish /> },
-  { path: routesPath.settings, element: <Settings />},
+  { path: routesPath.settings, element: <Settings /> },
 ];

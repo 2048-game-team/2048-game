@@ -3,7 +3,15 @@ import { $settings } from 'entities/settings';
 import { FC, PropsWithChildren } from 'react';
 import { useStore } from 'effector-react';
 import { getChangeHandler } from './getChangeHandler';
-import { textRowSpan, valueRowSpan, minGameSize, maxGameSize, minCanvasSideSize, maxCanvasSideSize, canvasSizeStep } from './const';
+import {
+  textRowSpan,
+  valueRowSpan,
+  minGameSize,
+  maxGameSize,
+  minCanvasSideSize,
+  maxCanvasSideSize,
+  canvasSizeStep,
+} from './const';
 
 export const Settings: FC<PropsWithChildren> = () => {
   const settings = useStore($settings);

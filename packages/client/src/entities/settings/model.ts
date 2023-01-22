@@ -5,9 +5,6 @@ import { Settings } from './types';
 
 export const setSettings = createEvent<Settings>();
 
-export const $settings = restore(
-  setSettings,
-  defaultSettings,
-);
+export const $settings = restore(setSettings, defaultSettings);
 
 persist({ store: $settings, key: 'settings' });

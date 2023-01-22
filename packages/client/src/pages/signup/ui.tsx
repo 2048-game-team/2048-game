@@ -1,4 +1,4 @@
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
+import { Button, Divider, Form, Input, Modal } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';

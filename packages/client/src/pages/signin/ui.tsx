@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
+import { Button, Form, Input, Modal, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';

@@ -7,4 +7,5 @@ export const routesPath = {
   logout: '/logout',
   game: '/game',
   finish: '/finish',
+  settings: '/settings',
 };

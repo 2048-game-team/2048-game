@@ -1,24 +1,22 @@
 import { createNewGame, $gameData } from 'entities/game-drive';
-import { FC, useRef, useEffect } from 'react';
-import { WIDTH, HEIGHT } from './const';
+import { FC, useRef, useEffect, PropsWithChildren } from 'react';
 import { drawGame } from './drawGame';
-import { GameCanvasProps } from '../types';
+import { useStore } from 'effector-react';
+import { $settings } from 'entities/settings';
 import { getKeydownHandler } from './keydownHandler';
 
-export const GameCanvas: FC<GameCanvasProps> = ({
-  width = WIDTH,
-  height = HEIGHT,
-}) => {
+export const GameCanvas: FC<PropsWithChildren> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { gameWidth, gameHeight, gameRows, gameCols } = useStore($settings);
 
   useEffect(() => {
-    createNewGame();
+    createNewGame(gameRows, gameCols);
     const ctx: CanvasRenderingContext2D | null | undefined =
       canvasRef.current?.getContext('2d');
 
     if (ctx) {
       const unwatch = $gameData.watch(store => {
-        drawGame(ctx, store.boardData, width, height);
+        drawGame(ctx, store.boardData, gameWidth, gameHeight);
       });
 
       const keydownHandler = getKeydownHandler(canvasRef.current);
@@ -29,7 +27,7 @@ export const GameCanvas: FC<GameCanvasProps> = ({
         window.removeEventListener('keydown', keydownHandler);
       };
     }
-  }, []);
+  }, [gameWidth, gameHeight]);
 
-  return <canvas ref={canvasRef} height={height} width={width} />;
+  return <canvas ref={canvasRef} height={gameHeight} width={gameWidth} />;
 };

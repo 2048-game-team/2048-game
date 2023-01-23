@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Image, Card } from 'antd';
 import { StartSpace, StartButton, StartTypography } from './styles';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
@@ -29,6 +29,7 @@ export const Start = () => {
         Как играть?
       </StartTypography>
       {isVisibleAboutCard && <Card>{aboutGameText}</Card>}
+      <Link to={routesPath.team}>О команде</Link>
     </StartSpace>
   );
 };

@@ -5,8 +5,8 @@ import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';
 import './model/init';
 import { useStore } from 'effector-react';
-import { signin, signinFx } from './model';
-import { SpaceButtons } from 'pages/profile/styles';
+import { signin, signInFx } from './model';
+import { SpaceButtons } from './styles';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();

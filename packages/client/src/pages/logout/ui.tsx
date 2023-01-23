@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button, Divider, Form, Modal, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
@@ -7,7 +7,7 @@ import { logout } from 'pages/logout/model';
 import { useStore } from 'effector-react';
 import { signinFx } from 'pages/signin/model';
 
-export const Logout: React.FC = () => {
+export const Logout: FC = () => {
   const navigate = useNavigate();
   const loading = useStore(signinFx.pending);
 

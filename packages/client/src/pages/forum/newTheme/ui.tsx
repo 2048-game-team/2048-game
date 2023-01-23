@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Button,
   Divider,
@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { FormThemeProps, Theme } from 'pages/forum';
 
-export const FormNewTheme: React.FC<FormThemeProps> = ({
+export const FormNewTheme: FC<FormThemeProps> = ({
   modalOpen,
   setModalOpen,
 }) => {
@@ -49,7 +49,7 @@ export const FormNewTheme: React.FC<FormThemeProps> = ({
             initialValues={{ remember: true }}
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
             form={form}>
             <Form.Item
               label="Название темы"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button, Form, Input, Modal, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
@@ -8,7 +8,7 @@ import { useStore } from 'effector-react';
 import { signin, signinFx } from './model';
 import { SpaceButtons } from 'pages/profile/styles';
 
-export const SignIn: React.FC = () => {
+export const SignIn: FC = () => {
   const navigate = useNavigate();
   const loading = useStore(signinFx.pending);
 

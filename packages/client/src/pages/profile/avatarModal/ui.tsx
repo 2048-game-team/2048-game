@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Modal, Upload, UploadFile } from 'antd';
 import { AvatarModalProps } from './types';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { setAvatar } from 'pages/profile/model';
 import { UploadChangeParam } from 'antd/es/upload';
 
-export const AvatarModal: React.FC<AvatarModalProps> = ({
+export const AvatarModal: FC<AvatarModalProps> = ({
   isModalOpen,
   closeModal,
 }) => {

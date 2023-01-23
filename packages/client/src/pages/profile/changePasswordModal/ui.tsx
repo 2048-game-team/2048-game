@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ChangePasswordModalProps } from './types';
 import { Button, Form, Input, Modal } from 'antd';
 import { useStore } from 'effector-react';
@@ -7,7 +7,7 @@ import { ChangePasswordRequest } from 'shared/api/swagger';
 import { SpaceButtons } from 'pages/profile/styles';
 import { setPassword } from 'pages/profile/model';
 
-export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
+export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
   isModalOpen,
   closeModal,
 }) => {
@@ -28,7 +28,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
       <Form
         name="changePassword"
         labelCol={{ span: 6 }}
-        autoComplete="off"
+        autoComplete="on"
         onFinish={onFinish}>
         <Form.Item
           label="Пароль"

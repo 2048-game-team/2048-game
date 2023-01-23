@@ -10,7 +10,7 @@ import { SpaceButtons } from 'pages/profile/styles';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
-  const loading = useStore(signinFx.pending);
+  const loading = useStore(signInFx.pending);
 
   const handleCancel = () => {
     navigate(routesPath.home);

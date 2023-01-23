@@ -7,4 +7,4 @@ export const $user = restore<UserResponse | null>(getUserFx, null);
 
 export const $isAuth = $user.map(user => user !== null);
 
-export const checkAuthGate = createGate();
+export const CheckAuthGate = createGate();

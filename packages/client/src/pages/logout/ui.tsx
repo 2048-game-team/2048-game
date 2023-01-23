@@ -5,11 +5,11 @@ import { routesPath } from 'processes/routes';
 import './model/init';
 import { logout } from 'pages/logout/model';
 import { useStore } from 'effector-react';
-import { signinFx } from 'pages/signin/model';
+import { signInFx } from 'pages/signin/model';
 
 export const Logout: FC = () => {
   const navigate = useNavigate();
-  const loading = useStore(signinFx.pending);
+  const loading = useStore(signInFx.pending);
 
   const handleCancel = () => {
     navigate(routesPath.home);

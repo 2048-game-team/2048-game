@@ -5,39 +5,18 @@ import {
   $leaderboard,
   CheckLeaderboardGate,
 } from 'pages/leaderboard/model/model';
-import { leaderboardRequest } from 'pages/leaderboard/consts';
-import { ColumnsType } from 'antd/es/table/Table';
-import { LeaderboardRow } from 'pages/leaderboard/types';
-import { Space, Table, Typography } from 'antd';
-import { ColumnPlace } from 'pages/leaderboard/styles';
-import { RowUser } from 'pages/leaderboard/rowUser/ui';
+import { columns, leaderboardRequest } from 'pages/leaderboard/consts';
+import { Space, Spin, Table, Typography } from 'antd';
+import { getLeaderboardFx } from 'pages/leaderboard/model/effects';
 
 export const Leaderboard = () => {
   useGate(CheckLeaderboardGate, leaderboardRequest);
   const leaderboard = useUnit($leaderboard);
+  const loading = useUnit(getLeaderboardFx.pending);
 
-  const columns: ColumnsType<LeaderboardRow> = [
-    {
-      title: 'Место',
-      dataIndex: 'key',
-      key: 'key',
-      align: 'center',
-      render: place => <ColumnPlace>{place}</ColumnPlace>,
-    },
-    {
-      title: 'Участник',
-      dataIndex: 'user',
-      key: 'user',
-      width: '1000px',
-      render: user => <RowUser user={user} />,
-    },
-    {
-      title: 'Очки',
-      dataIndex: 'points',
-      key: 'points',
-      align: 'center',
-    },
-  ];
+  if (loading) {
+    return <Spin size="large" />;
+  }
 
   if (!leaderboard) {
     return <Typography.Title>Нет таблицы</Typography.Title>;

@@ -11,6 +11,7 @@ import { Settings } from 'pages/settings';
 import { Profile } from 'pages/profile';
 import { PrivateRoute } from './ui';
 import { Leaderboard } from 'pages/leaderboard/ui';
+import { Team } from 'pages/team/ui';
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },
@@ -31,4 +32,5 @@ export const routes: RouteObject[] = [
   { path: routesPath.finish, element: <Finish /> },
   { path: routesPath.settings, element: <Settings /> },
   { path: routesPath.leaderboard, element: <Leaderboard /> },
+  { path: routesPath.team, element: <Team /> },
 ];

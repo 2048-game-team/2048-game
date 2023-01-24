@@ -9,4 +9,5 @@ export const routesPath = {
   finish: '/finish',
   settings: '/settings',
   leaderboard: '/leaderboard',
+  team: '/team',
 };

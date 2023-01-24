@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Button,
   Divider,
@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { FormMessageProps, Theme } from 'pages/forum';
 
-export const FormNewMessage: React.FC<FormMessageProps> = ({
+export const FormNewMessage: FC<FormMessageProps> = ({
   modalOpen,
   setModalOpen,
 }) => {
@@ -49,7 +49,7 @@ export const FormNewMessage: React.FC<FormMessageProps> = ({
             initialValues={{ remember: true }}
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
             form={form}>
             <Form.Item
               label="Содержание"

@@ -1,4 +1,4 @@
-export interface AvatarModalProps {
+export interface ChangePasswordModalProps {
   isModalOpen: boolean;
   closeModal: () => void;
 }

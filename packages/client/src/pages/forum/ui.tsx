@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button } from 'antd';
 import { ForumTheme } from './forumTheme/ui';
 import { SpaceForum, SpaceEnd } from 'pages/forum';
 import { FormNewTheme } from './newTheme/ui';
 
-export const Forum: React.FC = () => {
+export const Forum: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleButtonNewTheme = () => {

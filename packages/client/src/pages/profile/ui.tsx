@@ -1,102 +1,153 @@
 import React, { useState } from 'react';
-import {
-  Avatar,
-  Button,
-  Card,
-  Divider,
-  Form,
-  Input,
-  Tooltip,
-  Typography,
-} from 'antd';
-import { LeftOutlined, UserOutlined } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, Button, Divider, Form, Input, Modal, Tooltip } from 'antd';
+import { UserSwitchOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { AvatarModal } from './avatarModal';
-import { ProfileFields } from 'pages/profile/types';
+import { UserUpdateRequest } from 'shared/api/swagger';
+import { useStore } from 'effector-react';
+import { $user } from 'processes/layout/model/model';
+import { SpaceProfile, SpaceAvatar, SpaceButtons } from './styles';
+import './model/init';
+import { setUserData, setUserDataFx } from 'pages/profile/model';
+import { resourcesUrl } from 'shared/api/consts';
+import { ChangePasswordModal } from 'pages/profile/changePasswordModal';
 
 export const Profile = () => {
+  const user = useStore($user);
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalAvatarOpen, setIsModalAvatarOpen] = useState(false);
+  const [isModalChangePasswordOpen, setIsModalChangePasswordOpen] =
+    useState(false);
+  const loading = useStore(setUserDataFx.pending);
+  const avatarSrc = user?.avatar ? `${resourcesUrl}${user.avatar}` : null;
 
   const showAvatarModal = () => {
-    setIsModalOpen(true);
+    setIsModalAvatarOpen(true);
+  };
+  const showChangePasswordModal = () => {
+    setIsModalChangePasswordOpen(true);
   };
 
-  const onFinish = (data: ProfileFields) => {
-    console.log(data);
+  const handleCancel = () => {
     navigate(routesPath.home);
   };
 
-  const onFinishFailed = () => {
-    console.log('Finish Failed');
+  const onFinish = (data: UserUpdateRequest) => {
+    setUserData(data);
+    navigate(routesPath.home);
   };
 
   return (
-    <Card>
-      <Typography>
-        <Link to={routesPath.home}>
-          <LeftOutlined />
-          Назад
-        </Link>
-        <Form
-          name="profile"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 15 }}
-          initialValues={{ remember: true }}
-          autoComplete="off"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
-          <Form.Item name="avatar" wrapperCol={{ offset: 10, span: 26 }}>
+    <>
+      <Modal
+        title="Профиль"
+        open
+        onCancel={handleCancel}
+        okButtonProps={{ hidden: true }}
+        footer={null}>
+        <SpaceProfile direction="vertical">
+          <SpaceAvatar>
             <Tooltip placement="top" title="Кликните для редактирования">
               <Avatar
                 size={120}
-                icon={<UserOutlined />}
+                icon={<UserSwitchOutlined />}
                 style={{ cursor: 'pointer' }}
                 onClick={showAvatarModal}
+                src={avatarSrc}
               />
             </Tooltip>
-          </Form.Item>
-          <Form.Item
-            label="Логин"
-            name="login"
-            rules={[{ required: true, message: 'Пожалуйста введите логин!' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: 'Пожалуйста введите email!' },
-              { type: 'email', message: 'Неверный email' },
-            ]}>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Пароль"
-            name="password"
-            rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}>
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-            label="Повторите пароль"
-            name="passwordRepeat"
-            rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}>
-            <Input.Password />
-          </Form.Item>
-          <Divider />
-          <Form.Item wrapperCol={{ offset: 10, span: 26 }}>
-            <Button type="primary" htmlType="submit" size="large">
-              Сохранить
-            </Button>
-          </Form.Item>
-        </Form>
-      </Typography>
+          </SpaceAvatar>
+
+          <Form
+            name="profile"
+            labelCol={{ span: 6 }}
+            initialValues={{ remember: true }}
+            autoComplete="on"
+            onFinish={onFinish}>
+            <Form.Item
+              label="Имя"
+              name="first_name"
+              initialValue={user?.first_name}
+              rules={[{ required: true, message: 'Введите имя' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Фамилия"
+              name="second_name"
+              initialValue={user?.second_name}
+              rules={[{ required: true, message: 'Введите фамилию' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Ник"
+              name="display_name"
+              initialValue={user?.display_name}
+              rules={[{ required: true, message: 'Введите отображаемое имя' }]}>
+              <Input />
+            </Form.Item>
+
+            <Divider />
+
+            <Form.Item
+              label="Логин"
+              name="login"
+              initialValue={user?.login}
+              rules={[{ required: true, message: 'Введите логин' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              initialValue={user?.email}
+              rules={[
+                { required: true, message: 'Введите email' },
+                { type: 'email', message: 'Неверный email' },
+              ]}>
+              <Input />
+            </Form.Item>
+
+            <Divider />
+
+            <Form.Item
+              label="Телефон"
+              name="phone"
+              initialValue={user?.phone}
+              rules={[{ required: true, message: 'Введите телефон' }]}>
+              <Input />
+            </Form.Item>
+
+            <SpaceButtons>
+              <Button
+                key="changePassword"
+                type="link"
+                htmlType="button"
+                onClick={showChangePasswordModal}>
+                Изменить пароль
+              </Button>
+
+              <Button
+                key="submit"
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                disabled={loading}>
+                Сохранить
+              </Button>
+            </SpaceButtons>
+          </Form>
+        </SpaceProfile>
+      </Modal>
+
       <AvatarModal
-        isModalOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onOk={() => setIsModalOpen(false)}
+        isModalOpen={isModalAvatarOpen}
+        closeModal={() => setIsModalAvatarOpen(false)}
       />
-    </Card>
+
+      <ChangePasswordModal
+        isModalOpen={isModalChangePasswordOpen}
+        closeModal={() => setIsModalChangePasswordOpen(false)}
+      />
+    </>
   );
 };

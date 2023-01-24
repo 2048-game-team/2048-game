@@ -1,24 +1,25 @@
-import { Button, Modal, Upload } from 'antd';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { Button, Modal, Upload, UploadFile } from 'antd';
 import { AvatarModalProps } from './types';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { setAvatar } from 'pages/profile/model';
+import { UploadChangeParam } from 'antd/es/upload';
 
-export const AvatarModal = ({
+export const AvatarModal: FC<AvatarModalProps> = ({
   isModalOpen,
-  onOk,
-  onClose,
-}: AvatarModalProps) => {
+  closeModal,
+}) => {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<File | undefined>();
   const [previewImage, setPreviewImage] = useState<string>();
 
-  const handleChange = (info: any) => {
+  const handleChange = (info: UploadChangeParam<UploadFile<File>>) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
     }
     setImageUrl(info.file.originFileObj);
-    setPreviewImage(URL.createObjectURL(info.file.originFileObj));
+    setPreviewImage(URL.createObjectURL(info.file.originFileObj as Blob));
   };
 
   const uploadButton = (
@@ -28,12 +29,11 @@ export const AvatarModal = ({
     </div>
   );
 
-  const handleOk = () => {
-    onOk();
-  };
-
-  const handleCancel = () => {
-    onClose();
+  const updateAvatar = () => {
+    if (imageUrl) {
+      setAvatar({ avatar: imageUrl });
+    }
+    closeModal();
   };
 
   if (!isModalOpen) {
@@ -42,15 +42,21 @@ export const AvatarModal = ({
 
   return (
     <Modal
-      title="Добавление аватара"
+      title="Изменить аватар"
       open={isModalOpen}
       footer={[
-        <Button key="submit" type="primary" onClick={handleOk}>
+        <Button
+          key="submit"
+          type="primary"
+          onClick={updateAvatar}
+          disabled={!imageUrl}>
           Сохранить
         </Button>,
       ]}
-      onCancel={handleCancel}
-      style={{ textAlign: 'center' }}>
+      onCancel={closeModal}
+      style={{ textAlign: 'center' }}
+      width={360}
+      centered>
       <Upload
         name="avatar"
         listType="picture-card"

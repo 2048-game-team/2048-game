@@ -1,13 +1,14 @@
-import React from 'react';
-import { Button, Divider, Form, Input, Modal, Typography } from 'antd';
+import React, { FC } from 'react';
+import { Button, Form, Input, Modal, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';
 import './model/init';
 import { useStore } from 'effector-react';
 import { signin, signInFx } from './model';
+import { SpaceButtons } from './styles';
 
-export const SignIn: React.FC = () => {
+export const SignIn: FC = () => {
   const navigate = useNavigate();
   const loading = useStore(signInFx.pending);
 
@@ -44,9 +45,9 @@ export const SignIn: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Divider />
+          <SpaceButtons>
+            <Link to={routesPath.signup}>Регистрация</Link>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 26 }}>
             <Button
               type="primary"
               htmlType="submit"
@@ -54,11 +55,7 @@ export const SignIn: React.FC = () => {
               disabled={loading}>
               Войти
             </Button>
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Link to={routesPath.signup}>Регистрация</Link>
-          </Form.Item>
+          </SpaceButtons>
         </Form>
       </Typography>
     </Modal>

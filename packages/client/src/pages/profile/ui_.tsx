@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { $isAuth, $user } from 'processes/layout/model/model';
 import { useStore } from 'effector-react';
 import { UserUpdateRequest, ChangePasswordRequest } from 'shared/api/swagger';
@@ -6,7 +6,7 @@ import './model/init';
 import { getUser, setAvatar, setUserData, setPassword } from './model';
 import { baseURL } from './const';
 
-export const Profile: React.FC = () => {
+export const Profile: FC = () => {
   const user = useStore($user);
   const isAuth = useStore($isAuth);
 

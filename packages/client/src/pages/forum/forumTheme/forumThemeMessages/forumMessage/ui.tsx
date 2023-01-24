@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import {
   MessageProps,
   MessageAuthor,
@@ -11,7 +11,7 @@ import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import {} from 'pages/forum';
 import { FormEditMessage } from './editMessage/ui';
 
-export const ForumMessage: React.FC<MessageProps> = ({ message }) => {
+export const ForumMessage: FC<MessageProps> = ({ message }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleButtonNewTheme = () => {

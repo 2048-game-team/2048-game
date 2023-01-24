@@ -10,6 +10,7 @@ import { Finish } from 'pages/finish';
 import { Settings } from 'pages/settings';
 import { Profile } from 'pages/profile';
 import { PrivateRoute } from './ui';
+import { Team } from 'pages/team/ui';
 
 export const routes: RouteObject[] = [
   { path: routesPath.home, element: <Start /> },
@@ -29,4 +30,5 @@ export const routes: RouteObject[] = [
   { path: routesPath.game, element: <Game /> },
   { path: routesPath.finish, element: <Finish /> },
   { path: routesPath.settings, element: <Settings /> },
+  { path: routesPath.team, element: <Team /> },
 ];

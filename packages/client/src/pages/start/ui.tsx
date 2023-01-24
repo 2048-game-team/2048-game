@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, Card } from 'antd';
 import { StartSpace, StartButton, StartTypography } from './styles';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';

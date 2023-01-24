@@ -1,11 +1,13 @@
 const STATIC_CACHE_NAME = 'static-data-v1';
 const DYNAMIC_CACHE_NAME = 'dynamic-data-v1';
 
-const STATIC_URLS = ['/',
+const STATIC_URLS = [
+  '/',
   '/teamPhotos/dmitry.jpg',
   '/teamPhotos/ekaterina.jpg',
   '/teamPhotos/nikolay.jpg',
-  '/teamPhotos/noimage.jpg'];
+  '/teamPhotos/noimage.jpg',
+];
 
 self.addEventListener('install', async event => {
   console.log('SW install');

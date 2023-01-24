@@ -8,4 +8,5 @@ export const routesPath = {
   game: '/game',
   finish: '/finish',
   settings: '/settings',
+  leaderboard: '/leaderboard',
 };

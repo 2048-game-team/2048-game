@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Col, Row, Image, Typography, Button } from 'antd';
 import { team } from './const';
-import Title from 'antd/es/typography/Title';
 import { TelegramIcon } from 'pages/team/telegramIcon';
 import Icon from '@ant-design/icons';
+
+const { Title } = Typography;
 
 export const Team = () => {
   return (

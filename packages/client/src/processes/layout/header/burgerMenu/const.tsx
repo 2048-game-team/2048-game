@@ -7,6 +7,7 @@ import {
   PlaySquareOutlined,
   ProfileOutlined,
   WechatOutlined,
+  TrophyOutlined,
 } from '@ant-design/icons';
 import { NavItem } from './types';
 
@@ -30,6 +31,11 @@ export const navList: NavItem[] = [
     path: routesPath.forum,
     icon: <WechatOutlined />,
     title: 'Форум',
+  },
+  {
+    path: routesPath.leaderboard,
+    icon: <TrophyOutlined />,
+    title: 'Таблица лидеров',
   },
   {
     path: routesPath.settings,

@@ -1,9 +1,11 @@
 {
   "name": "client-server-template-with-vite",
   "private": true,
+  "homepage": "2048-game",
   "scripts": {
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
     "build": "lerna run build",
+    "build:client": "lerna run build --scope=client",
     "dev:client": "lerna run dev  --scope=client",
     "dev:server": "lerna run dev --scope=server",
     "dev": "lerna run dev",
@@ -21,6 +23,13 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "1.1.1",
-    "lerna": "5.4.3"
+    "@testing-library/user-event": "14.4.3",
+    "eslint": "^8.32.0",
+    "eslint-plugin-effector": "^0.10.3",
+    "lerna": "5.4.3",
+    "nx": "15.5.2"
+  },
+  "dependencies": {
+    "typescript-eslint": "0.0.1-alpha.0"
   }
 }

@@ -1,67 +1,78 @@
-import {Button, Modal, Upload} from "antd";
-import React, {useState} from "react";
-import {AvatarModalProps} from "./types";
-import {LoadingOutlined, PlusOutlined} from "@ant-design/icons";
+import React, { FC, useState } from 'react';
+import { Button, Modal, Upload, UploadFile } from 'antd';
+import { AvatarModalProps } from './types';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { setAvatar } from 'pages/profile/model';
+import { UploadChangeParam } from 'antd/es/upload';
 
-export const AvatarModal = ({isModalOpen, onOk, onClose}:AvatarModalProps) => {
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string>();
-    const [previewImage, setPreviewImage] = useState<string>();
+export const AvatarModal: FC<AvatarModalProps> = ({
+  isModalOpen,
+  closeModal,
+}) => {
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<File | undefined>();
+  const [previewImage, setPreviewImage] = useState<string>();
 
-    const handleChange = (info: any) => {
-        if (info.file.status === "uploading") {
-            setLoading(true);
-            return;
-        }
-        setImageUrl(info.file.originFileObj);
-        setPreviewImage(URL.createObjectURL(info.file.originFileObj));
-    };
-
-    const uploadButton = (
-        <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <div style={{ marginTop: 8 }}>Загрузить</div>
-        </div>
-    );
-
-    const handleOk = () => {
-        onOk();
-    };
-
-    const handleCancel = () => {
-        onClose();
-    };
-
-    if(!isModalOpen) {
-        return null;
+  const handleChange = (info: UploadChangeParam<UploadFile<File>>) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
     }
+    setImageUrl(info.file.originFileObj);
+    setPreviewImage(URL.createObjectURL(info.file.originFileObj as Blob));
+  };
 
-    return (
-        <Modal title="Добавление аватара"
-               open={isModalOpen}
-               footer={[
-                   <Button key="submit"
-                           type="primary"
-                           onClick={handleOk}>
-                       Сохранить
-                   </Button>,
-               ]}
-               onCancel={handleCancel}
-               style={{ textAlign: 'center' }}
-        >
-            <Upload
-                name="avatar"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                onChange={handleChange}
-                >
-                {imageUrl ? (
-                    <img src={previewImage} alt="avatar" style={{ width: "100%", height: "100%", objectFit: "cover"}} />
-                ) : (
-                    uploadButton
-                )}
-            </Upload>
-        </Modal>
-    )
-}
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Загрузить</div>
+    </div>
+  );
+
+  const updateAvatar = () => {
+    if (imageUrl) {
+      setAvatar({ avatar: imageUrl });
+    }
+    closeModal();
+  };
+
+  if (!isModalOpen) {
+    return null;
+  }
+
+  return (
+    <Modal
+      title="Изменить аватар"
+      open={isModalOpen}
+      footer={[
+        <Button
+          key="submit"
+          type="primary"
+          onClick={updateAvatar}
+          disabled={!imageUrl}>
+          Сохранить
+        </Button>,
+      ]}
+      onCancel={closeModal}
+      style={{ textAlign: 'center' }}
+      width={360}
+      centered>
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        onChange={handleChange}>
+        {imageUrl ? (
+          <img
+            src={previewImage}
+            alt="avatar"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          uploadButton
+        )}
+      </Upload>
+    </Modal>
+  );
+};

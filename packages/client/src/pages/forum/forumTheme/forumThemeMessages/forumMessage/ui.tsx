@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react';
 import {
   MessageProps,
   MessageAuthor,
   MessageDate,
   SpaceBetween,
   SpaceMessageHeader,
-} from 'pages/forum'
-import { Avatar, Button, Card, Space, Tooltip } from 'antd'
-import { EditOutlined, UserOutlined } from '@ant-design/icons'
-import {} from 'pages/forum'
-import { FormEditMessage } from './editMessage/ui'
+} from 'pages/forum';
+import { Avatar, Button, Card, Space, Tooltip } from 'antd';
+import { EditOutlined, UserOutlined } from '@ant-design/icons';
+import {} from 'pages/forum';
+import { FormEditMessage } from './editMessage/ui';
 
-export const ForumMessage: React.FC<MessageProps> = ({ message }) => {
-  const [modalOpen, setModalOpen] = useState(false)
+export const ForumMessage: FC<MessageProps> = ({ message }) => {
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleButtonNewTheme = () => {
-    setModalOpen(true)
-  }
+    setModalOpen(true);
+  };
 
   return (
     <>
@@ -53,5 +53,5 @@ export const ForumMessage: React.FC<MessageProps> = ({ message }) => {
         content={message.content}
       />
     </>
-  )
-}
+  );
+};

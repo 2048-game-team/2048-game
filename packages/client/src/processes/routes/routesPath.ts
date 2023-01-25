@@ -1,9 +1,13 @@
 export const routesPath = {
   home: '/',
-  login: '/login',
+  signin: '/signin',
   profile: '/profile',
-  register: '/register',
+  signup: '/signup',
   forum: '/forum',
   logout: '/logout',
   game: '/game',
-}
+  finish: '/finish',
+  settings: '/settings',
+  leaderboard: '/leaderboard',
+  team: '/team',
+};

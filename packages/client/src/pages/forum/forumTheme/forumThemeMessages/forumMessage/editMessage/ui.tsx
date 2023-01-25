@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react';
 import {
   Button,
   Divider,
@@ -7,33 +7,33 @@ import {
   Modal,
   notification,
   Typography,
-} from 'antd'
-import { FormMessageProps, Theme } from 'pages/forum'
+} from 'antd';
+import { FormMessageProps, Theme } from 'pages/forum';
 
-export const FormEditMessage: React.FC<FormMessageProps> = ({
+export const FormEditMessage: FC<FormMessageProps> = ({
   modalOpen,
   setModalOpen,
   content,
 }) => {
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   const handleCancel = () => {
-    form.resetFields()
-    setModalOpen(false)
-  }
+    form.resetFields();
+    setModalOpen(false);
+  };
 
   const handleFinish = (data: Theme) => {
-    console.log(data)
-    form.resetFields()
-    setModalOpen(false)
-  }
+    console.log(data);
+    form.resetFields();
+    setModalOpen(false);
+  };
 
   const handleFinishFailed = () => {
     notification.error({
       message: 'Ошибка',
       description: 'Обнаружена ошибка заполнения полей формы',
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -50,7 +50,7 @@ export const FormEditMessage: React.FC<FormMessageProps> = ({
             initialValues={{ remember: true }}
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
             form={form}>
             <Form.Item
               label="Содержание"
@@ -72,5 +72,5 @@ export const FormEditMessage: React.FC<FormMessageProps> = ({
         </Typography>
       </Modal>
     </>
-  )
-}
+  );
+};

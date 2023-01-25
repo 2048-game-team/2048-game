@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import { Button, Collapse } from 'antd'
-import { ForumThemeHeader } from './forumThemeHeader/ui'
-import { ForumThemeMessages } from './forumThemeMessages/ui'
-import { SpaceTheme, SpaceEnd } from 'pages/forum'
-import { mocForumData } from '../mocData'
-import { FormNewMessage } from './newMessage/ui'
+import React, { FC, useState } from 'react';
+import { Button, Collapse } from 'antd';
+import { ForumThemeHeader } from './forumThemeHeader/ui';
+import { ForumThemeMessages } from './forumThemeMessages/ui';
+import { SpaceTheme, SpaceEnd } from 'pages/forum';
+import { mocForumData } from '../mocData';
+import { FormNewMessage } from './newMessage/ui';
 
-export const ForumTheme: React.FC = () => {
-  const [activeTheme, setActiveTheme] = useState<string | string[]>()
-  const [modalOpen, setModalOpen] = useState(false)
+export const ForumTheme: FC = () => {
+  const [activeTheme, setActiveTheme] = useState<string | string[]>();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const toggleTheme = (key: string | string[]) => {
-    setActiveTheme(key)
-  }
+    setActiveTheme(key);
+  };
 
   const handleButtonNewMessage = () => {
-    setModalOpen(true)
-  }
+    setModalOpen(true);
+  };
 
   return (
     <>
@@ -49,5 +49,5 @@ export const ForumTheme: React.FC = () => {
 
       <FormNewMessage modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
-  )
-}
+  );
+};

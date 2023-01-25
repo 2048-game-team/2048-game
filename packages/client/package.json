@@ -6,19 +6,24 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "eslint:check": "eslint --quiet --ext .ts,.tsx src --cache --cache-location=./.eslint-cache",
+    "prettier:check": "prettier --check ./",
+    "lint": "yarn run eslint:check && yarn run prettier:check",
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
     "prettier": "prettier --write .",
     "format": "npm run lint:fix && npm run prettier",
-    "test": "jest ./"
+    "test": "jest ./",
+    "swagger": "swagger-typescript-api --axios --responses --extract-enums --extract-request-params --extract-request-body -p ./src/shared/api/swagger.json -o ./src/shared/api -n swagger.ts"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.0",
+    "@testing-library/user-event": "^14.4.3",
     "antd": "5.1.0",
     "axios": "1.2.1",
     "dotenv": "16.0.2",
     "effector": "22.4.1",
     "effector-react": "22.4.0",
+    "effector-storage": "^5.0.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-react": "7.31.11",
     "prettier": "2.7.1",
@@ -28,6 +33,7 @@
     "react-media-hook": "0.5.0",
     "react-router-dom": "6.6.0",
     "styled-components": "5.3.6",
+    "swagger-typescript-api": "^12.0.2",
     "vite-tsconfig-paths": "4.0.3"
   },
   "devDependencies": {
@@ -40,7 +46,6 @@
     "@typescript-eslint/eslint-plugin": "5.35.1",
     "@typescript-eslint/parser": "5.35.1",
     "@vitejs/plugin-react": "2.0.1",
-    "eslint": "8.23.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "28",
     "jest-environment-jsdom": "29.0.1",

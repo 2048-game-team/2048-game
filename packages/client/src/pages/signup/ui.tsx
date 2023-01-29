@@ -17,6 +17,7 @@ export const SignUp = () => {
   };
   const onFinish = (data: SignUpRequest) => {
     createNewUser(data);
+    navigate(routesPath.home);
   };
 
   return (

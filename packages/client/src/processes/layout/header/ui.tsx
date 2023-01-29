@@ -12,7 +12,7 @@ export const Header = () => {
 
   const userName = isAuth
     ? user?.display_name ?? `${user?.first_name} ${user?.second_name}`
-    : 'Неизвестный';
+    : 'Гость';
 
   const avatarSrc = user?.avatar ? `${resourcesUrl}${user.avatar}` : null;
 
@@ -30,7 +30,7 @@ export const Header = () => {
 
       <Popover
         title={userName}
-        trigger={['hover', 'click', 'focus']}
+        trigger={['hover', 'focus']}
         placement="bottomRight"
         content={UserMenu}>
         <Avatar icon={avatarIcon} src={avatarSrc} />

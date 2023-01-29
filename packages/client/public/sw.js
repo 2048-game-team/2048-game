@@ -1,5 +1,5 @@
 const STATIC_CACHE_NAME = 'static-data-v1';
-const DYNAMIC_CACHE_NAME = 'dynamic-data-v1';
+const DYNAMIC_CACHE_NAME = 'dynamic-data-v2';
 
 const STATIC_URLS = [
   '/',
@@ -58,7 +58,7 @@ const checkForGetUser = async (request, res) => {
   // При запросе о текущем пользователе - сохраняем ответ в динамический кэш
   const cache = await caches.open(DYNAMIC_CACHE_NAME);
   const { pathname } = new URL(request.url);
-  if (pathname?.includes('auth/user')) {
+  if (pathname?.includes('auth/user') && res.status === 200) {
     await cache.put(request, res.clone());
   }
 };

@@ -1,16 +1,12 @@
 import {
-  IGameData,
   GameStatus,
   IMovementResult,
   Array2D,
   OneLine,
   ICollapsedData,
 } from './types';
-import { setGameData, setGameStatus } from './model';
-
-export const gameData: IGameData = { boardData: [], score: 0 };
-
-const winCreteria = 2048;
+import { gameData, setGameData, setGameStatus } from './model';
+import { winCreteria } from './const';
 
 export const createEmpty2DArray = (
   rowCount: number,
@@ -75,4 +71,12 @@ export const transposeMatrix = () => {
     });
   });
   gameData.boardData = result;
+};
+
+export const getRowCount = () => {
+  return gameData.boardData.length;
+};
+
+export const getColCount = () => {
+  return gameData.boardData[0]?.length;
 };

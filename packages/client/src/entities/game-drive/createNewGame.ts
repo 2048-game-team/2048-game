@@ -1,24 +1,27 @@
-import { gameData, createEmpty2DArray } from './common';
+import { createEmpty2DArray } from './common';
 import { insertNewNumber } from './insertNewNumber';
 import { GameStatus } from './types';
-import { setGameData, setGameStatus } from './model';
-
-const defaultBoardSize = { rows: 4, cols: 4 };
-const maxBoardSize = { rows: 40, cols: 40 };
+import { gameData, setGameData, setGameStatus } from './model';
+import { defaultGameSize, minGameSize, maxGameSize } from './const';
+import { clearUndoData } from './undoRedo/clearUndoData';
+import { makeGameSnapshot, undoInsert } from './undoRedo/common';
 
 export const createNewGame = (rowCount?: number, colCount?: number) => {
-  rowCount = rowCount ?? defaultBoardSize.rows;
-  colCount = colCount ?? defaultBoardSize.cols;
+  rowCount = rowCount ?? defaultGameSize;
+  colCount = colCount ?? defaultGameSize;
   const isInvalidBoardSize =
-    rowCount <= 0 ||
-    rowCount > maxBoardSize.rows ||
-    colCount <= 0 ||
-    colCount > maxBoardSize.cols;
+    rowCount < minGameSize ||
+    rowCount > maxGameSize ||
+    colCount < minGameSize ||
+    colCount > maxGameSize;
   if (isInvalidBoardSize) throw new Error('Invalid board size');
+  clearUndoData();
   gameData.boardData = createEmpty2DArray(rowCount, colCount);
   gameData.score = 0;
+  makeGameSnapshot();
   setGameStatus(GameStatus.OnGame);
+  insertNewNumber();
+  insertNewNumber();
+  undoInsert();
   setGameData({ ...gameData });
-  insertNewNumber();
-  insertNewNumber();
 };

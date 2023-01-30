@@ -1,6 +1,6 @@
-import { gameData, transposeMatrix } from './common';
+import { transposeMatrix } from './common';
 import { GameStatus, CellList } from './types';
-import { setGameData, setGameStatus } from './model';
+import { gameData, setGameStatus } from './model';
 
 export const insertNewNumber = () => {
   const newNumber = Math.random() < 0.9 ? 2 : 4;
@@ -10,7 +10,6 @@ export const insertNewNumber = () => {
     gameData.boardData[freeCells[randomCellIdx].row][
       freeCells[randomCellIdx].col
     ] = newNumber;
-    setGameData({ ...gameData });
   }
   if (freeCells.length <= 1) {
     if (noWayToMove()) setGameStatus(GameStatus.Lost);

@@ -6,12 +6,11 @@ import { getChangeHandler } from './getChangeHandler';
 import {
   textRowSpan,
   valueRowSpan,
-  minGameSize,
-  maxGameSize,
   minCanvasSideSize,
   maxCanvasSideSize,
   canvasSizeStep,
 } from './const';
+import { minGameSize, maxGameSize } from 'entities/game-drive/const';
 
 export const Settings: FC<PropsWithChildren> = () => {
   const settings = useStore($settings);

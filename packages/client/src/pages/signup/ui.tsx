@@ -5,18 +5,19 @@ import { routesPath } from 'processes/routes';
 import { createNewUser, signupCreateFx } from './model';
 import './model/init';
 import { SignUpRequest } from 'shared/api/swagger';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { SpaceButtons } from 'pages/profile/styles';
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const loading = useStore(signupCreateFx.pending);
+  const loading = useUnit(signupCreateFx.pending);
 
   const handleCancel = () => {
     navigate(routesPath.home);
   };
   const onFinish = (data: SignUpRequest) => {
     createNewUser(data);
+    navigate(routesPath.home);
   };
 
   return (

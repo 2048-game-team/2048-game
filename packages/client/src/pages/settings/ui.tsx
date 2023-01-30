@@ -3,15 +3,10 @@ import { $settings } from 'entities/settings';
 import React, { FC, PropsWithChildren } from 'react';
 import { useUnit } from 'effector-react';
 import { getChangeHandler } from './getChangeHandler';
-import {
-  minGameSize,
-  maxGameSize,
-  minCanvasSideSize,
-  maxCanvasSideSize,
-  canvasSizeStep,
-} from './const';
+import { minCanvasSideSize, maxCanvasSideSize, canvasSizeStep } from './const';
 import { routesPath } from 'processes/routes';
 import { useNavigate } from 'react-router-dom';
+import { minGameSize, maxGameSize } from 'entities/game-drive/const';
 
 export const Settings: FC<PropsWithChildren> = () => {
   const navigate = useNavigate();

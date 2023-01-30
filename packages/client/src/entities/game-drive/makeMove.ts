@@ -1,8 +1,11 @@
-import { gameData, oneLineHandler, transposeMatrix } from './common';
+import { oneLineHandler, transposeMatrix } from './common';
+import { gameData, setGameData } from './model';
 import { insertNewNumber } from './insertNewNumber';
 import { Movements, IMovementResult } from './types';
+import { makeGameSnapshot, undoInsert } from './undoRedo/common';
 
 export const makeMove = (move: Movements) => {
+  makeGameSnapshot();
   switch (move) {
     case Movements.Left:
       leftMoveProcess();
@@ -18,6 +21,8 @@ export const makeMove = (move: Movements) => {
       break;
   }
   insertNewNumber();
+  setGameData({ ...gameData });
+  undoInsert();
 };
 
 const leftMoveProcess = () => {

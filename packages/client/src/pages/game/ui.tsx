@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GameSpace } from './styles';
 import { GameCanvas } from './gameCanvas';
 import { GameRestartButton } from './gameRestartButton';
+import { UndoRedoButtons } from './undoRedoButtons';
 import { GameInfo } from './gameInfo';
 import { $gameStatus } from 'entities/game-drive';
 import { GameStatus } from 'entities/game-drive';
@@ -22,6 +23,7 @@ export const Game: FC<PropsWithChildren> = () => {
       <GameInfo />
       <GameCanvas />
       <GameRestartButton />
+      <UndoRedoButtons />
     </GameSpace>
   );
 };

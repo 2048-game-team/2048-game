@@ -3,14 +3,14 @@ import { IGameData, GameStatus, Movements } from 'entities/game-drive/types';
 import { $gameData, $gameStatus } from 'entities/game-drive/model';
 import 'root/jest.mock';
 
-const testDimension = 3;
+export const testDimension = 3;
 let gameData: IGameData;
 let gameStatus: GameStatus;
 
 $gameData?.watch(data => (gameData = data));
 $gameStatus?.watch(data => (gameStatus = data));
 
-const compareArrays = (a: number[], b: number[]) => {
+export const compare = <T>(a: T, b: T) => {
   return JSON.stringify(a) === JSON.stringify(b);
 };
 
@@ -33,7 +33,7 @@ test('Set board test', () => {
   setGame({ boardData: setRows, score: 0 });
 
   for (let i = 0; i < testDimension; i++)
-    expect(compareArrays(gameData?.boardData[i], setRows[i])).toEqual(true);
+    expect(compare<number[]>(gameData?.boardData[i], setRows[i])).toEqual(true);
 });
 
 test('Try left movement', () => {

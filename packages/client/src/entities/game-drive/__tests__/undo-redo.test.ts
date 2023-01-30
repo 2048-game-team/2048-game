@@ -6,7 +6,7 @@ import {
   setGame,
   makeMove,
   undo,
-  redo
+  redo,
 } from 'entities/game-drive';
 import { Movements } from 'entities/game-drive/types';
 import { testDimension, compare } from './game-drive.test';

@@ -1,4 +1,4 @@
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { $gameData, $gameStatus, clearData } from 'entities/game-drive';
 import { GameStatus, setGameStatus } from 'entities/game-drive';
 import { Image, Typography } from 'antd';
@@ -11,8 +11,8 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 const { Title } = Typography;
 
 export const Finish: FC<PropsWithChildren> = () => {
-  const { score } = useStore($gameData);
-  const status = useStore($gameStatus);
+  const { score } = useUnit($gameData);
+  const status = useUnit($gameStatus);
   const navigate = useNavigate();
 
   useEffect(() => () => clearData(), []);

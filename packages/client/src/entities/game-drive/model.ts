@@ -1,6 +1,8 @@
 import { createEvent, restore } from 'effector';
 import { IGameData, GameStatus } from './types';
 
+export const gameData: IGameData = { boardData: [], score: 0 };
+
 export const setGameData = createEvent<IGameData>();
 export const setGameStatus = createEvent<GameStatus>();
 

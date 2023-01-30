@@ -1,5 +1,5 @@
 import { useStore } from 'effector-react';
-import { $gameData, $gameStatus, setGame } from 'entities/game-drive';
+import { $gameData, $gameStatus, clearData } from 'entities/game-drive';
 import { GameStatus, setGameStatus } from 'entities/game-drive';
 import { Image, Typography } from 'antd';
 import { FinishSpace, StartButton } from './styles';
@@ -15,7 +15,7 @@ export const Finish: FC<PropsWithChildren> = () => {
   const status = useStore($gameStatus);
   const navigate = useNavigate();
 
-  useEffect(() => () => setGame({ boardData: [], score: 0 }), []);
+  useEffect(() => () => clearData(), []);
 
   const startGameHandler = () => {
     setGameStatus(GameStatus.OnGame);

@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Card } from 'antd';
 import { StartSpace, StartButton, StartTypography } from './styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
+import { YandexOAuthRedirectUri } from 'root/const';
+import { oauthSignIn } from 'processes/layout/model/model';
 
 export const Start = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [isVisibleAboutCard, setIsVisibleAboutCard] = useState<boolean>(false);
+
+  // Проверка OAuth Яндекса
+  const code = searchParams.get('code');
+  useEffect(() => {
+    if (code) {
+      oauthSignIn({ code, redirect_uri: YandexOAuthRedirectUri });
+    }
+  }, [code]);
 
   const startGameHandler = () => {
     navigate(routesPath.game);

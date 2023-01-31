@@ -9,13 +9,10 @@ export const SpaceButtons = styled(Space)`
 export const SpaceYandex = styled(Space)`
   width: 100%;
   justify-content: center;
-  font-size: 2rem;
-  font-weight: 500;
 `;
 
 export const ButtonYandex = styled(Button)`
-  font-size: 3rem !important;
-  font-weight: 500;
-  height: 6rem !important;
-  width: 12rem;
+  padding: 0.5rem 3.5rem !important;
+  height: 3.5rem !important;
+  border-radius: 12px !important;
 `;

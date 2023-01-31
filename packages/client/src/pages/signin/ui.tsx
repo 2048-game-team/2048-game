@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, Divider, Form, Input, Modal, Tooltip } from 'antd';
+import { Button, Divider, Form, Input, Modal } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';
@@ -8,6 +8,7 @@ import { useUnit } from 'effector-react';
 import { oauthGetServiceId, signin, signInFx } from './model';
 import { ButtonYandex, SpaceButtons, SpaceYandex } from './styles';
 import { YandexOAuthRedirectUri } from 'root/const';
+import { YandexIcon } from 'pages/signin/yandexIcon';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -29,11 +30,9 @@ export const SignIn: FC = () => {
   return (
     <Modal title="Вход" open onCancel={handleCancel} footer={null}>
       <SpaceYandex>
-        <Tooltip placement="top" title="Вход через Яндекс">
-          <ButtonYandex size="large" type="link" onClick={handleOauth}>
-            Я
-          </ButtonYandex>
-        </Tooltip>
+        <ButtonYandex size="large" onClick={handleOauth} icon={YandexIcon}>
+          Войти с Яндекс ID
+        </ButtonYandex>
       </SpaceYandex>
 
       <Divider />

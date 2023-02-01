@@ -5,6 +5,8 @@ import { BurgerMenu } from './burgerMenu';
 import { useUnit } from 'effector-react';
 import { $isAuth, $user } from 'processes/layout/model/model';
 import { resourcesUrl } from 'shared/api/consts';
+import { routesPath } from 'processes/routes';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const user = useUnit($user);
@@ -25,7 +27,7 @@ export const Header = () => {
       <BurgerMenu />
 
       <Typography.Title style={{ marginBottom: 0, caretColor: 'transparent' }}>
-        2048
+        <Link to={routesPath.home}>2048</Link>
       </Typography.Title>
 
       <Popover

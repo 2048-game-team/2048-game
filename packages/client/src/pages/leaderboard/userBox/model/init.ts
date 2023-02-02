@@ -4,5 +4,5 @@ import { getUserByIdFx } from 'pages/leaderboard/userBox/model/effects';
 
 sample({
   clock: GetUserByIdGate.open,
-  target: getUserByIdFx
-})
+  target: getUserByIdFx,
+});

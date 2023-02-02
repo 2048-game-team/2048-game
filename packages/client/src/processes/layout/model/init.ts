@@ -15,7 +15,12 @@ sample({
 });
 
 sample({
-  clock: [signInFx.done, signupCreateFx.done, oauthSignInFx.done, CheckAuthGate.open],
+  clock: [
+    signInFx.done,
+    signupCreateFx.done,
+    oauthSignInFx.done,
+    CheckAuthGate.open,
+  ],
   target: getUserFx,
 });
 

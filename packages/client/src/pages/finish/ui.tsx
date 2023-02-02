@@ -8,7 +8,7 @@ import { routesPath } from 'processes/routes';
 import finishLogo from './finishLogo.png';
 import { FC, PropsWithChildren, useEffect } from 'react';
 import { UpdateLeaderboardGate } from 'pages/finish/model/model';
-import './model/init'
+import './model/init';
 import { $user } from 'processes/layout/model/model';
 import { RATING_FIELD_NAME } from 'pages/leaderboard/consts';
 
@@ -17,11 +17,11 @@ const { Title } = Typography;
 export const Finish: FC<PropsWithChildren> = () => {
   const { score } = useUnit($gameData);
   const status = useUnit($gameStatus);
-  const user = useUnit($user)
+  const user = useUnit($user);
   useGate(UpdateLeaderboardGate, {
-      userId: user?.id,
-      [RATING_FIELD_NAME]: score,
-    });
+    userId: user?.id,
+    [RATING_FIELD_NAME]: score,
+  });
   const navigate = useNavigate();
 
   useEffect(() => () => clearData(), []);

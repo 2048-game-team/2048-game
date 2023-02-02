@@ -4,5 +4,5 @@ import { leaderboardCreateFx } from 'pages/finish/model/effects';
 
 sample({
   clock: UpdateLeaderboardGate.open,
-  target: leaderboardCreateFx
-})
+  target: leaderboardCreateFx,
+});

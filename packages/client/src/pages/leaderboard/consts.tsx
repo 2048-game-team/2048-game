@@ -5,7 +5,7 @@ import { ColumnPlace } from 'pages/leaderboard/styles';
 import { UserBox } from 'pages/leaderboard/userBox/ui';
 
 export const RATING_FIELD_NAME = 'points-2048-v1';
-export const TEAM_NAME = '2048-v1'
+export const TEAM_NAME = '2048-v1';
 
 export const leaderboardRequest = {
   ratingFieldName: RATING_FIELD_NAME,

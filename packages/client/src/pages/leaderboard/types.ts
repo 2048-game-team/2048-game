@@ -7,8 +7,8 @@ export type RowUserProps = {
 };
 
 export interface LeaderboardData {
-  userId?: number,
-  [RATING_FIELD_NAME]: number,
+  userId?: number;
+  [RATING_FIELD_NAME]: number;
 }
 
 export interface LeaderboardItem {
@@ -18,7 +18,7 @@ export interface LeaderboardItem {
 }
 
 export interface GetUserByIdGateProps {
-  userId: number,
-  userFn: Dispatch<SetStateAction<UserResponse | undefined>>
-  loadingFn: Dispatch<SetStateAction<boolean>>
+  userId: number;
+  userFn: Dispatch<SetStateAction<UserResponse | undefined>>;
+  loadingFn: Dispatch<SetStateAction<boolean>>;
 }

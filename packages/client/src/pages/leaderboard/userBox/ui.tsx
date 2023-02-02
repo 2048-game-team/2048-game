@@ -7,13 +7,17 @@ import { ColumnUser } from 'pages/leaderboard/styles';
 import { useGate } from 'effector-react';
 import { GetUserByIdGate } from 'pages/leaderboard/userBox/model/model';
 import { UserResponse } from 'shared/api/swagger';
-import './model/init'
+import './model/init';
 
 export const UserBox: FC<RowUserProps> = ({ userId }) => {
-  const [user, setUser] = useState<UserResponse>()
-  const [loading, setLoading] = useState<boolean>(true)
+  const [user, setUser] = useState<UserResponse>();
+  const [loading, setLoading] = useState<boolean>(true);
 
-  useGate(GetUserByIdGate, { userId, userFn: setUser.bind(this), loadingFn: setLoading.bind(this) })
+  useGate(GetUserByIdGate, {
+    userId,
+    userFn: setUser.bind(this),
+    loadingFn: setLoading.bind(this),
+  });
 
   const avatarSrc = user?.avatar ? `${resourcesUrl}${user.avatar}` : null;
   const avatarIcon = <UserOutlined />;
@@ -21,7 +25,7 @@ export const UserBox: FC<RowUserProps> = ({ userId }) => {
     user?.display_name ?? `${user?.first_name} ${user?.second_name}`;
 
   if (loading) {
-    return <Spin/>
+    return <Spin />;
   }
 
   return (

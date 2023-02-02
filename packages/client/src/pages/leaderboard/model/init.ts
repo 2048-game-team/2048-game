@@ -6,11 +6,11 @@ import {
 } from 'pages/leaderboard/model/model';
 
 sample({
-  clock: getLeaderboardFx.doneData,
-  target: $leaderboard,
+  clock: CheckLeaderboardGate.open,
+  target: getLeaderboardFx,
 });
 
 sample({
-  clock: CheckLeaderboardGate.open,
-  target: getLeaderboardFx,
+  clock: getLeaderboardFx.doneData,
+  target: $leaderboard,
 });

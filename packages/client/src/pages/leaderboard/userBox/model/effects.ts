@@ -2,6 +2,7 @@ import { createEffect } from 'effector';
 import { practicumApi } from 'shared/api/api';
 import { AxiosError } from 'axios';
 import { GetUserByIdGateProps } from 'pages/leaderboard/types';
+import { randomSleep } from 'shared/utils/randomSleep';
 
 export const getUserByIdFx = createEffect<
   GetUserByIdGateProps,
@@ -11,13 +12,7 @@ export const getUserByIdFx = createEffect<
   const { data } = await practicumApi.user.userDetail(userId);
 
   // Имитация задержки при получении данных
-  const delay = Math.random() * 4000 + 500;
-  await new Promise<void>(resolve => {
-    const wait = setInterval(() => {
-      clearInterval(wait);
-      resolve();
-    }, delay);
-  });
+  await randomSleep(4000);
 
   userFn(data);
   loadingFn(false);

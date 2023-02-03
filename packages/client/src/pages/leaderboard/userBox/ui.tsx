@@ -15,8 +15,8 @@ export const UserBox: FC<RowUserProps> = ({ userId }) => {
 
   useGate(GetUserByIdGate, {
     userId,
-    userFn: setUser.bind(this),
-    loadingFn: setLoading.bind(this),
+    userFn: setUser,
+    loadingFn: setLoading,
   });
 
   const avatarSrc = user?.avatar ? `${resourcesUrl}${user.avatar}` : null;

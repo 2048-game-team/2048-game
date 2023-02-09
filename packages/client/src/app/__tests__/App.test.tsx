@@ -11,6 +11,6 @@ global.fetch = jest.fn(() =>
 );
 
 test('Example test', async () => {
-  render(<AppWithProviders />);
+  render(<AppWithProviders isSSR={false} />);
   expect(screen.getByText(appContent)).toBeDefined();
 });

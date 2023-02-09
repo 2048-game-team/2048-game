@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { AppWithProviders } from 'app';
 import { startServiceWorker } from 'processes/serviceWorker';
 
-const root = ReactDOM.createRoot(
-  document.querySelector('#root') as HTMLElement
+ReactDOM.hydrateRoot(
+  document.querySelector('#root') as HTMLElement,
+  <AppWithProviders isSSR={false} />
 );
-
-root.render(<AppWithProviders />);
 
 startServiceWorker();

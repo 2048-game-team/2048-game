@@ -16,10 +16,12 @@ const Application = () => {
   );
 };
 
-export const AppWithProviders: FC<PropsWithChildren<TAppProps>> = props => {
-  const { isSSR } = props;
+export const AppWithProviders: FC<PropsWithChildren<TAppProps>> = ({
+  isSSR,
+  scope,
+}) => {
   return (
-    <WithProviders isSSR={isSSR}>
+    <WithProviders isSSR={isSSR} scope={scope}>
       <Application />
     </WithProviders>
   );

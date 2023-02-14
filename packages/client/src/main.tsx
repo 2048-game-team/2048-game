@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const scope = fork(window.__INITIAL_STATE__);
+const scope = fork({ values: window.__INITIAL_STATE__ });
 
 ReactDOM.hydrateRoot(
   document.querySelector('#root') as HTMLElement,

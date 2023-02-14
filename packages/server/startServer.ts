@@ -8,6 +8,7 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { BASE_URL } from './consts';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 export async function startServer() {
@@ -30,17 +31,17 @@ export async function startServer() {
     app.use(vite.middlewares);
   }
 
-  app.get('/api', (_, res) => {
+  app.get(`${BASE_URL}/api`, (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
 
   if (!isDev()) {
     app.use(
-      '/2048-game/assets',
+      `${BASE_URL}/assets`,
       express.static(path.resolve(distPath, 'assets'))
     );
     app.use(
-      '/2048-game/teamPhotos',
+      `${BASE_URL}/teamPhotos`,
       express.static(path.resolve(distPath, 'teamPhotos'))
     );
     // Без этих костылей на проде код падает

@@ -4,19 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import './model/init';
 import { logout } from 'pages/logout/model';
-import { useStore } from 'effector-react';
+import { useEvent, useStore } from 'effector-react/ssr';
 import { signInFx } from 'pages/signin/model';
 
 export const Logout: FC = () => {
   const navigate = useNavigate();
   const loading = useStore(signInFx.pending);
+  const logoutFn = useEvent(logout);
 
   const handleCancel = () => {
     navigate(routesPath.home);
   };
 
   const onFinish = () => {
-    logout();
+    logoutFn();
     navigate(routesPath.home);
   };
 

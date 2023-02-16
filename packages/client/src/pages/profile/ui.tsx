@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { AvatarModal } from './avatarModal';
 import { UserUpdateRequest } from 'shared/api/swagger';
-import { useStore } from 'effector-react';
+import { useEvent, useStore } from 'effector-react/ssr';
 import { $user } from 'processes/layout/model/model';
 import { SpaceProfile, SpaceAvatar, SpaceButtons } from './styles';
 import './model/init';
@@ -15,6 +15,7 @@ import { ChangePasswordModal } from 'pages/profile/changePasswordModal';
 
 export const Profile = () => {
   const user = useStore($user);
+  const setUserDataFn = useEvent(setUserData);
   const navigate = useNavigate();
   const [isModalAvatarOpen, setIsModalAvatarOpen] = useState(false);
   const [isModalChangePasswordOpen, setIsModalChangePasswordOpen] =
@@ -34,7 +35,7 @@ export const Profile = () => {
   };
 
   const onFinish = (data: UserUpdateRequest) => {
-    setUserData(data);
+    setUserDataFn(data);
     navigate(routesPath.home);
   };
 

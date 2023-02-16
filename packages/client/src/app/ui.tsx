@@ -6,6 +6,7 @@ import { Spin } from 'antd';
 import { LayoutGame } from 'processes/layout';
 import { TAppProps } from './types';
 import './index.css';
+import { Provider } from 'effector-react/ssr';
 
 const Application = () => {
   const router = useRoutes(routes);
@@ -27,12 +28,13 @@ const Application = () => {
 };
 
 export const AppWithProviders: FC<PropsWithChildren<TAppProps>> = ({
-  isSSR,
   scope,
 }) => {
   return (
-    <WithProviders isSSR={isSSR} scope={scope}>
-      <Application />
-    </WithProviders>
+    <Provider value={scope}>
+      <WithProviders>
+        <Application />
+      </WithProviders>
+    </Provider>
   );
 };

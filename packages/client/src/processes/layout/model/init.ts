@@ -8,7 +8,6 @@ import { getUserFx, oauthSignInFx } from 'processes/layout/model/effects';
 import { signInFx } from 'pages/signin/model';
 import { logoutFx } from 'pages/logout/model';
 import { signupCreateFx } from 'pages/signup/model';
-import { getUser } from 'pages/profile/model';
 
 sample({
   clock: getUserFx.doneData,
@@ -16,7 +15,12 @@ sample({
 });
 
 sample({
-  clock: [signInFx.done, signupCreateFx.done, CheckAuthGate.open],
+  clock: [
+    signInFx.done,
+    oauthSignInFx.done,
+    signupCreateFx.done,
+    CheckAuthGate.open,
+  ],
   target: getUserFx,
 });
 
@@ -27,8 +31,3 @@ sample({
 });
 
 sample({ clock: oauthSignIn, target: oauthSignInFx });
-
-sample({
-  clock: oauthSignInFx.done,
-  target: getUser,
-});

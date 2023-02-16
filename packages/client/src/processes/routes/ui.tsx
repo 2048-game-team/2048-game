@@ -1,4 +1,4 @@
-import { useStore } from 'effector-react';
+import { useStore } from 'effector-react/ssr';
 import { $isAuth } from 'processes/layout/model/model';
 import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';

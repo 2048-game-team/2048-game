@@ -1,12 +1,13 @@
 import { Space, Switch, Typography } from 'antd';
 import { $theme, setTheme, Theme } from 'entities/ui';
-import { useStore } from 'effector-react';
+import { useEvent, useStore } from 'effector-react/ssr';
 
 export const UserMenu = () => {
   const theme = useStore($theme);
+  const setThemeFn = useEvent(setTheme);
 
   const toggleTheme = () =>
-    setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
+    setThemeFn(theme === Theme.Dark ? Theme.Light : Theme.Dark);
 
   const checked = theme === Theme.Light;
 

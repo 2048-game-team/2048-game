@@ -2,7 +2,7 @@ import { Avatar, Popover, Space, Typography } from 'antd';
 import { UserOutlined, UserSwitchOutlined } from '@ant-design/icons';
 import { UserMenu } from './userMenu';
 import { BurgerMenu } from './burgerMenu';
-import { useUnit } from 'effector-react';
+import { useUnit } from 'effector-react/ssr';
 import { $isAuth, $user } from 'processes/layout/model/model';
 import { resourcesUrl } from 'shared/api/consts';
 import { routesPath } from 'processes/routes';

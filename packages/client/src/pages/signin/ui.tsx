@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import { SignInRequest } from 'shared/api/swagger';
 import './model/init';
-import { useUnit } from 'effector-react';
+import { useEvent, useUnit } from 'effector-react/ssr';
 import { oauthGetServiceId, signin, signInFx } from './model';
 import { ButtonYandex, SpaceButtons, SpaceYandex } from './styles';
 import { YandexOAuthRedirectUri } from 'root/const';
@@ -13,18 +13,19 @@ import { YandexIcon } from 'pages/signin/yandexIcon';
 export const SignIn: FC = () => {
   const navigate = useNavigate();
   const loading = useUnit(signInFx.pending);
+  const [signinFn, oauthGetServiceIdFn] = useEvent([signin, oauthGetServiceId]);
 
   const handleCancel = () => {
     navigate(routesPath.home);
   };
 
   const onFinish = (data: SignInRequest) => {
-    signin(data);
+    signinFn(data);
     navigate(routesPath.home);
   };
 
   const handleOauth = () => {
-    oauthGetServiceId({ redirect_uri: YandexOAuthRedirectUri });
+    oauthGetServiceIdFn({ redirect_uri: YandexOAuthRedirectUri });
   };
 
   return (

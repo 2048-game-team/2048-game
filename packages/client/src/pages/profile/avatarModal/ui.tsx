@@ -4,6 +4,7 @@ import { AvatarModalProps } from './types';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { setAvatar } from 'pages/profile/model';
 import { UploadChangeParam } from 'antd/es/upload';
+import { useEvent } from 'effector-react/ssr';
 
 export const AvatarModal: FC<AvatarModalProps> = ({
   isModalOpen,
@@ -12,6 +13,7 @@ export const AvatarModal: FC<AvatarModalProps> = ({
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<File | undefined>();
   const [previewImage, setPreviewImage] = useState<string>();
+  const setAvatarFn = useEvent(setAvatar);
 
   const handleChange = (info: UploadChangeParam<UploadFile<File>>) => {
     if (info.file.status === 'uploading') {
@@ -31,7 +33,7 @@ export const AvatarModal: FC<AvatarModalProps> = ({
 
   const updateAvatar = () => {
     if (imageUrl) {
-      setAvatar({ avatar: imageUrl });
+      setAvatarFn({ avatar: imageUrl });
     }
     closeModal();
   };

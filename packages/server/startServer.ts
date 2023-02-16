@@ -44,6 +44,10 @@ export async function startServer() {
       `${BASE_URL}/teamPhotos`,
       express.static(path.resolve(distPath, 'teamPhotos'))
     );
+    app.use(
+      `${BASE_URL}/sw.js`,
+      express.static(path.resolve(distPath, 'sw.js'))
+    );
     // Без этих костылей на проде код падает
     global.window = {} as typeof global.window;
     global.FormData = {} as typeof global.FormData;

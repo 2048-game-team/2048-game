@@ -25,7 +25,7 @@ export function render(url) {
     sheet.collectStyles(
       <StaticRouter location={url}>
         <StyleProvider cache={cache}>
-          <AppWithProviders isSSR={true} scope={scope} />
+          <AppWithProviders scope={scope} />
         </StyleProvider>
       </StaticRouter>
     )

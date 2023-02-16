@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { AppWithProviders } from 'app';
 import { startServiceWorker } from 'processes/serviceWorker';
 import { fork, ValueMap } from 'effector';
+import { BASE_URL } from 'root/const';
+import { BrowserRouter } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -14,7 +16,9 @@ const scope = fork({ values: window.__INITIAL_STATE__ });
 
 ReactDOM.hydrateRoot(
   document.querySelector('#root') as HTMLElement,
-  <AppWithProviders isSSR={false} scope={scope} />
+  <BrowserRouter basename={BASE_URL}>
+    <AppWithProviders scope={scope} />
+  </BrowserRouter>
 );
 
 startServiceWorker();

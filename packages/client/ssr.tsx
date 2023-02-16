@@ -1,6 +1,5 @@
 import { AppWithProviders } from './src/app';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
 import { fork, serialize } from 'effector';
@@ -20,14 +19,12 @@ export function antdCacheFn() {
   return extractStyle(cache);
 }
 
-export function render(url) {
+export function render(url: string) {
   return renderToString(
     sheet.collectStyles(
-      <StaticRouter location={url}>
-        <StyleProvider cache={cache}>
-          <AppWithProviders scope={scope} />
-        </StyleProvider>
-      </StaticRouter>
+      <StyleProvider cache={cache}>
+        <AppWithProviders scope={scope} location={url} />
+      </StyleProvider>
     )
   );
 }

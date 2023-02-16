@@ -16,10 +16,6 @@ global.fetch = jest.fn(() =>
 const scope = fork();
 
 test('Example test', async () => {
-  render(
-    <BrowserRouter basename={BASE_URL}>
-      <AppWithProviders scope={scope} />
-    </BrowserRouter>
-  );
+  render(<AppWithProviders scope={scope} />);
   expect(screen.getByText(appContent)).toBeDefined();
 });

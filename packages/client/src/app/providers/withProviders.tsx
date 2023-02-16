@@ -5,7 +5,7 @@ import { WithNotifications } from 'app/providers/withNotifications';
 import { WithRouter } from 'app/providers/withRouter';
 import { WithStaticRouter } from 'app/providers/withStaticRouter';
 import { ProvidersProps, TCComponents } from 'app/types';
-import { WithProvider } from 'app/providers/withProvider';
+import { WithEffector } from 'app/providers/withEffector';
 
 export const WithProviders: FC<PropsWithChildren<ProvidersProps>> = ({
   children,
@@ -13,7 +13,7 @@ export const WithProviders: FC<PropsWithChildren<ProvidersProps>> = ({
   scope,
 }) => {
   const components: TCComponents = [
-    WithProvider(scope),
+    WithEffector(scope),
     location ? WithStaticRouter(location + '/') : WithRouter,
     WithTheme,
     WithErrorBoundaries,

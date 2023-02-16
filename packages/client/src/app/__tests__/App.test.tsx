@@ -2,8 +2,6 @@ import { AppWithProviders } from 'app/ui';
 import { render, screen } from '@testing-library/react';
 import 'root/jest.mock';
 import { fork } from 'effector';
-import { BASE_URL } from 'root/const';
-import { BrowserRouter } from 'react-router-dom';
 
 const appContent = 'Старт!';
 

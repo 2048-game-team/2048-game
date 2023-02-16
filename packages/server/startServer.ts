@@ -8,6 +8,7 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { BASE_URL } from './consts';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 export async function startServer() {
@@ -30,18 +31,22 @@ export async function startServer() {
     app.use(vite.middlewares);
   }
 
-  app.get('/api', (_, res) => {
+  app.get(`${BASE_URL}/api`, (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
 
   if (!isDev()) {
     app.use(
-      '/2048-game/assets',
+      `${BASE_URL}/assets`,
       express.static(path.resolve(distPath, 'assets'))
     );
     app.use(
-      '/2048-game/teamPhotos',
+      `${BASE_URL}/teamPhotos`,
       express.static(path.resolve(distPath, 'teamPhotos'))
+    );
+    app.use(
+      `${BASE_URL}/sw.js`,
+      express.static(path.resolve(distPath, 'sw.js'))
     );
     // Без этих костылей на проде код падает
     global.window = {} as typeof global.window;
@@ -67,18 +72,27 @@ export async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: (url: string) => Promise<string>;
+      let ssr;
 
       if (!isDev()) {
-        render = (await import(ssrClientPath)).render;
+        ssr = await import(ssrClientPath);
       } else {
-        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
-          .render;
+        ssr = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'));
       }
 
-      const appHtml = await render(url);
+      const { render, sheetFn, scopeFn, antdCacheFn } = ssr;
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const appHtml = await render(url);
+      const styles = await sheetFn();
+      const antStyles = await antdCacheFn();
+      const scope = await scopeFn();
+      const storesValues = `window.__INITIAL_STATE__=${JSON.stringify(scope)}`;
+
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(`<!--ssr-styles-->`, styles)
+        .replace(`<!--ssr-antd-->`, antStyles)
+        .replace(`<!--ssr-state-->`, storesValues);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {

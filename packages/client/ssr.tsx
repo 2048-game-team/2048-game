@@ -1,12 +1,30 @@
-import React from 'react';
 import { AppWithProviders } from './src/app';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
+import { ServerStyleSheet } from 'styled-components';
+import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
+import { fork, serialize } from 'effector';
 
-export function render(url) {
+const scope = fork();
+export function scopeFn() {
+  return serialize(scope);
+}
+
+const sheet = new ServerStyleSheet();
+export function sheetFn() {
+  return sheet.getStyleTags();
+}
+
+const cache = createCache();
+export function antdCacheFn() {
+  return extractStyle(cache);
+}
+
+export function render(url: string) {
   return renderToString(
-    <StaticRouter location={url}>
-      <AppWithProviders isSSR={true} />
-    </StaticRouter>
+    sheet.collectStyles(
+      <StyleProvider cache={cache}>
+        <AppWithProviders scope={scope} location={url} />
+      </StyleProvider>
+    )
   );
 }

@@ -7,8 +7,10 @@ import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
 import { YandexOAuthRedirectUri } from 'root/const';
 import { oauthSignIn } from 'processes/layout/model/model';
+import { useEvent } from 'effector-react/ssr';
 
 export const Start = () => {
+  const oauthSignInFn = useEvent(oauthSignIn);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -18,7 +20,7 @@ export const Start = () => {
   const code = searchParams.get('code');
   useEffect(() => {
     if (code) {
-      oauthSignIn({ code, redirect_uri: YandexOAuthRedirectUri });
+      oauthSignInFn({ code, redirect_uri: YandexOAuthRedirectUri });
     }
   }, [code]);
 

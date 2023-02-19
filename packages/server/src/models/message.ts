@@ -23,7 +23,7 @@ export class Message extends Model<Message> {
   author!: string;
 
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
   })
   parentId!: string;
 }

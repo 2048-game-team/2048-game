@@ -1,4 +1,4 @@
-import { dbConnect } from './db';
+import { dbConnect } from './src/db';
 import { startServer } from './server';
 
 const run = async () => {

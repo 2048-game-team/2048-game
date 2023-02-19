@@ -8,9 +8,9 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import { BASE_URL, API_URL } from './consts';
-import { topics } from './router/topics';
-import { messages } from './router/messages';
+import { BASE_URL, API_URL } from './src/consts';
+import { topics } from './src/router/topics';
+import { messages } from './src/router/messages';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 

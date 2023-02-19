@@ -1,5 +1,5 @@
 import { createClientAndConnect } from './db';
-import { startServer } from './startServer';
+import { startServer } from './server';
 
 const run = async () => {
   await createClientAndConnect();

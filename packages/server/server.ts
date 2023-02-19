@@ -9,7 +9,7 @@ import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import { BASE_URL, API_URL } from './consts';
-import { posts } from './router/posts';
+import { topics } from './router/topic ';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
@@ -21,7 +21,7 @@ app.get(`/api`, (_, res) => {
   res.json('👋 Howdy from the server :)');
 });
 
-app.use(`${API_URL}/posts`, posts);
+app.use(`${API_URL}/topics`, topics);
 
 export async function startServer() {
   let vite: ViteDevServer | undefined;

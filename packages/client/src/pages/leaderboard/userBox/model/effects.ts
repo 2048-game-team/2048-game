@@ -12,7 +12,7 @@ export const getUserByIdFx = createEffect<
   const { data } = await practicumApi.user.userDetail(userId);
 
   // Имитация задержки при получении данных
-  await randomSleep(4000);
+  await randomSleep(2000);
 
   userFn(data);
   loadingFn(false);

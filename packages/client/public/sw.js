@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = 'static-data-v1';
+const STATIC_CACHE_NAME = 'static-data-v2';
 const DYNAMIC_CACHE_NAME = 'dynamic-data-v2';
 
 const STATIC_URLS = [
@@ -7,6 +7,9 @@ const STATIC_URLS = [
   '/teamPhotos/ekaterina.jpg',
   '/teamPhotos/nikolay.jpg',
   '/teamPhotos/noimage.jpg',
+  '/sounds/background.mp3',
+  '/sounds/click.mp3',
+  '/sounds/finish.mp3',
 ];
 
 self.addEventListener('install', async event => {

@@ -7,15 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import finishLogo from './finishLogo.png';
 import { FC, PropsWithChildren, useEffect } from 'react';
+import { sfx } from 'entities/music';
+import { $settings } from 'entities/settings';
 
 const { Title } = Typography;
 
 export const Finish: FC<PropsWithChildren> = () => {
   const { score } = useUnit($gameData);
   const status = useUnit($gameStatus);
+  const { soundVolume } = useUnit($settings);
   const navigate = useNavigate();
 
-  useEffect(() => () => clearData(), []);
+  useEffect(() => {
+    sfx.playFinish(soundVolume);
+    return clearData;
+  }, []);
 
   const startGameHandler = () => {
     setGameStatus(GameStatus.OnGame);
@@ -23,7 +29,11 @@ export const Finish: FC<PropsWithChildren> = () => {
   };
 
   if (status !== GameStatus.Lost) {
-    return <p>Игра еще не окончена. Вы попали на эту страницу по ошибке</p>;
+    return (
+      <Typography.Text>
+        Игра еще не окончена. Вы попали на эту страницу по ошибке
+      </Typography.Text>
+    );
   }
 
   return (

@@ -14,7 +14,7 @@ export const WithProviders: FC<PropsWithChildren<ProvidersProps>> = ({
 }) => {
   const components: TCComponents = [
     WithEffector(scope),
-    location ? WithStaticRouter(location + '/') : WithRouter,
+    location ? WithStaticRouter(location) : WithRouter,
     WithTheme,
     WithErrorBoundaries,
     WithNotifications,

@@ -8,7 +8,7 @@ class Sfx {
   playClick(volume: number) {
     if (volume <= 0.01) return;
     if (!this.clickSound) {
-      this.clickSound = new Audio(`c${soundUrl.click}`);
+      this.clickSound = new Audio(`${BASE_URL}${soundUrl.click}`);
     }
     this.clickSound.volume = volume;
     if (this.clickSound.paused) {

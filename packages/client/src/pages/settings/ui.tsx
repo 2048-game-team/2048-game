@@ -1,4 +1,4 @@
-import { Divider, Form, InputNumber, Modal } from 'antd';
+import { Divider, Form, InputNumber, Modal, Slider } from 'antd';
 import { $settings } from 'entities/settings';
 import React, { FC, PropsWithChildren } from 'react';
 import { useUnit } from 'effector-react';
@@ -11,7 +11,14 @@ import { minGameSize, maxGameSize } from 'entities/game-drive/const';
 export const Settings: FC<PropsWithChildren> = () => {
   const navigate = useNavigate();
   const settings = useUnit($settings);
-  const { gameRows, gameCols, gameHeight, gameWidth } = settings;
+  const {
+    gameRows,
+    gameCols,
+    gameHeight,
+    gameWidth,
+    soundVolume,
+    musicVolume,
+  } = settings;
 
   const handleCancel = () => {
     navigate(routesPath.home);
@@ -28,7 +35,7 @@ export const Settings: FC<PropsWithChildren> = () => {
           <InputNumber
             min={minGameSize}
             max={maxGameSize}
-            defaultValue={gameRows}
+            value={gameRows}
             onChange={getChangeHandler(settings, 'gameRows')}
           />
         </Form.Item>
@@ -37,7 +44,7 @@ export const Settings: FC<PropsWithChildren> = () => {
           <InputNumber
             min={minGameSize}
             max={maxGameSize}
-            defaultValue={gameCols}
+            value={gameCols}
             onChange={getChangeHandler(settings, 'gameCols')}
           />
         </Form.Item>
@@ -49,7 +56,7 @@ export const Settings: FC<PropsWithChildren> = () => {
             min={minCanvasSideSize}
             max={maxCanvasSideSize}
             step={canvasSizeStep}
-            defaultValue={gameWidth}
+            value={gameWidth}
             onChange={getChangeHandler(settings, 'gameWidth')}
           />
         </Form.Item>
@@ -59,8 +66,32 @@ export const Settings: FC<PropsWithChildren> = () => {
             min={minCanvasSideSize}
             max={maxCanvasSideSize}
             step={canvasSizeStep}
-            defaultValue={gameHeight}
+            value={gameHeight}
             onChange={getChangeHandler(settings, 'gameHeight')}
+          />
+        </Form.Item>
+
+        <Divider />
+
+        <Form.Item label="Громкость звука">
+          <Slider
+            min={0}
+            max={1}
+            step={0.01}
+            value={soundVolume}
+            tooltip={{ open: false }}
+            onChange={getChangeHandler(settings, 'soundVolume')}
+          />
+        </Form.Item>
+
+        <Form.Item label="Громкость музыки">
+          <Slider
+            min={0}
+            max={1}
+            step={0.01}
+            value={musicVolume}
+            tooltip={{ open: false }}
+            onChange={getChangeHandler(settings, 'musicVolume')}
           />
         </Form.Item>
       </Form>

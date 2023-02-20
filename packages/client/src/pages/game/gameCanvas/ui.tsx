@@ -1,13 +1,14 @@
 import { createNewGame, $gameData } from 'entities/game-drive';
 import { FC, useRef, useEffect, PropsWithChildren } from 'react';
 import { drawGame } from './drawGame';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { $settings } from 'entities/settings';
 import { getKeydownHandler } from './keydownHandler';
 
 export const GameCanvas: FC<PropsWithChildren> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { gameWidth, gameHeight, gameRows, gameCols } = useStore($settings);
+  const { gameWidth, gameHeight, gameRows, gameCols, soundVolume } =
+    useUnit($settings);
 
   useEffect(() => {
     createNewGame(gameRows, gameCols);
@@ -19,7 +20,7 @@ export const GameCanvas: FC<PropsWithChildren> = () => {
         drawGame(ctx, store.boardData, gameWidth, gameHeight);
       });
 
-      const keydownHandler = getKeydownHandler(canvasRef.current);
+      const keydownHandler = getKeydownHandler(canvasRef.current, soundVolume);
       window.addEventListener('keydown', keydownHandler);
 
       return () => {

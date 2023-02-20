@@ -1,6 +1,6 @@
 import React from 'react';
 import './model/init';
-import { useGate, useUnit } from 'effector-react';
+import { useGate, useUnit } from 'effector-react/ssr';
 import {
   $leaderboard,
   CheckLeaderboardGate,

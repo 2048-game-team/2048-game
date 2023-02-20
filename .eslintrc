@@ -27,5 +27,6 @@
       "error",
       { "props": "never", "children": "never" }
     ]
-  }
+  },
+  "ignorePatterns": ["dist", "dist-ssr"]
 }

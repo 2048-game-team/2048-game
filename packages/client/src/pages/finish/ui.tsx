@@ -11,6 +11,8 @@ import { UpdateLeaderboardGate } from 'pages/finish/model/model';
 import './model/init';
 import { $user } from 'processes/layout/model/model';
 import { RATING_FIELD_NAME } from 'pages/leaderboard/consts';
+import { sfx } from 'entities/music';
+import { $settings } from 'entities/settings';
 
 const { Title } = Typography;
 
@@ -22,9 +24,13 @@ export const Finish: FC<PropsWithChildren> = () => {
     userId: user?.id,
     [RATING_FIELD_NAME]: score,
   });
+  const { soundVolume } = useUnit($settings);
   const navigate = useNavigate();
 
-  useEffect(() => () => clearData(), []);
+  useEffect(() => {
+    sfx.playFinish(soundVolume);
+    return clearData;
+  }, []);
 
   const startGameHandler = () => {
     setGameStatus(GameStatus.OnGame);
@@ -32,7 +38,11 @@ export const Finish: FC<PropsWithChildren> = () => {
   };
 
   if (status !== GameStatus.Lost) {
-    return <p>Игра еще не окончена. Вы попали на эту страницу по ошибке</p>;
+    return (
+      <Typography.Text>
+        Игра еще не окончена. Вы попали на эту страницу по ошибке
+      </Typography.Text>
+    );
   }
 
   return (

@@ -3,15 +3,19 @@ import { WithTheme } from 'app/providers/withTheme';
 import { SignUp } from 'pages/signup';
 import userEvent from '@testing-library/user-event';
 import { WithRouter } from 'app/providers/withRouter';
+import { Provider } from 'effector-react/ssr';
+import { fork } from 'effector';
 
 describe('<SignUpPage />', () => {
   beforeEach(() => {
     render(
-      <WithTheme>
-        <WithRouter>
-          <SignUp />
-        </WithRouter>
-      </WithTheme>
+      <Provider value={fork()}>
+        <WithTheme>
+          <WithRouter>
+            <SignUp />
+          </WithRouter>
+        </WithTheme>
+      </Provider>
     );
   });
 

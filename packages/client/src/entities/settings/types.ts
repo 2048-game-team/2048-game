@@ -3,4 +3,6 @@ export type Settings = {
   gameRows: number;
   gameHeight: number;
   gameWidth: number;
+  soundVolume: number;
+  musicVolume: number;
 };

@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { useStore } from 'effector-react';
+import { useStore } from 'effector-react/ssr';
 import { $message } from 'entities/notification/model';
 import { notification } from 'antd';
 

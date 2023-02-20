@@ -1,2 +1,4 @@
 **/swagger.json
 **/swagger.ts
+dist
+dist-ssr

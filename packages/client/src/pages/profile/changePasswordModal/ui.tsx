@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ChangePasswordModalProps } from './types';
 import { Button, Form, Input, Modal } from 'antd';
-import { useStore } from 'effector-react';
+import { useEvent, useStore } from 'effector-react/ssr';
 import { setPasswordFx } from 'pages/profile/model/effects';
 import { ChangePasswordRequest } from 'shared/api/swagger';
 import { SpaceButtons } from 'pages/profile/styles';
@@ -12,9 +12,10 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
   closeModal,
 }) => {
   const loading = useStore(setPasswordFx.pending);
+  const setPasswordFn = useEvent(setPassword);
 
   const onFinish = (data: ChangePasswordRequest) => {
-    setPassword(data);
+    setPasswordFn(data);
     closeModal();
   };
 

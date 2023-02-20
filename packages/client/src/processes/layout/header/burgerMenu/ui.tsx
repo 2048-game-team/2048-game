@@ -3,7 +3,7 @@ import { Dropdown, MenuProps, Typography } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { navList } from './const';
-import { useUnit } from 'effector-react';
+import { useUnit } from 'effector-react/ssr';
 import { $isAuth } from 'processes/layout/model/model';
 import { checkDisable } from './utils';
 

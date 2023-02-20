@@ -1,6 +1,7 @@
 import { AppWithProviders } from 'app/ui';
 import { render, screen } from '@testing-library/react';
 import 'root/jest.mock';
+import { fork } from 'effector';
 
 const appContent = 'Старт!';
 
@@ -10,7 +11,9 @@ global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') })
 );
 
+const scope = fork();
+
 test('Example test', async () => {
-  render(<AppWithProviders />);
+  render(<AppWithProviders scope={scope} />);
   expect(screen.getByText(appContent)).toBeDefined();
 });

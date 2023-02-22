@@ -51,6 +51,10 @@ export async function startServer() {
       express.static(path.resolve(distPath, 'teamPhotos'))
     );
     app.use(
+      `${BASE_URL}/sounds`,
+      express.static(path.resolve(distPath, 'sounds'))
+    );
+    app.use(
       `${BASE_URL}/sw.js`,
       express.static(path.resolve(distPath, 'sw.js'))
     );

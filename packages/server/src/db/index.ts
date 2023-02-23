@@ -24,17 +24,26 @@ export const dbConnect = async () => {
     await sequelize.sync(); // Синхронизация базы данных
     console.log('Connection has been established successfully.');
 
-    // const res = await Topic.create({
-    //   title: 'Первая тема форума',
-    //   content: 'Текст раскрывающий первую тему форума. ',
-    //   date: new Date().toISOString(),
-    // });
+    const topic = await Topic.create({
+      title: 'Первая тема форума',
+      content: 'Текст раскрывающий первую тему форума. ',
+      created_at: new Date().toISOString(),
+      userId: 1234,
+    });
 
-    // const id = res.id
+    const message = await Message.create({
+      content: 'Текст раскрывающий первую тему форума. ',
+      created_at: new Date().toISOString(),
+      userId: 1234,
+      topicId: topic.id,
+    });
 
-    // console.log('id', id)
+    const newTopic = await Topic.findOne({ where: { id: topic.id } });
+    console.log('id', newTopic);
 
-    // await Topic.destroy({ where: { id } });
+    await Topic.destroy({ where: { id: topic.id } });
+    await Message.destroy({ where: { id: message.id } });
+
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

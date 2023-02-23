@@ -9,7 +9,10 @@ class TopicController {
 
   // getById: Handler = async () => {};
 
-  // createNew: Handler = async () => {};
+  createNew: Handler = async (req, _) => {
+    const { titile, content, created_at, userId } = req.body;
+    console.log(titile, content, created_at, userId);
+  };
 
   // deleteById: Handler = async () => {};
 }

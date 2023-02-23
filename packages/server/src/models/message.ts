@@ -1,11 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Topic } from './topic'
 
 @Table({
   timestamps: false, // don't add 'created_at', 'updated_at'
   paranoid: true, // add 'deleted_at'
   tableName: 'messages',
 })
-export class Message extends Model<Message> {
+export class Message extends Model {
   @Column({
     type: DataType.TEXT,
     allowNull: false,
@@ -15,15 +16,19 @@ export class Message extends Model<Message> {
   @Column({
     type: DataType.DATE,
   })
-  date!: string;
-
-  @Column({
-    type: DataType.STRING,
-  })
-  author!: string;
+  created_at!: string;
 
   @Column({
     type: DataType.INTEGER,
   })
-  parentId!: string;
+  userId!: number;
+
+  @ForeignKey(() => Topic)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  topicId!: number;
+
+  @BelongsTo(() => Topic)
+  topic!: Topic;
 }

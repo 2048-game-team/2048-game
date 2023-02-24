@@ -4,7 +4,11 @@ import prisma from '../db';
 class TopicController {
   getAll: Handler = async (_, res, next) => {
     try {
-      const topics = await prisma.topic.findMany();
+      const topics = await prisma.topic.findMany({
+        include: {
+          messages: true,
+        },
+      });
       res.status(200).json(topics);
     } catch (err) { 
       next(err);

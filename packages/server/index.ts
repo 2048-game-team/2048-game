@@ -1,9 +1,16 @@
-import { dbConnect } from './src/db';
 import { startServer } from './server';
+import prisma from './src/db';
 
 const run = async () => {
-  await dbConnect();
   await startServer();
 };
 
-run();
+run()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async e => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

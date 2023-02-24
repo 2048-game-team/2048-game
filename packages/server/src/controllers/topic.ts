@@ -1,10 +1,10 @@
 import type { Handler } from 'express';
-import { Topic } from '../models/topic';
+import prisma from '../db';
 
 class TopicController {
   getAll: Handler = async (_, res, next) => {
     try {
-      const topics = await Topic.findAll();
+      const topics = await prisma.topic.findMany();
       res.status(200).json(topics);
     } catch (err) { 
       next(err);
@@ -13,10 +13,17 @@ class TopicController {
 
   // getById: Handler = async () => {};
 
-  createNew: Handler = async (req, _, next) => {
+  createNew: Handler = async (req, res, next) => {
     try {
-      const { titile, content, created_at, userId } = req.body;
-      console.log(titile, content, created_at, userId);
+      const { title, content, authorId } = req.body;
+      const newTopic = await prisma.topic.create({
+        data: {
+          title,
+          content,
+          authorId: Number(authorId),
+        },
+      });
+      res.json(newTopic);
     } catch (err) { 
       next(err);
     }

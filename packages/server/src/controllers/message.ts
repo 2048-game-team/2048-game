@@ -37,7 +37,19 @@ class MessageController {
     }
   };
 
-  // deleteById:Handler = async () => { }
+  deleteById: Handler = async (req, res, next) => {
+    try {
+      const { id } = req.query;
+      const deletedPost = await prisma.messages.delete({
+        where: {
+          id: Number(id),
+        },
+      });
+      res.json(deletedPost);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export const messageController = new MessageController();

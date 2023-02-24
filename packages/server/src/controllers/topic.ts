@@ -33,7 +33,19 @@ class TopicController {
     }
   };
 
-  // deleteById: Handler = async () => {};
+  deleteById: Handler = async (req, res, next) => {
+    try {
+      const { id } = req.query;
+      const deletedPost = await prisma.topic.delete({
+        where: {
+          id: Number(id),
+        },
+      });
+      res.json(deletedPost);
+    } catch (err) { 
+      next(err)
+    }
+  };
 }
 
 export const topicController = new TopicController();

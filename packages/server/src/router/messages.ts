@@ -1,6 +1,5 @@
 import express from 'express';
 import { auth } from '../middlewares/auth';
-// import { Topic } from 'models/topic ';
 import { messageController } from '../controllers/message';
 
 export const messages = express.Router();
@@ -10,4 +9,4 @@ messages.use(auth);
 messages.get('/all', messageController.getAll); // return all themes
 messages.get('/:id', messageController.getById); // get theme by ID
 messages.post('/create', messageController.createNew); //
-// messages.delete('/delete/:id', messageController.deleteById);
+messages.delete('/delete/:id', messageController.deleteById);

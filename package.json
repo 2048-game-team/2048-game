@@ -3,7 +3,7 @@
   "private": true,
   "homepage": "2048-game",
   "scripts": {
-    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
+    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn generate:prisma",
     "build": "lerna run build",
     "build:client": "lerna run build --scope=client",
     "dev:client": "lerna run dev  --scope=client",
@@ -12,7 +12,8 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "generate:prisma": "npx prisma generate --schema=./packages/server/prisma/schema.prisma"
   },
   "license": "MIT",
   "workspaces": [

@@ -40,7 +40,7 @@ class MessageController {
   deleteById: Handler = async (req, res, next) => {
     try {
       const { id } = req.query;
-      const deletedPost = await prisma.messages.delete({
+      const deletedPost = await prisma.message.delete({
         where: {
           id: Number(id),
         },

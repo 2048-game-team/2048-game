@@ -1,11 +1,11 @@
 import { Button, Space } from 'antd';
-import { useStore } from 'effector-react';
+import { useUnit } from 'effector-react';
 import { undo, redo } from 'entities/game-drive';
 import { $undoRedoPossible } from 'entities/game-drive';
 import { FC, PropsWithChildren } from 'react';
 
 export const UndoRedoButtons: FC<PropsWithChildren> = () => {
-  const { canUndo, canRedo } = useStore($undoRedoPossible);
+  const { canUndo, canRedo } = useUnit($undoRedoPossible);
 
   const undoHandler = () => {
     undo();

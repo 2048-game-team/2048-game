@@ -1,4 +1,5 @@
-import { useUnit } from 'effector-react';
+import { useStore } from 'effector-react';
+import { useGate, useUnit } from 'effector-react/ssr';
 import { $gameData, $gameStatus, clearData } from 'entities/game-drive';
 import { GameStatus, setGameStatus } from 'entities/game-drive';
 import { Image, Typography } from 'antd';
@@ -7,14 +8,24 @@ import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import finishLogo from './finishLogo.png';
 import { FC, PropsWithChildren, useEffect } from 'react';
+import { UpdateLeaderboardGate } from 'pages/finish/model/model';
+import './model/init';
+import { $user } from 'processes/layout/model/model';
+import { RATING_FIELD_NAME } from 'pages/leaderboard/consts';
 import { sfx } from 'entities/music';
 import { $settings } from 'entities/settings';
 
 const { Title } = Typography;
 
 export const Finish: FC<PropsWithChildren> = () => {
-  const { score } = useUnit($gameData);
-  const status = useUnit($gameStatus);
+  const { score } = useStore($gameData);
+  const status = useStore($gameStatus);
+  const user = useUnit($user);
+
+  useGate(UpdateLeaderboardGate, {
+    userId: user?.id,
+    [RATING_FIELD_NAME]: score,
+  });
   const { soundVolume } = useUnit($settings);
   const navigate = useNavigate();
 

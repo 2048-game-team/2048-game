@@ -1,10 +1,11 @@
-import { ColumnsType } from 'antd/es/table/Table';
-import { LeaderboardRow } from 'pages/leaderboard/types';
-import { ColumnPlace } from 'pages/leaderboard/styles';
-import { RowUser } from 'pages/leaderboard/rowUser/ui';
 import React from 'react';
+import { ColumnsType } from 'antd/es/table/Table';
+import { LeaderboardItem } from 'pages/leaderboard/types';
+import { ColumnPlace } from 'pages/leaderboard/styles';
+import { UserBox } from 'pages/leaderboard/userBox/ui';
 
-export const RATING_FIELD_NAME = 'leaderboardPoints';
+export const RATING_FIELD_NAME = 'points-2048-v1';
+export const TEAM_NAME = '2048-v1';
 
 export const leaderboardRequest = {
   ratingFieldName: RATING_FIELD_NAME,
@@ -12,7 +13,7 @@ export const leaderboardRequest = {
   limit: 10,
 };
 
-export const columns: ColumnsType<LeaderboardRow> = [
+export const columns: ColumnsType<LeaderboardItem> = [
   {
     title: 'Место',
     dataIndex: 'key',
@@ -22,10 +23,10 @@ export const columns: ColumnsType<LeaderboardRow> = [
   },
   {
     title: 'Участник',
-    dataIndex: 'user',
-    key: 'user',
+    dataIndex: 'userId',
+    key: 'userId',
     width: '1000px',
-    render: user => <RowUser user={user} />,
+    render: userId => <UserBox userId={userId} />,
   },
   {
     title: 'Очки',

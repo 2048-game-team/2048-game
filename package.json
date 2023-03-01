@@ -14,7 +14,7 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "preview": "lerna run preview",
-    "generate:prisma": "npx prisma generate --schema=./packages/server/prisma/schema.prisma"
+    "prisma:generate": "lerna run prisma:generate --scope=server"
   },
   "license": "MIT",
   "workspaces": [

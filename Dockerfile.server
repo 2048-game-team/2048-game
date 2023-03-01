@@ -18,10 +18,12 @@ RUN rm -rf /app/packages/client/dist/ && rm -rf /app/packages/client/dist-ssr/ &
 
 FROM node:$NODE_VERSION-buster-slim as production
 WORKDIR /app
-
+RUN apt-get update -y && apt-get install -y openssl
 COPY --from=builder /app/packages/server/dist/ /app/
 COPY --from=builder /app/packages/server/package.json /app/package.json
+COPY --from=builder /app/packages/server/prisma /app/prisma/
 RUN yarn install --production=true
+RUN yarn prisma:generate
 COPY --from=builder /app/packages/client/ /app/node_modules/client/
 
 EXPOSE $SERVER_PORT

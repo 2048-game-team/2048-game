@@ -8,11 +8,11 @@ WORKDIR /app
 FROM base as builder
 
 COPY package.json yarn.lock
-RUN yarn install --frozen-lockfile
-
 COPY . .
 
-RUN yarn --network-timeout 100000 lerna bootstrap 
+RUN yarn install --frozen-lockfile
+
+RUN yarn --network-timeout 100000 lerna bootstrap
 RUN yarn build --scope=server
 RUN yarn build:ssr && yarn build:client
 

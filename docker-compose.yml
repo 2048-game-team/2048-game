@@ -16,9 +16,9 @@ services:
             - postgres
         environment:
           SERVER_PORT: ${SERVER_PORT}
-          DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_DB}:${POSTGRES_PORT}
+          DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}
     postgres:
-      image: postgres:14     
+      image: postgres:14
       ports:
         - "${POSTGRES_PORT}:${POSTGRES_PORT}"
       environment:

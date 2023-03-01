@@ -62,7 +62,8 @@ const drawCell = (
   ctx.fill();
   ctx.font = FONT_STYLE;
   ctx.fillStyle = TEXT_COLOR;
-  ctx.fillText(value.toString(), x + (width/2.3), y + (height/1.7));
+  const textWidth = ctx.measureText(value.toString()).width;
+  ctx.fillText(value.toString(), x + ((width-textWidth)/2), y + (height/1.7));
 };
 
 const getCellColor = (ctx: CanvasRenderingContext2D, value: number) => {

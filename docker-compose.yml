@@ -12,9 +12,11 @@ services:
         restart: always
         ports:
             - "${SERVER_PORT}:${SERVER_PORT}"
+        links:
+            - postgres
         environment:
           SERVER_PORT: ${SERVER_PORT}
-
+          DATABASE_URL: ${DOCKER_DATABASE_URL}
     postgres:
       image: postgres:14     
       ports:

@@ -1,9 +1,22 @@
 export const BORDER = 10;
-export const FONT_STYLE = '20px serif';
+export const FONT_STYLE = '35px Verdana';
 export const FIELD_COLOR = '#BBADA0';
-export const TEXT_COLOR = '#776E65';
-export const ZERO_CELL_COLOR = '#CDC1B4';
-export const CELL_COLOR = '#EEE4DA';
+export const TEXT_COLOR = '#524b46';
+
+export const CELL_COLORS = {
+  ZERO_CELL_COLOR: '#CDC1B4',
+  CELL_COLOR_2: '#EEE4DA',
+  CELL_COLOR_4: '#d36832',
+  CELL_COLOR_8: '#f78e48',
+  CELL_COLOR_16: '#FC5E2EFF',
+  CELL_COLOR_32: '#FF3333FF',
+  CELL_COLOR_64: '#FF0000FF',
+  CELL_COLOR_128: '#FFA900FF',
+  CELL_COLOR_256: '#FFC400FF',
+  CELL_COLOR_512: '#FF6D41FF',
+  CELL_COLOR_1024: '#FFAC11FF',
+  CELL_COLOR_2048: '#91E710FF',
+}
 
 export const HEIGHT = 450;
 export const WIDTH = 550;

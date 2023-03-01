@@ -1,4 +1,4 @@
 node_modules
-packages//dist
-packages//dist-ssr
+packages/*/dist
+packages/*/dist-ssr
 packages/*/node_modules

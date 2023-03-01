@@ -8,14 +8,24 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import { BASE_URL } from './consts';
+import { BASE_URL, API_URL } from './src/consts';
+import { topics } from './src/router/topics';
+import { messages } from './src/router/messages';
 
 const isDev = () => process.env.NODE_ENV === 'development';
-export async function startServer() {
-  const app = express();
-  app.use(cors());
-  const port = Number(process.env.SERVER_PORT) || 3001;
 
+const app = express();
+app.use(cors());
+const port = Number(process.env.SERVER_PORT) || 3001;
+
+app.get(`/api`, (_, res) => {
+  res.json('👋 Howdy from the server :)');
+});
+
+app.use(`${API_URL}/topics`, topics);
+app.use(`${API_URL}/messages`, messages);
+
+export async function startServer() {
   let vite: ViteDevServer | undefined;
   const distPath = path.dirname(require.resolve('client/dist/index.html'));
   const srcPath = path.dirname(require.resolve('client'));
@@ -30,10 +40,6 @@ export async function startServer() {
 
     app.use(vite.middlewares);
   }
-
-  app.get(`${BASE_URL}/api`, (_, res) => {
-    res.json('👋 Howdy from the server :)');
-  });
 
   if (!isDev()) {
     app.use(

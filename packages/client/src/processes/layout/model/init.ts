@@ -17,8 +17,8 @@ sample({
 sample({
   clock: [
     signInFx.done,
-    oauthSignInFx.done,
     signupCreateFx.done,
+    oauthSignInFx.done,
     CheckAuthGate.open,
   ],
   target: getUserFx,

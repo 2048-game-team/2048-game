@@ -14,7 +14,8 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "preview": "lerna run preview",
-    "prisma:generate": "lerna run prisma:generate --scope=server"
+    "prisma:generate": "lerna run prisma:generate --scope=server",
+    "prisma:studio": "lerna run prisma:studio --scope=server"
   },
   "license": "MIT",
   "workspaces": [

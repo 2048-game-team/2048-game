@@ -16,7 +16,7 @@ model Topic {
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String?
-  authorId  Int
+  userId  Int
   messages  Message[]
 }
 
@@ -25,7 +25,17 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
-  authorId  Int
+  userId    Int
   parent    Topic?   @relation(fields: [topicId], references: [id])
   topicId   Int?
+  likes     Like[]
+  ansMessId Int?
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userId    Int
+  parent    Message?   @relation(fields: [messageId], references: [id])
+  messageId Int?
 }

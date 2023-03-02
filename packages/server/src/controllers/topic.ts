@@ -6,7 +6,7 @@ class TopicController {
     try {
       const topics = await prisma.topic.findMany({
         include: {
-          messages: true,
+          messages: true
         },
       });
       res.status(200).json(topics);
@@ -19,12 +19,12 @@ class TopicController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { title, content, authorId } = req.body;
+      const { title, content, userId } = req.body;
       const newTopic = await prisma.topic.create({
         data: {
           title,
           content,
-          authorId: Number(authorId),
+          userId: Number(userId),
         },
       });
       res.json(newTopic);

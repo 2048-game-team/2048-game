@@ -13,8 +13,13 @@ class MessageController {
 
   getById: Handler = async (req, res, next) => {
     try {
-      const { id } = req.query;
-      const message = await prisma.message.findUnique({ where: { id: Number(id) } });
+      const { id } = req.params;
+      const message = await prisma.message.findUnique({
+        where: { id: Number(id) },
+        include: {
+          likes: true,
+        },
+      });
       res.status(200).json(message);
     } catch (err) {
       next(err);
@@ -23,12 +28,13 @@ class MessageController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { content, authorId, topicId } = req.body;
+      const { content, userId, topicId, ansMessId } = req.body;
       const newMessage = await prisma.message.create({
         data: {
           content,
-          authorId: Number(authorId),
+          userId: Number(userId),
           topicId: Number(topicId),
+          ansMessId: Number(ansMessId),
         },
       });
       res.status(200).json(newMessage);
@@ -36,6 +42,22 @@ class MessageController {
       next(err);
     }
   };
+
+  // updateById: Handler = async (req, res, next) => {
+  //   try {
+  //     const { id } = req.query;
+  //     // const { content, userId, topicId } = req.body;
+  //     const updatedMessage = await prisma.message.update({
+  //       where: { id: Number(id) },
+  //       data: {
+
+  //       }
+  //     });
+  //     res.json(updatedMessage);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // };
 
   deleteById: Handler = async (req, res, next) => {
     try {
@@ -49,7 +71,7 @@ class MessageController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 }
 
 export const messageController = new MessageController();

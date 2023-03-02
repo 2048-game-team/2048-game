@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest .",
-    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma"
+    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
+    "prisma:migrate": "npx prisma migrate dev --name init --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^4.10.1",

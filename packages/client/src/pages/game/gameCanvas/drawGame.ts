@@ -1,4 +1,4 @@
-import { Array2D } from 'entities/game-drive';
+import {Array2D, Cell} from 'entities/game-drive';
 import {
   BORDER,
   FONT_STYLE,
@@ -6,6 +6,16 @@ import {
   TEXT_COLOR,
   CELL_COLORS
 } from './const';
+
+const canvas: any = {
+  width: null,
+  height: null,
+}
+
+let thisCtx: any = null;
+
+const cells: Array<Cell> = [];
+const speed = 2;
 
 const roundRect = (
   ctx: CanvasRenderingContext2D,
@@ -51,22 +61,41 @@ const drawBackground = (
 
 const drawCell = (
   ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  value: number
-): void => {
-  getCellColor(ctx, value);
-  roundRect(ctx, x, y, width, height, 10);
+  cell: Cell
+) => {
+  getColor(ctx, cell.value);
+
+  //анимация только для ячеек с числом
+  if(cell.value != 0) {
+    roundRect(ctx, cell.x, cell.y, cell.width, cell.height, 10);
+
+    if(cell.width < cell.maxWidth) {
+      cell.width += speed;
+    }
+    if (cell.height < cell.maxHeight) {
+      cell.height += speed;
+    }
+  } else {
+    roundRect(ctx, cell.x, cell.y, cell.maxWidth+1, cell.maxHeight+1, 10);
+  }
   ctx.fill();
+
   ctx.font = FONT_STYLE;
   ctx.fillStyle = TEXT_COLOR;
-  const textWidth = ctx.measureText(value.toString()).width;
-  ctx.fillText(value.toString(), x + ((width-textWidth)/2), y + (height/1.7));
+  const textWidth = ctx.measureText(cell.value.toString()).width;
+  ctx.fillText(cell.value.toString(), cell.x + ((cell.maxWidth-textWidth)/2), cell.y + (cell.maxHeight/1.7));
 };
 
-const getCellColor = (ctx: CanvasRenderingContext2D, value: number) => {
+const update = () => {
+  thisCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+  cells.forEach((item) => {
+    drawCell(thisCtx, item);
+  })
+  requestAnimationFrame(update);
+}
+
+const getColor = (ctx: CanvasRenderingContext2D, value: number) => {
   switch (value) {
     case 2:
       ctx.fillStyle = CELL_COLORS.CELL_COLOR_2;
@@ -113,6 +142,10 @@ export const drawGame = (
   width: number,
   height: number
 ): void => {
+  thisCtx = ctx;
+  canvas.width = width;
+  canvas.height = height;
+
   drawBackground(ctx, width, height);
 
   if (gameState.length === 0) {
@@ -129,7 +162,18 @@ export const drawGame = (
     row.forEach((cellValue, cellIndex) => {
       const x = BORDER + (BORDER + cellWidth) * cellIndex;
       const y = BORDER + (BORDER + cellHeigth) * rowIndex;
-      drawCell(ctx, x, y, cellWidth, cellHeigth, cellValue);
+      const cell = {
+        x: x,
+        y: y,
+        width: 0,
+        height: 0,
+        value: cellValue,
+        maxWidth: cellWidth,
+        maxHeight: cellHeigth,
+      };
+      cells.push(cell);
     });
   });
+
+  update();
 };

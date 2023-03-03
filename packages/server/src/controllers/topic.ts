@@ -7,37 +7,45 @@ class TopicController {
     try {
       const topics = await prisma.topic.findMany({
         include: {
-          messages: true,
           user: true,
+          messages: {
+            include: {
+              user: true,
+              likes: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
         },
       });
-      res.status(200).json(topics);
-    } catch (err) { 
-      next(err);
-    } 
-  };
 
-  // getById: Handler = async () => {};
+      res.status(200).json(topics);
+    } catch (err) {
+      next(err);
+    }
+  };
 
   createNew: Handler = async (req, res, next) => {
     try {
       const { title, content, userId, userName, userAvatar } = req.body;
-      
+
       const user = await userService.update(
         Number(userId),
         userName,
-        userAvatar,
+        userAvatar
       );
 
-      const newTopic = await prisma.topic.create({
+      const topic = await prisma.topic.create({
         data: {
           title,
           content,
           userId: Number(userId),
         },
       });
-      res.status(201).json({ newTopic, user });
-    } catch (err) { 
+      res.status(201).json({ topic, user });
+    } catch (err) {
       next(err);
     }
   };
@@ -51,8 +59,8 @@ class TopicController {
         },
       });
       res.status(200).json(deletedPost);
-    } catch (err) { 
-      next(err)
+    } catch (err) {
+      next(err);
     }
   };
 }

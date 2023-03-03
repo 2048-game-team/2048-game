@@ -1,17 +1,24 @@
 import type { Handler } from 'express';
+import { userService } from '../service/users';
 import prisma from '../db';
 
 class LikeController {
   createNew: Handler = async (req, res, next) => {
     try {
-      const { userId, messageId } = req.body;
-      const newLike = await prisma.like.create({
+      const { userId, messageId, userAvatar, userName } = req.body;
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar
+      );
+
+      const like = await prisma.like.create({
         data: {
           messageId: Number(messageId),
           userId: Number(userId),
         },
       });
-      res.status(200).json(newLike);
+      res.status(200).json({ like, user });
     } catch (err) {
       next(err);
     }

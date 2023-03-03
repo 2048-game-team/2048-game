@@ -1,10 +1,16 @@
 import type { Handler } from 'express';
+import { userService } from '../service/users';
 import prisma from '../db';
 
 class MessageController {
   getAll: Handler = async (_, res, next) => {
     try {
-      const messages = await prisma.message.findMany();
+      const messages = await prisma.message.findMany({
+        include: {
+          likes: true,
+          user: true,
+        },
+      });
       res.status(200).json(messages);
     } catch (err) {
       next(err);
@@ -29,36 +35,27 @@ class MessageController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { content, userId, topicId, ansMessId } = req.body;
-      const newMessage = await prisma.message.create({
+      const { topicId, content, userId, userName, userAvatar, ansMessId } = req.body;
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar
+      );
+
+      const message = await prisma.message.create({
         data: {
           content,
           userId: Number(userId),
           topicId: Number(topicId),
-          ansMessId: Number(ansMessId),
+          ansMessId: ansMessId ? Number(ansMessId) : null,
         },
       });
-      res.status(200).json(newMessage);
+
+      res.status(201).json({ message, user });
     } catch (err) {
       next(err);
     }
   };
-
-  // updateById: Handler = async (req, res, next) => {
-  //   try {
-  //     const { id } = req.query;
-  //     // const { content, userId, topicId } = req.body;
-  //     const updatedMessage = await prisma.message.update({
-  //       where: { id: Number(id) },
-  //       data: {
-
-  //       }
-  //     });
-  //     res.json(updatedMessage);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // };
 
   deleteById: Handler = async (req, res, next) => {
     try {
@@ -68,7 +65,7 @@ class MessageController {
           id: Number(id),
         },
       });
-      res.json(deletedPost);
+      res.status(200).json(deletedPost);
     } catch (err) {
       next(err);
     }

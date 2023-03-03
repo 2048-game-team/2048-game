@@ -18,6 +18,7 @@ class MessageController {
         where: { id: Number(id) },
         include: {
           likes: true,
+          user: true,
         },
       });
       res.status(200).json(message);

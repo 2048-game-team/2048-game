@@ -10,13 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       Int       @unique
+  name     String
+  avatar   String?
+  topics   Topic[]
+  messages Message[]
+  Like     Like[]
+}
+
 model Topic {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String    @db.VarChar(255)
   content   String?
-  userId  Int
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?
   messages  Message[]
 }
 
@@ -25,17 +35,18 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
+  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  parent    Topic?   @relation(fields: [topicId], references: [id])
-  topicId   Int?
+  topic     Topic    @relation(fields: [topicId], references: [id])
+  topicId   Int
   likes     Like[]
   ansMessId Int?
 }
 
 model Like {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  id        Int     @id @default(autoincrement())
+  user      User    @relation(fields: [userId], references: [id])
   userId    Int
-  parent    Message?   @relation(fields: [messageId], references: [id])
-  messageId Int?
+  message   Message @relation(fields: [messageId], references: [id])
+  messageId Int
 }

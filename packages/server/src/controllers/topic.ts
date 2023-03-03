@@ -1,12 +1,14 @@
 import type { Handler } from 'express';
 import prisma from '../db';
+import { userService } from '../service/users';
 
 class TopicController {
   getAll: Handler = async (_, res, next) => {
     try {
       const topics = await prisma.topic.findMany({
         include: {
-          messages: true
+          messages: true,
+          user: true,
         },
       });
       res.status(200).json(topics);
@@ -19,7 +21,14 @@ class TopicController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { title, content, userId } = req.body;
+      const { title, content, userId, userName, userAvatar } = req.body;
+      
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar,
+      );
+
       const newTopic = await prisma.topic.create({
         data: {
           title,
@@ -27,7 +36,7 @@ class TopicController {
           userId: Number(userId),
         },
       });
-      res.json(newTopic);
+      res.status(201).json({ newTopic, user });
     } catch (err) { 
       next(err);
     }
@@ -41,7 +50,7 @@ class TopicController {
           id: Number(id),
         },
       });
-      res.json(deletedPost);
+      res.status(200).json(deletedPost);
     } catch (err) { 
       next(err)
     }

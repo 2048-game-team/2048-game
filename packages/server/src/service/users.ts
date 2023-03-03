@@ -8,7 +8,7 @@ class UserService {
       },
     });
 
-    if (user) {
+    if (user && (user.avatar !== avatar || user.name !== name)) {
       const updatedUser = await prisma.user.update({
         where: { id },
         data: {

@@ -50,3 +50,9 @@ model Like {
   message   Message @relation(fields: [messageId], references: [id])
   messageId Int
 }
+
+model UserTheme {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  theme     String
+}

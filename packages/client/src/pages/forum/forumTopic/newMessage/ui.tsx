@@ -8,12 +8,18 @@ import {
   notification,
   Typography,
 } from 'antd';
-import { FormThemeProps, Theme } from 'pages/forum';
+import { FormMessageProps, NewMessage } from 'pages/forum';
+import { useEvent, useUnit } from 'effector-react/ssr';
+import { $user } from 'processes/layout/model/model';
+import { createMessage } from 'pages/forum/model';
 
-export const FormNewTheme: FC<FormThemeProps> = ({
+export const FormNewMessage: FC<FormMessageProps> = ({
+  topicId,
   modalOpen,
   setModalOpen,
 }) => {
+  const user = useUnit($user);
+  const createMessageFn = useEvent(createMessage);
   const [form] = Form.useForm();
 
   const handleCancel = () => {
@@ -21,8 +27,25 @@ export const FormNewTheme: FC<FormThemeProps> = ({
     setModalOpen(false);
   };
 
-  const handleFinish = (data: Theme) => {
-    console.log(data);
+  const handleFinish = (data: NewMessage) => {
+    console.log({
+      ...data,
+      topicId: topicId,
+      userId: user?.id,
+      userName: user?.display_name,
+      userAvatar: user?.avatar,
+    });
+
+    if (user) {
+      createMessageFn({
+        ...data,
+        topicId: topicId,
+        userId: user.id,
+        userName: user.display_name,
+        userAvatar: user.avatar,
+      });
+    }
+
     form.resetFields();
     setModalOpen(false);
   };
@@ -37,13 +60,13 @@ export const FormNewTheme: FC<FormThemeProps> = ({
   return (
     <>
       <Modal
-        title="Новая тема"
+        title="Новый комментарий"
         open={modalOpen}
         onCancel={handleCancel}
         footer={null}>
         <Typography>
           <Form
-            name="theme"
+            name="message"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
@@ -52,20 +75,8 @@ export const FormNewTheme: FC<FormThemeProps> = ({
             autoComplete="on"
             form={form}>
             <Form.Item
-              label="Название темы"
-              name="title"
-              rules={[
-                {
-                  required: true,
-                  message: 'Пожалуйста введите название темы!',
-                },
-              ]}>
-              <Input />
-            </Form.Item>
-
-            <Form.Item
               label="Содержание"
-              name="context"
+              name="content"
               rules={[
                 { required: true, message: 'Содержание не может быть пустым!' },
               ]}>

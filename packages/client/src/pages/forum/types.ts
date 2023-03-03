@@ -1,52 +1,66 @@
-export type ForumData = ForumTheme[];
+export type ForumData = ForumTopic[];
 
-type ForumTheme = {
+type ForumTopic = {
   id: string;
   title: string;
   content: string;
-  date: string;
-  author: Author;
+  updatedAt: string;
+  userName: string;
+  userAvatar?: string;
+  likes?: number;
   messages?: Message[];
-};
-
-type Author = {
-  name: string;
-  avatar?: string;
 };
 
 type Message = {
   id: string;
-  date: string;
   content: string;
-  author: Author;
+  updatedAt: string;
+  userName: string;
+  userAvatar?: string;
+  likes?: number;
 };
 
-export type ThemeHeaderProps = {
+export type NewMessage = {
+  topicId: number;
+  content: string;
+  userId: number;
+  userName: string;
+  userAvatar?: string;
+};
+
+export type NewTopic = {
+  title: string;
+  content: string;
+  userId: number;
+  userName: string;
+  userAvatar?: string;
+};
+
+export type TopicHeaderProps = {
   title: string;
   date: string;
-  author: Author;
+  authorName: string;
+  authorAvatar?: string;
   active: boolean;
 };
 
 export type MessagesProps = {
+  topicId: number;
   messages: Message[] | undefined;
 };
 
 export type MessageProps = {
+  topicId: number;
   message: Message;
 };
 
-export type FormThemeProps = {
+export type FormTopicProps = {
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
 };
 
-export type Theme = {
-  title: string;
-  content: string;
-};
-
 export type FormMessageProps = {
+  topicId: number;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
   content?: string;

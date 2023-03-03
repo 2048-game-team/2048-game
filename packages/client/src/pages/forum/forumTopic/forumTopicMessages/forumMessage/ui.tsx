@@ -11,10 +11,10 @@ import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import {} from 'pages/forum';
 import { FormEditMessage } from './editMessage/ui';
 
-export const ForumMessage: FC<MessageProps> = ({ message }) => {
+export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleButtonNewTheme = () => {
+  const handleButtonNewTopic = () => {
     setModalOpen(true);
   };
 
@@ -24,20 +24,20 @@ export const ForumMessage: FC<MessageProps> = ({ message }) => {
         <SpaceBetween>
           <Space wrap>
             <Avatar
-              src={message.author.avatar}
+              src={message.userAvatar}
               size="small"
               icon={<UserOutlined />}
             />
             <SpaceMessageHeader direction="vertical">
-              <MessageAuthor>{message.author.name}</MessageAuthor>
-              <MessageDate>{message.date}</MessageDate>
+              <MessageAuthor>{message.userName}</MessageAuthor>
+              <MessageDate>{message.updatedAt}</MessageDate>
             </SpaceMessageHeader>
           </Space>
 
           <Tooltip title="Редактировать">
             <Button
               type="primary"
-              onClick={handleButtonNewTheme}
+              onClick={handleButtonNewTopic}
               shape="circle"
               icon={<EditOutlined />}
             />
@@ -48,6 +48,7 @@ export const ForumMessage: FC<MessageProps> = ({ message }) => {
       </Card>
 
       <FormEditMessage
+        topicId={topicId}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         content={message.content}

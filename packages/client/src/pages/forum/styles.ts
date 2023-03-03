@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Space, Typography } from 'antd';
 
-export const ThemeTitle = styled(Typography.Title)`
+export const TopicTitle = styled(Typography.Title)`
   margin: 0 !important;
 `;
 
@@ -18,7 +18,7 @@ export const SpaceForum = styled(Space)`
   width: 100%;
   gap: 1.5rem !important;
 `;
-export const SpaceTheme = styled(Space)`
+export const SpaceTopic = styled(Space)`
   width: 100%;
   gap: 1rem !important;
 `;

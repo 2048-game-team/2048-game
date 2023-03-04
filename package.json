@@ -14,7 +14,8 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "preview": "lerna run preview",
-    "prisma:generate": "lerna run prisma:generate --scope=server"
+    "prisma:generate": "lerna run prisma:generate --scope=server",
+    "prisma:studio": "lerna run prisma:studio --scope=server"
   },
   "license": "MIT",
   "workspaces": [
@@ -26,8 +27,8 @@
   "devDependencies": {
     "@evilmartians/lefthook": "1.1.1",
     "@testing-library/user-event": "14.4.3",
-    "eslint": "^8.32.0",
-    "eslint-plugin-effector": "^0.10.3",
+    "eslint": "8.32.0",
+    "eslint-plugin-effector": "0.10.3",
     "lerna": "5.4.3",
     "nx": "15.5.2"
   },

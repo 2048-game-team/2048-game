@@ -9,4 +9,5 @@ messages.use(auth);
 messages.get('/all', messageController.getAll); // return all themes
 messages.get('/:id', messageController.getById); // get theme by ID
 messages.post('/create', messageController.createNew); //
+// messages.patch('/update/:id', messageController.updateById);
 messages.delete('/delete/:id', messageController.deleteById);

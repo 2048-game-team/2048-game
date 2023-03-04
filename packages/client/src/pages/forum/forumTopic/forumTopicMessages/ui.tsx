@@ -2,7 +2,10 @@ import React, { FC } from 'react';
 import { MessagesProps, SpaceMessages } from 'pages/forum';
 import { ForumMessage } from './forumMessage/ui';
 
-export const ForumTopicMessages: FC<MessagesProps> = ({ topicId, messages }) => {
+export const ForumTopicMessages: FC<MessagesProps> = ({
+  topicId,
+  messages,
+}) => {
   if (!messages) {
     return null;
   }

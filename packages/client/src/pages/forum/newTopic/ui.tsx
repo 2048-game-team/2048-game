@@ -17,8 +17,8 @@ export const FormNewTopic: FC<FormTopicProps> = ({
   modalOpen,
   setModalOpen,
 }) => {
-  const user = useUnit($user)
-  const createTopicFn = useEvent(createTopic)
+  const user = useUnit($user);
+  const createTopicFn = useEvent(createTopic);
   const [form] = Form.useForm();
 
   const handleCancel = () => {

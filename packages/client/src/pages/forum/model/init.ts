@@ -1,5 +1,10 @@
 import { sample } from 'effector';
-import { $forumData, createMessage, createTopic, GetForumDataGate } from './model';
+import {
+  $forumData,
+  createMessage,
+  createTopic,
+  GetForumDataGate,
+} from './model';
 import { createMessageFx, createTopicFx, getForumDataFx } from './effects';
 
 sample({
@@ -9,15 +14,15 @@ sample({
 
 sample({
   clock: getForumDataFx.doneData,
-  target: $forumData
-})
+  target: $forumData,
+});
 
 sample({
   clock: createTopic,
-  target: createTopicFx
-})
+  target: createTopicFx,
+});
 
 sample({
   clock: createMessage,
-  target: createMessageFx
-})
+  target: createMessageFx,
+});

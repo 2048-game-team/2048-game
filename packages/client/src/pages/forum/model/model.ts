@@ -7,6 +7,6 @@ export const $forumData = restore<ForumData>(getForumDataFx, null);
 
 export const GetForumDataGate = createGate({});
 
-export const createTopic = createEvent<NewTopic>()
+export const createTopic = createEvent<NewTopic>();
 
-export const createMessage = createEvent<NewMessage>()
+export const createMessage = createEvent<NewMessage>();

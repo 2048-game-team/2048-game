@@ -13,7 +13,7 @@ type User = {
   id: number;
   name: string;
   avatar?: string;
-}
+};
 
 type Message = {
   id: number;
@@ -34,7 +34,7 @@ type Message = {
 type Like = {
   id: number;
   user: User;
-}
+};
 
 export type NewMessage = {
   topicId: number;

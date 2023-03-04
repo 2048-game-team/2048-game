@@ -2,87 +2,88 @@ import { ForumData } from 'pages/forum/types';
 
 export const mocForumData: ForumData = [
   {
-    "id": '1',
+    id: '1',
     // "createdAt": "2023-03-04T13:15:56.494Z",
-    "updatedAt": new Date("2023-03-04T13:15:56.494Z"),
-    "title": "Первая тема",
-    "content": "Текст раскрывающий первую тему форума.",
+    updatedAt: new Date('2023-03-04T13:15:56.494Z'),
+    title: 'Первая тема',
+    content: 'Текст раскрывающий первую тему форума.',
     // "userId": 1234,
-    "user": {
-      "id": 1234,
-      "name": "vasya",
-      "avatar": "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+    user: {
+      id: 1234,
+      name: 'vasya',
+      avatar:
+        'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
     },
-    "messages": [
+    messages: [
       {
-        "id": 1,
+        id: 1,
         // "createdAt": "2023-03-04T13:20:27.295Z",
-        "updatedAt": new Date("2023-03-04T13:20:27.295Z"),
-        "content": "Первый мессадж",
+        updatedAt: new Date('2023-03-04T13:20:27.295Z'),
+        content: 'Первый мессадж',
         // "userId": 1234,
         // "topicId": 1,
         // "exMessageId": null,
-        "user": {
-          "id": 1234,
-          "name": "vasya",
-          "avatar": "avatar"
+        user: {
+          id: 1234,
+          name: 'vasya',
+          avatar: 'avatar',
         },
-        "likes": [
+        likes: [
           {
-            "id": 1,
+            id: 1,
             // "userId": 134,
             // "messageId": 1,
-            "user": {
-              "id": 134,
-              "name": "vasya",
-              "avatar": "avatar"
-            }
+            user: {
+              id: 134,
+              name: 'vasya',
+              avatar: 'avatar',
+            },
           },
           {
-            "id": 2,
+            id: 2,
             // "userId": 134,
             // "messageId": 1,
-            "user": {
-              "id": 135,
-              "name": "vadya",
-              "avatar": "avatar"
-            }
-          }
+            user: {
+              id: 135,
+              name: 'vadya',
+              avatar: 'avatar',
+            },
+          },
         ],
-        "exMessage": null
+        exMessage: null,
       },
       {
-        "id": 2,
+        id: 2,
         // "createdAt": "2023-03-04T13:20:48.368Z",
-        "updatedAt": new Date("2023-03-04T13:20:48.368Z"),
-        "content": "Первый мессадж",
+        updatedAt: new Date('2023-03-04T13:20:48.368Z'),
+        content: 'Первый мессадж',
         // "userId": 1234,
         // "topicId": 1,
         // "exMessageId": 1,
-        "user": {
-          "id": 1234,
-          "name": "vasya",
-          "avatar": "avatar"
+        user: {
+          id: 1234,
+          name: 'vasya',
+          avatar: 'avatar',
         },
-        "likes": [],
-        "exMessage": {
-          "id": 1,
+        likes: [],
+        exMessage: {
+          id: 1,
           // "createdAt": "2023-03-04T13:20:27.295Z",
-          "updatedAt": new Date("2023-03-04T13:20:27.295Z"),
-          "content": "Первый экс-мессадж",
+          updatedAt: new Date('2023-03-04T13:20:27.295Z'),
+          content: 'Первый экс-мессадж',
           // "userId": 1234,
           // "topicId": 1,
           // "exMessageId": null
-          "user": {
-            "id": 1234,
-            "name": "vasya",
-            "avatar": "avatar"
+          user: {
+            id: 1234,
+            name: 'vasya',
+            avatar: 'avatar',
           },
-        }
-      }
-    ]
-  }
-]
+        },
+      },
+    ],
+  },
+];
 
 /*
 export const mocForumData: ForumData = [

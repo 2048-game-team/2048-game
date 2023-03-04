@@ -5,7 +5,7 @@ import { ForumTopicMessages } from './forumTopicMessages/ui';
 import { SpaceTopic, SpaceEnd } from 'pages/forum';
 import { mocForumData } from '../mocData';
 import { FormNewMessage } from './newMessage/ui';
-import '../model/init'
+import '../model/init';
 import { useGate, useUnit } from 'effector-react/ssr';
 import { $forumData, GetForumDataGate } from 'pages/forum/model';
 import { dateToStringForRender } from 'shared/utils/dateToString';
@@ -14,14 +14,13 @@ export const ForumTopic: FC = () => {
   const [activeTopic, setActiveTopic] = useState<string | string[]>();
   const [modalOpen, setModalOpen] = useState(false);
   // const forumData = useUnit($forumData);
-  const forumData = mocForumData
+  const forumData = mocForumData;
 
   //--------------------------
   console.log('forumData: ', forumData);
   //--------------------------
 
   useGate(GetForumDataGate);
-
 
   const toggleTopic = (key: string | string[]) => {
     setActiveTopic(key);
@@ -32,9 +31,7 @@ export const ForumTopic: FC = () => {
   };
 
   if (!forumData || forumData.length === 0) {
-    return <Typography.Title>
-      Форум пока пустой
-    </Typography.Title>
+    return <Typography.Title>Форум пока пустой</Typography.Title>;
   }
 
   return (
@@ -55,7 +52,10 @@ export const ForumTopic: FC = () => {
             <SpaceTopic direction="vertical">
               {topic.content}
 
-              <ForumTopicMessages topicId={Number(activeTopic)} messages={topic.messages} />
+              <ForumTopicMessages
+                topicId={Number(activeTopic)}
+                messages={topic.messages}
+              />
 
               <SpaceEnd>
                 <Button type="primary" onClick={handleButtonNewMessage}>
@@ -67,7 +67,11 @@ export const ForumTopic: FC = () => {
         ))}
       </Collapse>
 
-      <FormNewMessage topicId={Number(activeTopic)} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <FormNewMessage
+        topicId={Number(activeTopic)}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
     </>
   );
 };

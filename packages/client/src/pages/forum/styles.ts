@@ -43,12 +43,12 @@ export const SpaceEnd = styled(Space)`
   justify-content: end;
 `;
 
-export const SpaceFooter= styled(Space)`
+export const SpaceFooter = styled(Space)`
   width: 100%;
   margin-top: 1rem;
 `;
 
-export const SpaceExMessage= styled(Space)`
+export const SpaceExMessage = styled(Space)`
   width: 100%;
   border-left: 4px solid blue;
   padding-left: 1rem;

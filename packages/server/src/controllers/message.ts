@@ -7,8 +7,8 @@ class MessageController {
     try {
       const messages = await prisma.message.findMany({
         include: {
-          likes: true,
           user: true,
+          likes: true,
         },
       });
       res.status(200).json(messages);
@@ -35,7 +35,8 @@ class MessageController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { topicId, content, userId, userName, userAvatar, ansMessId } = req.body;
+      const { topicId, content, userId, userName, userAvatar, exMessageId } =
+        req.body;
       const user = await userService.update(
         Number(userId),
         userName,
@@ -47,7 +48,7 @@ class MessageController {
           content,
           userId: Number(userId),
           topicId: Number(topicId),
-          ansMessId: ansMessId ? Number(ansMessId) : null,
+          exMessageId: exMessageId ? Number(exMessageId) : null,
         },
       });
 

@@ -5,14 +5,14 @@ class ThemeController {
   setUserTheme: Handler = async (req, res, next) => {
     try {
       const { userId, theme } = req.body;
-      const userTheme = await prisma.userTheme.findMany({
+      const userTheme = await prisma.theme.findUnique({
         where: {
           userId: Number(userId),
         },
       });
 
       if (userTheme) {
-        const updatedTheme = await prisma.userTheme.update({
+        const updatedTheme = await prisma.theme.update({
           where: {
             userId: Number(userId),
           },
@@ -23,7 +23,7 @@ class ThemeController {
         res.status(200).json(updatedTheme);
       }
 
-      const newTheme = await prisma.userTheme.create({
+      const newTheme = await prisma.theme.create({
         data: {
           theme,
           userId: Number(userId),
@@ -39,7 +39,7 @@ class ThemeController {
   getByUserId: Handler = async (req, res, next) => {
     try {
       const { userId } = req.params;
-      const userTheme = await prisma.userTheme.findMany({
+      const userTheme = await prisma.theme.findUnique({
         where: {
           userId: Number(userId),
         },

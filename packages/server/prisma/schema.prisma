@@ -31,16 +31,18 @@ model Topic {
 }
 
 model Message {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  content   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  topic     Topic    @relation(fields: [topicId], references: [id])
-  topicId   Int
-  likes     Like[]
-  ansMessId Int?
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  content     String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  topic       Topic     @relation(fields: [topicId], references: [id])
+  topicId     Int
+  likes       Like[]
+  message     Message?  @relation("MessageAnswers")
+  exMessage   Message?  @relation("MessageAnswers", fields: [exMessageId], references: [id])
+  exMessageId Int?      @unique
 }
 
 model Like {
@@ -51,8 +53,8 @@ model Like {
   messageId Int
 }
 
-model UserTheme {
+model Theme {
   id        Int     @id @default(autoincrement())
-  userId    Int
+  userId    Int     @unique
   theme     String
 }

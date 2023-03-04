@@ -16,6 +16,7 @@ class TopicController {
                   user: true,
                 },
               },
+              exMessage: true,
             },
           },
         },

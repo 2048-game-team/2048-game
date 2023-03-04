@@ -4,21 +4,37 @@ type ForumTopic = {
   id: string;
   title: string;
   content: string;
-  updatedAt: string;
-  userName: string;
-  userAvatar?: string;
-  likes?: number;
+  updatedAt: Date;
+  user: User;
   messages?: Message[];
 };
 
+type User = {
+  id: number;
+  name: string;
+  avatar?: string;
+}
+
 type Message = {
-  id: string;
+  id: number;
   content: string;
-  updatedAt: string;
-  userName: string;
-  userAvatar?: string;
-  likes?: number;
+  updatedAt: Date;
+  user: User;
+  likes?: Like[];
+  exMessage?: Message | null;
 };
+
+// type ExMessage = {
+//   id: number;
+//   content: string;
+//   updatedAt: Date;
+//   user: User;
+// }
+
+type Like = {
+  id: number;
+  user: User;
+}
 
 export type NewMessage = {
   topicId: number;

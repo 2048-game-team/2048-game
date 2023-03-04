@@ -4,12 +4,13 @@ import {
   MessageAuthor,
   MessageDate,
   SpaceBetween,
-  SpaceMessageHeader,
+  SpaceMessageHeader, SpaceFooter, SpaceExMessage
 } from 'pages/forum';
-import { Avatar, Button, Card, Space, Tooltip } from 'antd';
-import { EditOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Badge, Button, Card, Space, Tooltip } from 'antd';
+import { EditOutlined, HeartFilled, HeartOutlined, UserOutlined } from '@ant-design/icons';
 import {} from 'pages/forum';
 import { FormEditMessage } from './editMessage/ui';
+import { dateToStringForRender } from 'shared/utils/dateToString';
 
 export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,13 +25,13 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
         <SpaceBetween>
           <Space wrap>
             <Avatar
-              src={message.userAvatar}
+              src={message.user.avatar}
               size="small"
               icon={<UserOutlined />}
             />
             <SpaceMessageHeader direction="vertical">
-              <MessageAuthor>{message.userName}</MessageAuthor>
-              <MessageDate>{message.updatedAt}</MessageDate>
+              <MessageAuthor>{message.user.name}</MessageAuthor>
+              <MessageDate>{dateToStringForRender(message.updatedAt)}</MessageDate>
             </SpaceMessageHeader>
           </Space>
 
@@ -44,7 +45,33 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
           </Tooltip>
         </SpaceBetween>
 
-        <Space>{message.content}</Space>
+        {message.exMessage &&
+        <SpaceExMessage  direction='vertical'>
+          <Space wrap>
+            <Avatar
+              src={message.exMessage.user.avatar}
+              size="small"
+              icon={<UserOutlined />}
+            />
+            <SpaceMessageHeader direction="vertical">
+              <MessageAuthor>{message.exMessage.user.name}</MessageAuthor>
+              <MessageDate>{dateToStringForRender(message.exMessage.updatedAt)}</MessageDate>
+            </SpaceMessageHeader>
+          </Space>
+          <SpaceBetween>{message.exMessage.content}</SpaceBetween>
+        </SpaceExMessage>
+        }
+
+        <SpaceBetween>{message.content}</SpaceBetween>
+
+        <SpaceFooter onClick={()=>console.log('click')}>
+        {(message.likes && message.likes?.length > 0)
+          ? <Badge count={message.likes?.length} color='red'>
+            <HeartFilled style={{ color: 'red', fontSize: '1.5rem', cursor: 'pointer' }}/>
+          </Badge>
+          : <HeartOutlined style={{ color: 'red', fontSize: '1.5rem', cursor: 'pointer' }} />
+        }
+        </SpaceFooter>
       </Card>
 
       <FormEditMessage

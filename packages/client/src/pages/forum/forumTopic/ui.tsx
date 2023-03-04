@@ -8,6 +8,7 @@ import { FormNewMessage } from './newMessage/ui';
 import '../model/init'
 import { useGate, useUnit } from 'effector-react/ssr';
 import { $forumData, GetForumDataGate } from 'pages/forum/model';
+import { dateToStringForRender } from 'shared/utils/dateToString';
 
 export const ForumTopic: FC = () => {
   const [activeTopic, setActiveTopic] = useState<string | string[]>();
@@ -45,9 +46,9 @@ export const ForumTopic: FC = () => {
             header={
               <ForumTopicHeader
                 title={topic.title}
-                date={topic.updatedAt}
-                authorName={topic.userName}
-                authorAvatar={topic.userAvatar}
+                date={dateToStringForRender(topic.updatedAt)}
+                authorName={topic.user.name}
+                authorAvatar={topic.user.avatar}
                 active={topic.id === activeTopic}
               />
             }>

@@ -11,13 +11,13 @@ const Application = () => {
   const router = useRoutes(routes);
   const [domDownloaded, setDomDownloaded] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     setDomDownloaded(true);
   }, []);
 
   if (!domDownloaded) {
     return null;
-  }
+  }*/
 
   return (
     <Suspense fallback={<Spin />}>

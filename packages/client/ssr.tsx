@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
 import { fork, serialize } from 'effector';
+import React from 'react';
 
 const scope = fork();
 export function scopeFn() {

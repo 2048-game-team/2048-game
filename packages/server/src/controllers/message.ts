@@ -14,7 +14,9 @@ class MessageController {
   getById: Handler = async (req, res, next) => {
     try {
       const { id } = req.query;
-      const message = await prisma.message.findUnique({ where: { id: Number(id) } });
+      const message = await prisma.message.findUnique({
+        where: { id: Number(id) },
+      });
       res.status(200).json(message);
     } catch (err) {
       next(err);
@@ -49,7 +51,7 @@ class MessageController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 }
 
 export const messageController = new MessageController();

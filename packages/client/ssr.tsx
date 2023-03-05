@@ -23,7 +23,7 @@ export function antdCacheFn() {
 
 export function render(url: string) {
   const urlParts = url.split(`${BASE_URL}`);
-  const loc = urlParts.length === 2 ? urlParts[urlParts.length - 1] : "/";
+  const loc = urlParts.length === 2 ? urlParts[urlParts.length - 1] : '/';
   return renderToString(
     sheet.collectStyles(
       <StyleProvider cache={cache}>

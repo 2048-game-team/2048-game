@@ -10,9 +10,9 @@ class TopicController {
         },
       });
       res.status(200).json(topics);
-    } catch (err) { 
+    } catch (err) {
       next(err);
-    } 
+    }
   };
 
   // getById: Handler = async () => {};
@@ -28,7 +28,7 @@ class TopicController {
         },
       });
       res.json(newTopic);
-    } catch (err) { 
+    } catch (err) {
       next(err);
     }
   };
@@ -42,8 +42,8 @@ class TopicController {
         },
       });
       res.json(deletedPost);
-    } catch (err) { 
-      next(err)
+    } catch (err) {
+      next(err);
     }
   };
 }

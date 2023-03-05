@@ -8,9 +8,10 @@ import {
   notification,
   Typography,
 } from 'antd';
-import { FormMessageProps, Theme } from 'pages/forum';
+import { FormMessageProps, NewTopic } from 'pages/forum';
 
 export const FormEditMessage: FC<FormMessageProps> = ({
+  topicId,
   modalOpen,
   setModalOpen,
   content,
@@ -22,8 +23,8 @@ export const FormEditMessage: FC<FormMessageProps> = ({
     setModalOpen(false);
   };
 
-  const handleFinish = (data: Theme) => {
-    console.log(data);
+  const handleFinish = (data: NewTopic) => {
+    console.log({ ...data, topicId });
     form.resetFields();
     setModalOpen(false);
   };

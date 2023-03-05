@@ -1,10 +1,16 @@
 import type { Handler } from 'express';
+import { userService } from '../service/users';
 import prisma from '../db';
 
 class MessageController {
   getAll: Handler = async (_, res, next) => {
     try {
-      const messages = await prisma.message.findMany();
+      const messages = await prisma.message.findMany({
+        include: {
+          user: true,
+          likes: true,
+        },
+      });
       res.status(200).json(messages);
     } catch (err) {
       next(err);
@@ -13,9 +19,13 @@ class MessageController {
 
   getById: Handler = async (req, res, next) => {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       const message = await prisma.message.findUnique({
         where: { id: Number(id) },
+        include: {
+          likes: true,
+          user: true,
+        },
       });
       res.status(200).json(message);
     } catch (err) {
@@ -25,15 +35,24 @@ class MessageController {
 
   createNew: Handler = async (req, res, next) => {
     try {
-      const { content, authorId, topicId } = req.body;
-      const newMessage = await prisma.message.create({
+      const { topicId, content, userId, userName, userAvatar, exMessageId } =
+        req.body;
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar
+      );
+
+      const message = await prisma.message.create({
         data: {
           content,
-          authorId: Number(authorId),
+          userId: Number(userId),
           topicId: Number(topicId),
+          exMessageId: exMessageId ? Number(exMessageId) : null,
         },
       });
-      res.status(200).json(newMessage);
+
+      res.status(201).json({ message, user });
     } catch (err) {
       next(err);
     }
@@ -47,7 +66,7 @@ class MessageController {
           id: Number(id),
         },
       });
-      res.json(deletedPost);
+      res.status(200).json(deletedPost);
     } catch (err) {
       next(err);
     }

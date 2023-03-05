@@ -1,33 +1,51 @@
 import type { Handler } from 'express';
 import prisma from '../db';
+import { userService } from '../service/users';
 
 class TopicController {
   getAll: Handler = async (_, res, next) => {
     try {
       const topics = await prisma.topic.findMany({
         include: {
-          messages: true,
+          user: true,
+          messages: {
+            include: {
+              user: true,
+              likes: {
+                include: {
+                  user: true,
+                },
+              },
+              exMessage: true,
+            },
+          },
         },
       });
+
       res.status(200).json(topics);
     } catch (err) {
       next(err);
     }
   };
 
-  // getById: Handler = async () => {};
-
   createNew: Handler = async (req, res, next) => {
     try {
-      const { title, content, authorId } = req.body;
-      const newTopic = await prisma.topic.create({
+      const { title, content, userId, userName, userAvatar } = req.body;
+
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar
+      );
+
+      const topic = await prisma.topic.create({
         data: {
           title,
           content,
-          authorId: Number(authorId),
+          userId: Number(userId),
         },
       });
-      res.json(newTopic);
+      res.status(201).json({ topic, user });
     } catch (err) {
       next(err);
     }
@@ -41,7 +59,7 @@ class TopicController {
           id: Number(id),
         },
       });
-      res.json(deletedPost);
+      res.status(200).json(deletedPost);
     } catch (err) {
       next(err);
     }

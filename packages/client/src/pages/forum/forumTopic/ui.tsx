@@ -3,7 +3,7 @@ import { Button, Collapse, Typography } from 'antd';
 import { ForumTopicHeader } from './forumTopicHeader/ui';
 import { ForumTopicMessages } from './forumTopicMessages/ui';
 import { SpaceTopic, SpaceEnd } from 'pages/forum';
-import { mocForumData } from '../mocData';
+import { mockForumData } from '../mockData';
 import { FormNewMessage } from './newMessage/ui';
 import '../model/init';
 import { useGate, useUnit } from 'effector-react/ssr';
@@ -13,10 +13,15 @@ import { dateToStringForRender } from 'shared/utils/dateToString';
 export const ForumTopic: FC = () => {
   const [activeTopic, setActiveTopic] = useState<string | string[]>();
   const [modalOpen, setModalOpen] = useState(false);
-  // const forumData = useUnit($forumData);
-  const forumData = mocForumData;
 
+  //-------------------------- Переключение между данными из базы и мок-данными
+  //-------------------------- Убрать когда форум будет готов
+  // const forumData = useUnit($forumData);
+  const forumData = mockForumData;
   //--------------------------
+
+  //-------------------------- Лог для отладки
+  //-------------------------- Убрать когда форум будет готов
   console.log('forumData: ', forumData);
   //--------------------------
 

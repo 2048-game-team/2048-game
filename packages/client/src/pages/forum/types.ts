@@ -19,17 +19,11 @@ type Message = {
   id: number;
   content: string;
   updatedAt: Date;
+  topicId: number;
   user: User;
   likes?: Like[];
   exMessage?: Message | null;
 };
-
-// type ExMessage = {
-//   id: number;
-//   content: string;
-//   updatedAt: Date;
-//   user: User;
-// }
 
 type Like = {
   id: number;

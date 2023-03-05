@@ -27,12 +27,15 @@ export const FormNewTopic: FC<FormTopicProps> = ({
   };
 
   const handleFinish = (data: NewTopic) => {
+    //-------------------------- Лог для отладки
+    //-------------------------- Убрать когда форум будет готов
     console.log({
       ...data,
       userId: user?.id,
       userName: user?.display_name,
       userAvatar: user?.avatar,
     });
+    //--------------------------
 
     if (user) {
       createTopicFn({

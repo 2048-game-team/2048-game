@@ -6,6 +6,8 @@ import {
   GetForumDataGate,
 } from './model';
 import { createMessageFx, createTopicFx, getForumDataFx } from './effects';
+import { MessageProps } from 'entities/notification/types';
+import { setMessage } from 'entities/notification/model';
 
 sample({
   clock: [GetForumDataGate.open, createTopicFx.done],
@@ -25,4 +27,16 @@ sample({
 sample({
   clock: createMessage,
   target: createMessageFx,
+});
+
+sample({
+  clock: [getForumDataFx.fail, createTopicFx.fail, createMessageFx.fail],
+  fn: (): MessageProps => {
+    return {
+      type: 'error',
+      message: 'Ошибка',
+      description: 'Ограничение доступа к базе данных',
+    };
+  },
+  target: setMessage,
 });

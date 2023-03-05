@@ -1,6 +1,6 @@
 import { ForumData } from 'pages/forum/types';
 
-export const mocForumData: ForumData = [
+export const mockForumData: ForumData = [
   {
     id: '1',
     // "createdAt": "2023-03-04T13:15:56.494Z",
@@ -21,7 +21,7 @@ export const mocForumData: ForumData = [
         updatedAt: new Date('2023-03-04T13:20:27.295Z'),
         content: 'Первый мессадж',
         // "userId": 1234,
-        // "topicId": 1,
+        topicId: 1,
         // "exMessageId": null,
         user: {
           id: 1234,
@@ -58,7 +58,7 @@ export const mocForumData: ForumData = [
         updatedAt: new Date('2023-03-04T13:20:48.368Z'),
         content: 'Первый мессадж',
         // "userId": 1234,
-        // "topicId": 1,
+        topicId: 2,
         // "exMessageId": 1,
         user: {
           id: 1234,
@@ -72,7 +72,7 @@ export const mocForumData: ForumData = [
           updatedAt: new Date('2023-03-04T13:20:27.295Z'),
           content: 'Первый экс-мессадж',
           // "userId": 1234,
-          // "topicId": 1,
+          topicId: 1,
           // "exMessageId": null
           user: {
             id: 1234,

@@ -1,29 +1,26 @@
 import { createEffect } from 'effector';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ForumData, NewMessage, NewTopic } from 'pages/forum';
-import {
-  getForumData,
-  postNewMessage,
-  postNewTopic,
-} from 'pages/forum/forumApi/api';
+import { ServerUrl } from 'root/const';
+import { apiPath } from 'pages/forum/forumApi/apiPath';
 
 export const getForumDataFx = createEffect<void, ForumData, AxiosError>(
   async () => {
-    const res = await getForumData();
-    return res?.data;
+    const res = await axios.get(ServerUrl + apiPath.getAll);
+    return res.data;
   }
 );
 
 export const createTopicFx = createEffect<NewTopic, NewTopic, AxiosError>(
   async data => {
-    const res = await postNewTopic(data);
-    return res?.data;
+    const res = await axios.post(ServerUrl + apiPath.createTopic, data);
+    return res.data;
   }
 );
 
 export const createMessageFx = createEffect<NewMessage, NewMessage, AxiosError>(
   async data => {
-    const res = await postNewMessage(data);
-    return res?.data;
+    const res = await axios.post(ServerUrl + apiPath.createMessage, data);
+    return res.data;
   }
 );

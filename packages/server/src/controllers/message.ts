@@ -58,6 +58,32 @@ class MessageController {
     }
   };
 
+  updateById: Handler = async (req, res, next) => { 
+    try {
+      const { content, userId, userName, userAvatar } =
+        req.body;
+      const { id } = req.params;
+      const user = await userService.update(
+        Number(userId),
+        userName,
+        userAvatar
+      );
+
+      const message = await prisma.message.update({
+        where: {
+          id: Number(id)
+        },
+        data: {
+          content,
+        },
+      });
+
+      res.status(201).json({ message, user });
+    } catch (err) { 
+      next(err)
+    }
+  }
+
   deleteById: Handler = async (req, res, next) => {
     try {
       const { id } = req.query;

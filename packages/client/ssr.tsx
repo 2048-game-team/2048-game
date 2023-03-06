@@ -3,6 +3,8 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
 import { fork, serialize } from 'effector';
+import { BASE_URL } from './const';
+import React from 'react';
 
 const scope = fork();
 export function scopeFn() {
@@ -20,10 +22,12 @@ export function antdCacheFn() {
 }
 
 export function render(url: string) {
+  const urlParts = url.split(`${BASE_URL}`);
+  const loc = urlParts.length === 2 ? urlParts[urlParts.length - 1] : '/';
   return renderToString(
     sheet.collectStyles(
       <StyleProvider cache={cache}>
-        <AppWithProviders scope={scope} location={url} />
+        <AppWithProviders scope={scope} location={loc} />
       </StyleProvider>
     )
   );

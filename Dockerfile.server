@@ -27,4 +27,4 @@ RUN yarn prisma:generate
 COPY --from=builder /app/packages/client/ /app/node_modules/client/
 
 EXPOSE $SERVER_PORT
-CMD [ "node", "/app/index.js" ]
+CMD ["/bin/bash", "-c", "yarn prisma:migrate;node /app/index.js"]

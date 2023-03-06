@@ -15,6 +15,7 @@
     "format": "lerna run format",
     "preview": "lerna run preview",
     "prisma:generate": "lerna run prisma:generate --scope=server",
+    "prisma:migrate": "lerna run prisma:migrate --scope=server",
     "prisma:studio": "lerna run prisma:studio --scope=server"
   },
   "license": "MIT",

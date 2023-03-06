@@ -16,7 +16,11 @@ class TopicController {
                   user: true,
                 },
               },
-              exMessage: true,
+              exMessage: {
+                include: {
+                  user: true,
+                },
+              },
             },
           },
         },

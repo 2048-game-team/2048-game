@@ -1,6 +1,6 @@
 import { createEffect } from 'effector';
 import axios, { AxiosError } from 'axios';
-import { ForumData, NewMessage, NewTopic } from 'pages/forum';
+import { ForumData, NewLike, NewMessage, NewTopic } from 'pages/forum';
 import { ServerUrl } from 'root/const';
 import { apiPath } from 'pages/forum/forumApi/apiPath';
 
@@ -21,6 +21,13 @@ export const createTopicFx = createEffect<NewTopic, NewTopic, AxiosError>(
 export const createMessageFx = createEffect<NewMessage, NewMessage, AxiosError>(
   async data => {
     const res = await axios.post(ServerUrl + apiPath.createMessage, data);
+    return res.data;
+  }
+);
+
+export const createLikeFx = createEffect<NewLike, NewLike, AxiosError>(
+  async data => {
+    const res = await axios.post(ServerUrl + apiPath.createLike, data);
     return res.data;
   }
 );

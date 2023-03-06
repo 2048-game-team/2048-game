@@ -15,15 +15,32 @@ import {
   HeartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import {} from 'pages/forum';
-import { FormEditMessage } from './editMessage/ui';
+import { FormReMessage } from './reMessage/ui';
 import { dateToStringForRender } from 'shared/utils/dateToString';
+import { resourcesUrl } from 'shared/api/consts';
+import { useEvent, useUnit } from 'effector-react/ssr';
+import { createLike } from 'pages/forum/model';
+import { $user } from 'processes/layout/model/model';
+import { blue, red } from '@ant-design/colors';
 
-export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
+export const ForumMessage: FC<MessageProps> = ({ message }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const user = useUnit($user);
+  const createLikeFn = useEvent(createLike);
 
   const handleButtonNewTopic = () => {
     setModalOpen(true);
+  };
+
+  const handleLike = () => {
+    if (user) {
+      createLikeFn({
+        messageId: message.id,
+        userId: user.id,
+        userName: user.display_name,
+        userAvatar: user.avatar,
+      });
+    }
   };
 
   return (
@@ -32,7 +49,7 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
         <SpaceBetween>
           <Space wrap>
             <Avatar
-              src={message.user.avatar}
+              src={`${resourcesUrl}${message.user.avatar}`}
               size="small"
               icon={<UserOutlined />}
             />
@@ -44,7 +61,7 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
             </SpaceMessageHeader>
           </Space>
 
-          <Tooltip title="Редактировать">
+          <Tooltip title="Ответить">
             <Button
               type="primary"
               onClick={handleButtonNewTopic}
@@ -55,10 +72,12 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
         </SpaceBetween>
 
         {message.exMessage && (
-          <SpaceExMessage direction="vertical">
+          <SpaceExMessage
+            direction="vertical"
+            style={{ borderColor: blue.primary }}>
             <Space wrap>
               <Avatar
-                src={message.exMessage.user.avatar}
+                src={`${resourcesUrl}${message.exMessage.user.avatar}`}
                 size="small"
                 icon={<UserOutlined />}
               />
@@ -75,26 +94,34 @@ export const ForumMessage: FC<MessageProps> = ({ topicId, message }) => {
 
         <SpaceBetween>{message.content}</SpaceBetween>
 
-        <SpaceFooter onClick={() => console.log('click')}>
+        <SpaceFooter onClick={handleLike}>
           {message.likes && message.likes?.length > 0 ? (
-            <Badge count={message.likes?.length} color="red">
+            <Badge count={message.likes?.length} color={red[4]} size="small">
               <HeartFilled
-                style={{ color: 'red', fontSize: '1.5rem', cursor: 'pointer' }}
+                style={{
+                  color: red.primary,
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                }}
               />
             </Badge>
           ) : (
             <HeartOutlined
-              style={{ color: 'red', fontSize: '1.5rem', cursor: 'pointer' }}
+              style={{
+                color: red.primary,
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+              }}
             />
           )}
         </SpaceFooter>
       </Card>
 
-      <FormEditMessage
-        topicId={topicId}
+      <FormReMessage
+        topicId={message.topicId}
+        exMessageId={message.id}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        content={message.content}
       />
     </>
   );

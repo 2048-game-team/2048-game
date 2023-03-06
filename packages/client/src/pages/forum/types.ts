@@ -4,7 +4,7 @@ type ForumTopic = {
   id: string;
   title: string;
   content: string;
-  updatedAt: Date;
+  updatedAt: string;
   user: User;
   messages?: Message[];
 };
@@ -18,7 +18,7 @@ type User = {
 type Message = {
   id: number;
   content: string;
-  updatedAt: Date;
+  updatedAt: string;
   topicId: number;
   user: User;
   likes?: Like[];
@@ -30,17 +30,25 @@ type Like = {
   user: User;
 };
 
-export type NewMessage = {
-  topicId: number;
+export type NewTopic = {
+  title: string;
   content: string;
   userId: number;
   userName: string;
   userAvatar?: string;
 };
 
-export type NewTopic = {
-  title: string;
+export type NewMessage = {
+  topicId: number;
+  exMessageId: number;
   content: string;
+  userId: number;
+  userName: string;
+  userAvatar?: string;
+};
+
+export type NewLike = {
+  messageId: number;
   userId: number;
   userName: string;
   userAvatar?: string;
@@ -55,12 +63,10 @@ export type TopicHeaderProps = {
 };
 
 export type MessagesProps = {
-  topicId: number;
   messages: Message[] | undefined;
 };
 
 export type MessageProps = {
-  topicId: number;
   message: Message;
 };
 
@@ -73,5 +79,11 @@ export type FormMessageProps = {
   topicId: number;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
-  content?: string;
+};
+
+export type FormReMessageProps = {
+  topicId: number;
+  exMessageId: number;
+  modalOpen: boolean;
+  setModalOpen: (open: boolean) => void;
 };

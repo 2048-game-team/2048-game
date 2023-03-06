@@ -4,7 +4,8 @@ export function dateToString(date: Date) {
   );
 }
 
-export function dateToStringForRender(date: Date) {
+export function dateToStringForRender(dateString: string) {
+  const date = new Date(dateString);
   const startDate = date.valueOf();
   const currentDate = Date.now();
   const interval = currentDate - startDate;

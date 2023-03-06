@@ -28,14 +28,6 @@ export const FormNewMessage: FC<FormMessageProps> = ({
   };
 
   const handleFinish = (data: NewMessage) => {
-    console.log({
-      ...data,
-      topicId: topicId,
-      userId: user?.id,
-      userName: user?.display_name,
-      userAvatar: user?.avatar,
-    });
-
     if (user) {
       createMessageFn({
         ...data,

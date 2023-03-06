@@ -36,6 +36,7 @@ export const SpaceMessageHeader = styled(Space)`
 export const SpaceBetween = styled(Space)`
   width: 100%;
   justify-content: space-between;
+  caret-color: transparent;
 `;
 
 export const SpaceEnd = styled(Space)`
@@ -46,6 +47,7 @@ export const SpaceEnd = styled(Space)`
 export const SpaceFooter = styled(Space)`
   width: 100%;
   margin-top: 1rem;
+  caret-color: transparent;
 `;
 
 export const SpaceExMessage = styled(Space)`
@@ -53,4 +55,5 @@ export const SpaceExMessage = styled(Space)`
   border-left: 4px solid blue;
   padding-left: 1rem;
   margin: 1rem 0;
+  gap: 0 !important;
 `;

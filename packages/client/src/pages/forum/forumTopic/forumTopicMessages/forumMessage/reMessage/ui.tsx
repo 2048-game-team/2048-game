@@ -8,14 +8,19 @@ import {
   notification,
   Typography,
 } from 'antd';
-import { FormMessageProps, NewTopic } from 'pages/forum';
+import { FormReMessageProps, NewTopic } from 'pages/forum';
+import { useEvent, useUnit } from 'effector-react/ssr';
+import { $user } from 'processes/layout/model/model';
+import { createMessage } from 'pages/forum/model';
 
-export const FormEditMessage: FC<FormMessageProps> = ({
+export const FormReMessage: FC<FormReMessageProps> = ({
   topicId,
+  exMessageId,
   modalOpen,
   setModalOpen,
-  content,
 }) => {
+  const user = useUnit($user);
+  const createMessageFn = useEvent(createMessage);
   const [form] = Form.useForm();
 
   const handleCancel = () => {
@@ -24,7 +29,16 @@ export const FormEditMessage: FC<FormMessageProps> = ({
   };
 
   const handleFinish = (data: NewTopic) => {
-    console.log({ ...data, topicId });
+    if (user) {
+      createMessageFn({
+        ...data,
+        topicId,
+        exMessageId,
+        userId: user.id,
+        userName: user.display_name,
+        userAvatar: user.avatar,
+      });
+    }
     form.resetFields();
     setModalOpen(false);
   };
@@ -39,7 +53,7 @@ export const FormEditMessage: FC<FormMessageProps> = ({
   return (
     <>
       <Modal
-        title="Редактировать комментарий"
+        title="Новый комментарий"
         open={modalOpen}
         onCancel={handleCancel}
         footer={null}>
@@ -59,7 +73,7 @@ export const FormEditMessage: FC<FormMessageProps> = ({
               rules={[
                 { required: true, message: 'Содержание не может быть пустым!' },
               ]}>
-              <Input.TextArea rows={4} defaultValue={content} />
+              <Input.TextArea rows={4} />
             </Form.Item>
 
             <Divider />

@@ -1,16 +1,27 @@
 import { sample } from 'effector';
 import {
   $forumData,
+  createLike,
   createMessage,
   createTopic,
   GetForumDataGate,
 } from './model';
-import { createMessageFx, createTopicFx, getForumDataFx } from './effects';
+import {
+  createLikeFx,
+  createMessageFx,
+  createTopicFx,
+  getForumDataFx,
+} from './effects';
 import { MessageProps } from 'entities/notification/types';
 import { setMessage } from 'entities/notification/model';
 
 sample({
-  clock: [GetForumDataGate.open, createTopicFx.done],
+  clock: [
+    GetForumDataGate.open,
+    createTopicFx.done,
+    createMessageFx.done,
+    createLikeFx.done,
+  ],
   target: getForumDataFx,
 });
 
@@ -30,7 +41,17 @@ sample({
 });
 
 sample({
-  clock: [getForumDataFx.fail, createTopicFx.fail, createMessageFx.fail],
+  clock: createLike,
+  target: createLikeFx,
+});
+
+sample({
+  clock: [
+    getForumDataFx.fail,
+    createTopicFx.fail,
+    createMessageFx.fail,
+    createLikeFx.fail,
+  ],
   fn: (): MessageProps => {
     return {
       type: 'error',

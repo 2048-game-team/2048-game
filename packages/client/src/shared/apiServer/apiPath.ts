@@ -3,4 +3,6 @@ export const apiPath = {
   createTopic: '/topics/create',
   createMessage: '/messages/create',
   createLike: '/likes/create',
+  setTheme: '/themes/set',
+  getTheme: '/themes',
 };

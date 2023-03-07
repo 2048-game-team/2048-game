@@ -3,11 +3,19 @@ import {
   $user,
   CheckAuthGate,
   oauthSignIn,
+  setUserTheme,
+  updateTheme,
 } from 'processes/layout/model/model';
-import { getUserFx, oauthSignInFx } from 'processes/layout/model/effects';
+import {
+  getUserFx,
+  oauthSignInFx,
+  setUserThemeFx,
+  updateThemeFx,
+} from 'processes/layout/model/effects';
 import { signInFx } from 'pages/signin/model';
 import { logoutFx } from 'pages/logout/model';
 import { signupCreateFx } from 'pages/signup/model';
+import { $theme } from 'entities/ui';
 
 sample({
   clock: getUserFx.doneData,
@@ -31,3 +39,18 @@ sample({
 });
 
 sample({ clock: oauthSignIn, target: oauthSignInFx });
+
+sample({
+  clock: setUserTheme,
+  target: setUserThemeFx,
+});
+
+sample({
+  clock: [updateTheme, getUserFx.doneData],
+  target: updateThemeFx,
+});
+
+sample({
+  clock: updateThemeFx.doneData,
+  target: $theme,
+});

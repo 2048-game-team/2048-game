@@ -15,7 +15,7 @@ import {
   HeartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { FormReMessage } from './reMessage/ui';
+import { FormNewMessage } from 'pages/forum/forumTopic/newMessage/ui';
 import { dateToStringForRender } from 'shared/utils/dateToString';
 import { resourcesUrl } from 'shared/api/consts';
 import { useEvent, useUnit } from 'effector-react/ssr';
@@ -117,7 +117,7 @@ export const ForumMessage: FC<MessageProps> = ({ message }) => {
         </SpaceFooter>
       </Card>
 
-      <FormReMessage
+      <FormNewMessage
         topicId={message.topicId}
         exMessageId={message.id}
         modalOpen={modalOpen}

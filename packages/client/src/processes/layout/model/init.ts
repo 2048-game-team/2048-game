@@ -47,6 +47,9 @@ sample({
 
 sample({
   clock: [updateTheme, getUserFx.doneData],
+  filter: user => {
+    return user !== null;
+  },
   target: updateThemeFx,
 });
 

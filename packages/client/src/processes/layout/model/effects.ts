@@ -5,8 +5,9 @@ import { practicumApi } from 'shared/api/api';
 import { Theme } from 'entities/ui';
 import { ServerUrl } from 'root/const';
 import { apiPath } from 'shared/apiServer/apiPath';
+import { UserThemePayload } from 'processes/layout/types';
 
-export const getUserFx = createEffect<void, UserResponse | null, AxiosError>(
+export const getUserFx = createEffect<void, UserResponse, AxiosError>(
   async () => {
     const res = await practicumApi.auth.userList();
     return res.data;
@@ -20,21 +21,17 @@ export const oauthSignInFx = createEffect<OauthSignInRequest, void, AxiosError>(
 );
 
 export const setUserThemeFx = createEffect<
-  { theme: Theme; userId: number },
-  { theme: Theme; userId: number },
+  UserThemePayload,
+  UserThemePayload,
   AxiosError
 >(async data => {
   const res = await axios.post(ServerUrl + apiPath.setTheme, data);
   return res.data;
 });
 
-export const updateThemeFx = createEffect<
-  UserResponse | null,
-  Theme,
-  AxiosError
->(async user => {
-  if (user) {
+export const updateThemeFx = createEffect<UserResponse, Theme, AxiosError>(
+  async user => {
     const res = await axios.get(ServerUrl + apiPath.getTheme + '/' + user.id);
     return res.data.theme;
   }
-});
+);

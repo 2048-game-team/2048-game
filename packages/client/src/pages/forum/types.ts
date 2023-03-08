@@ -77,6 +77,7 @@ export type FormTopicProps = {
 
 export type FormMessageProps = {
   topicId: number;
+  exMessageId?: number;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
 };
@@ -84,6 +85,12 @@ export type FormMessageProps = {
 export type FormReMessageProps = {
   topicId: number;
   exMessageId: number;
+  modalOpen: boolean;
+  setModalOpen: (open: boolean) => void;
+};
+
+export type FormEmojiProps = {
+  callback: (emoji: string) => void;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
 };

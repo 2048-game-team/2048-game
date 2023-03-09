@@ -17,7 +17,7 @@ export interface LeaderboardData {
 }
 
 export interface LeaderboardItem {
-  place: number;
+  key: number;
   user: User;
   points: number;
 }

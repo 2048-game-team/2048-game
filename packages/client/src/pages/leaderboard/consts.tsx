@@ -16,17 +16,15 @@ export const leaderboardRequest = {
 export const columns: ColumnsType<LeaderboardItem> = [
   {
     title: 'Место',
-    dataIndex: 'place',
-    key: 'place',
+    dataIndex: 'key',
     align: 'center',
-    sorter: (a, b) => a.place - b.place,
+    sorter: (a, b) => a.key - b.key,
     showSorterTooltip: false,
     render: place => <ColumnPlace>{place}</ColumnPlace>,
   },
   {
     title: 'Участник',
     dataIndex: 'user',
-    key: 'user',
     sorter: (a, b) => {
       if (
         (a.user.name ? a.user.name : '') >= (b.user.name ? b.user.name : '')
@@ -43,7 +41,6 @@ export const columns: ColumnsType<LeaderboardItem> = [
   {
     title: 'Очки',
     dataIndex: 'points',
-    key: 'points',
     align: 'center',
     sorter: (a, b) => a.points - b.points,
     showSorterTooltip: false,

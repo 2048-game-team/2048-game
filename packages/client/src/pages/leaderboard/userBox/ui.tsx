@@ -4,7 +4,6 @@ import { Avatar, Typography } from 'antd';
 import { resourcesUrl } from 'shared/api/consts';
 import { UserOutlined } from '@ant-design/icons';
 import { ColumnUser } from 'pages/leaderboard/styles';
-import './model/init';
 
 export const UserBox: FC<RowUserProps> = ({ user }) => {
   const avatarSrc = user.avatar ? `${resourcesUrl}${user.avatar}` : null;

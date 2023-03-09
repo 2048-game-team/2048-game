@@ -16,8 +16,11 @@ export const getLeaderboardFx = createEffect<
 
   if (Array.isArray(data) && data.length > 0) {
     return data.map((item, key) => ({
-      key: key + 1,
-      userId: item.data.userId,
+      place: key + 1,
+      user: {
+        name: item.data.user.name,
+        avatar: item.data.user.avatar,
+      },
       points: item.data[RATING_FIELD_NAME],
     }));
   }

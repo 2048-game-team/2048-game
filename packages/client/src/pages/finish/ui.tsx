@@ -23,7 +23,10 @@ export const Finish: FC<PropsWithChildren> = () => {
   const user = useUnit($user);
 
   useGate(UpdateLeaderboardGate, {
-    userId: user?.id,
+    user: {
+      name: user?.display_name ?? `${user?.first_name} ${user?.second_name}`,
+      avatar: user?.avatar,
+    },
     [RATING_FIELD_NAME]: score,
   });
   const { soundVolume } = useUnit($settings);

@@ -14,7 +14,7 @@ export const getLeaderboardFx = createEffect<
     leaderboardRequest
   );
 
-  if (Array.isArray(data) && data.length > 0) {
+  if (Array.isArray(data)) {
     return data.map((item, key) => ({
       key: key + 1,
       userId: item.data.userId,

@@ -10,7 +10,7 @@ export const leaderboardCreateFx = createEffect<
   void,
   AxiosError
 >(async leaderboardData => {
-  if (leaderboardData.userId) {
+  if (leaderboardData.user.name) {
     await practicumApi.leaderboard.leaderboardCreate({
       data: leaderboardData,
       ratingFieldName: RATING_FIELD_NAME,

@@ -18,8 +18,8 @@ export const Leaderboard = () => {
     return <Spin size="large" />;
   }
 
-  if (!leaderboard) {
-    return <Typography.Title>Нет таблицы</Typography.Title>;
+  if (leaderboard.length === 0) {
+    return <Typography.Title>Таблицы лидеров пока нет</Typography.Title>;
   }
 
   return (

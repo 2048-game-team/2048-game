@@ -9,6 +9,8 @@
  * ---------------------------------------------------------------
  */
 
+import { LeaderboardResponse } from 'pages/leaderboard/types';
+
 /** @example {"id":123,"first_name":"Petya","second_name":"Pupkin","display_name":"Petya Pupkin","login":"userLogin","email":"my@email.com","phone":"89223332211","avatar":"/path/to/avatar.jpg"} */
 export interface UserResponse {
   /** User id */
@@ -1031,7 +1033,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `500` `void` Unexpected error
      */
     postLeaderboard: (leaderboardRequest: LeaderboardRequest, params: RequestParams = {}) =>
-      this.request<void, void>({
+      this.request<LeaderboardResponse[], void>({
         path: `/leaderboard/all`,
         method: 'POST',
         body: leaderboardRequest,

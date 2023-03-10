@@ -29,7 +29,7 @@ app.use(`${API_URL}/topics`, topics);
 app.use(`${API_URL}/messages`, messages);
 app.use(`${API_URL}/likes`, likes);
 app.use(`${API_URL}/themes`, themes);
-app.use(errorMiddleware)
+app.use(errorMiddleware);
 
 export async function startServer() {
   let vite: ViteDevServer | undefined;

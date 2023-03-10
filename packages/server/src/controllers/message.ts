@@ -58,10 +58,9 @@ class MessageController {
     }
   };
 
-  updateById: Handler = async (req, res, next) => { 
+  updateById: Handler = async (req, res, next) => {
     try {
-      const { content, userId, userName, userAvatar } =
-        req.body;
+      const { content, userId, userName, userAvatar } = req.body;
       const { id } = req.params;
       const user = await userService.update(
         Number(userId),
@@ -71,7 +70,7 @@ class MessageController {
 
       const message = await prisma.message.update({
         where: {
-          id: Number(id)
+          id: Number(id),
         },
         data: {
           content,
@@ -79,10 +78,10 @@ class MessageController {
       });
 
       res.status(201).json({ message, user });
-    } catch (err) { 
-      next(err)
+    } catch (err) {
+      next(err);
     }
-  }
+  };
 
   deleteById: Handler = async (req, res, next) => {
     try {

@@ -37,7 +37,9 @@ test('XSS vulnerability check', async () => {
   console.log(logRedirectTest);
   expect(logMessages[logMessages.length - 1]).toEqual(logRedirectTest);
 
-  const { container } = render(<AppWithProviders scope={scope} />);
+  const { container } = render(
+    <AppWithProviders scope={scope} env={process.env as ImportMetaEnv} />
+  );
 
   const avatar = container.getElementsByClassName('ant-avatar-circle')[0];
   expect(avatar).toBeDefined();

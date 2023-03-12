@@ -14,6 +14,6 @@ global.fetch = jest.fn(() =>
 const scope = fork();
 
 test('Example test', async () => {
-  render(<AppWithProviders scope={scope} />);
+  render(<AppWithProviders scope={scope} env={process.env as ImportMetaEnv} />);
   expect(screen.getByText(appContent)).toBeDefined();
 });

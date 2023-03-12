@@ -3,8 +3,9 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
 import { fork, serialize } from 'effector';
-import { BASE_URL } from './const';
 import React from 'react';
+
+const BASE_URL = process.env.VITE_BASE_URL;
 
 const scope = fork();
 export function scopeFn() {

@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL } from 'root/const';
+import { $envData } from 'app/model';
+
+let baseUrl: string;
+$envData.watch(env => ({ baseUrl } = env));
 
 interface MusicProps {
   url: string;
@@ -11,7 +14,7 @@ export const useMusic = ({ url, volume }: MusicProps) => {
 
   useEffect(() => {
     if (volume > 0) {
-      setAudio(new Audio(`${BASE_URL}${url}`));
+      setAudio(new Audio(`${baseUrl}${url}`));
     }
   }, []);
 

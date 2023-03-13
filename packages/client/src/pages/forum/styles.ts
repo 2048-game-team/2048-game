@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Space, Typography } from 'antd';
 
-export const ThemeTitle = styled(Typography.Title)`
+export const TopicTitle = styled(Typography.Title)`
   margin: 0 !important;
 `;
 
@@ -18,7 +18,7 @@ export const SpaceForum = styled(Space)`
   width: 100%;
   gap: 1.5rem !important;
 `;
-export const SpaceTheme = styled(Space)`
+export const SpaceTopic = styled(Space)`
   width: 100%;
   gap: 1rem !important;
 `;
@@ -36,9 +36,24 @@ export const SpaceMessageHeader = styled(Space)`
 export const SpaceBetween = styled(Space)`
   width: 100%;
   justify-content: space-between;
+  caret-color: transparent;
 `;
 
 export const SpaceEnd = styled(Space)`
   width: 100%;
   justify-content: end;
+`;
+
+export const SpaceFooter = styled(Space)`
+  width: 100%;
+  margin-top: 1rem;
+  caret-color: transparent;
+`;
+
+export const SpaceExMessage = styled(Space)`
+  width: 100%;
+  border-left: 4px solid blue;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  gap: 0 !important;
 `;

@@ -6,19 +6,10 @@ import { Spin } from 'antd';
 import { LayoutGame } from 'processes/layout';
 import { TAppProps } from './types';
 import './index.css';
+import React from 'react';
 
 const Application = () => {
   const router = useRoutes(routes);
-  const [domDownloaded, setDomDownloaded] = useState(false);
-
-  useEffect(() => {
-    setDomDownloaded(true);
-  }, []);
-
-  if (!domDownloaded) {
-    return null;
-  }
-
   return (
     <Suspense fallback={<Spin />}>
       <LayoutGame>{router}</LayoutGame>

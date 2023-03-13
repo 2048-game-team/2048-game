@@ -1,14 +1,15 @@
 import React from 'react';
 import { Avatar, Space } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { ThemeHeaderProps, ThemeTitle, SpaceBetween } from 'pages/forum';
+import { TopicHeaderProps, TopicTitle, SpaceBetween } from 'pages/forum';
 
-export const ForumThemeHeader = ({
+export const ForumTopicHeader = ({
   title,
   date,
-  author,
+  authorName,
+  authorAvatar,
   active,
-}: ThemeHeaderProps) => {
+}: TopicHeaderProps) => {
   if (!active) {
     return <Space>{title}</Space>;
   }
@@ -16,11 +17,11 @@ export const ForumThemeHeader = ({
   return (
     <SpaceBetween>
       <Space direction="vertical">
-        <ThemeTitle level={3}>{title}</ThemeTitle>
+        <TopicTitle level={3}>{title}</TopicTitle>
 
         <Space wrap>
-          <Avatar src={author.avatar} icon={<UserOutlined />} size="small" />
-          {author.name}
+          <Avatar src={authorAvatar} icon={<UserOutlined />} size="small" />
+          {authorName}
         </Space>
       </Space>
 

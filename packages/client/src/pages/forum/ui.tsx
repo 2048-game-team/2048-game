@@ -1,29 +1,29 @@
 import React, { FC, useState } from 'react';
 import { Button } from 'antd';
-import { ForumTheme } from './forumTheme/ui';
+import { ForumTopic } from './forumTopic/ui';
 import { SpaceForum, SpaceEnd } from 'pages/forum';
-import { FormNewTheme } from './newTheme/ui';
+import { FormNewTopic } from './newTopic/ui';
 
 export const Forum: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleButtonNewTheme = () => {
+  const handleButtonNewTopic = () => {
     setModalOpen(true);
   };
 
   return (
     <>
       <SpaceForum direction="vertical">
-        <ForumTheme />
+        <ForumTopic />
 
         <SpaceEnd>
-          <Button type="primary" onClick={handleButtonNewTheme}>
+          <Button type="primary" onClick={handleButtonNewTopic}>
             Новая тема
           </Button>
         </SpaceEnd>
       </SpaceForum>
 
-      <FormNewTheme modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <FormNewTopic modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
   );
 };

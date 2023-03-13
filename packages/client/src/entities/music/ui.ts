@@ -6,7 +6,7 @@ class Sfx {
   private finishSound: HTMLAudioElement | undefined;
 
   playClick(volume: number) {
-    if (volume <= 0.01) return;
+    if (volume === 0) return;
     if (!this.clickSound) {
       this.clickSound = new Audio(`${BASE_URL}${soundUrl.click}`);
     }
@@ -19,7 +19,7 @@ class Sfx {
   }
 
   playFinish(volume: number) {
-    if (volume <= 0.01) return;
+    if (volume === 0) return;
     if (!this.finishSound) {
       this.finishSound = new Audio(`${BASE_URL}${soundUrl.finish}`);
     }

@@ -11,6 +11,9 @@ import * as path from 'path';
 import { BASE_URL, API_URL } from './src/consts';
 import { topics } from './src/router/topics';
 import { messages } from './src/router/messages';
+import { likes } from './src/router/likes';
+import { themes } from './src/router/themes';
+import { errorMiddleware } from './src/middlewares/error';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
@@ -24,6 +27,9 @@ app.get(`/api`, (_, res) => {
 
 app.use(`${API_URL}/topics`, topics);
 app.use(`${API_URL}/messages`, messages);
+app.use(`${API_URL}/likes`, likes);
+app.use(`${API_URL}/themes`, themes);
+app.use(errorMiddleware);
 
 export async function startServer() {
   let vite: ViteDevServer | undefined;

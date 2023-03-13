@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { MessagesProps, SpaceMessages } from 'pages/forum';
 import { ForumMessage } from './forumMessage/ui';
 
-export const ForumThemeMessages = ({ messages }: MessagesProps) => {
+export const ForumTopicMessages: FC<MessagesProps> = ({ messages }) => {
   if (!messages) {
     return null;
   }

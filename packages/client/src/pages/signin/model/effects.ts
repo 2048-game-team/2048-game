@@ -2,7 +2,7 @@ import { createEffect } from 'effector';
 import { SignInRequest, YandexServiceIdListParams } from 'shared/api/swagger';
 import { AxiosError } from 'axios';
 import { practicumApi } from 'shared/api/api';
-import { YandexOAuthRedirectUri, yandexOauthUrl } from 'root/const';
+import { YANDEX_OAUTH_REDIRECT_URL, YANDEX_OAUTH_URL } from 'root/const';
 
 export const signInFx = createEffect<SignInRequest, void, AxiosError>(
   async signInRequest => {
@@ -18,5 +18,5 @@ export const oauthGetServiceIdFx = createEffect<
   const res = await practicumApi.oauth.yandexServiceIdList(
     yandexServiceIdListParams
   );
-  window.location.href = `${yandexOauthUrl}?response_type=code&client_id=${res.data.service_id}&redirect_uri=${YandexOAuthRedirectUri}&force_confirm=yes`;
+  window.location.href = `${YANDEX_OAUTH_URL}?response_type=code&client_id=${res.data.service_id}&redirect_uri=${YANDEX_OAUTH_REDIRECT_URL}&force_confirm=yes`;
 });

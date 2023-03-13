@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Card } from 'antd';
-import { StartSpace, StartButton, StartTypography } from './styles';
+import { Card, Image } from 'antd';
+import { StartButton, StartSpace, StartTypography } from './styles';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
-import { YandexOAuthRedirectUri } from 'root/const';
+import { YANDEX_OAUTH_REDIRECT_URL } from 'root/const';
 import { oauthSignIn } from 'processes/layout/model/model';
 import { useEvent } from 'effector-react/ssr';
 
@@ -20,7 +20,7 @@ export const Start = () => {
   const code = searchParams.get('code');
   useEffect(() => {
     if (code) {
-      oauthSignInFn({ code, redirect_uri: YandexOAuthRedirectUri });
+      oauthSignInFn({ code, redirect_uri: YANDEX_OAUTH_REDIRECT_URL });
     }
   }, [code]);
 

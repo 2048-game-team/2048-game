@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import 'root/jest.mock';
 import { fork } from 'effector';
 import { baseURL } from 'shared/api/consts';
 import {
@@ -12,7 +11,7 @@ import {
   XSSScript,
   injureUserResponse,
 } from './const';
-
+import { expect, it, beforeAll, afterEach, afterAll } from 'vitest';
 const scope = fork();
 
 const server = setupServer(
@@ -33,11 +32,11 @@ console.log = (...args) => {
   logBackup.apply(console, args);
 };
 
-test('XSS vulnerability check', async () => {
+it('XSS vulnerability check', async () => {
   console.log(logRedirectTest);
   expect(logMessages[logMessages.length - 1]).toEqual(logRedirectTest);
 
-  const { container } = render(<AppWithProviders scope={scope} />);
+  const { container } = render(<AppWithProviders scope={scope} location="/" />);
 
   const avatar = container.getElementsByClassName('ant-avatar-circle')[0];
   expect(avatar).toBeDefined();

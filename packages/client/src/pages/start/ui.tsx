@@ -5,9 +5,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
-import { YandexOAuthRedirectUri } from 'root/const';
 import { oauthSignIn } from 'processes/layout/model/model';
 import { useEvent } from 'effector-react/ssr';
+import { yandexOauthRedirectUri } from 'shared/envConsts';
 
 export const Start = () => {
   const oauthSignInFn = useEvent(oauthSignIn);
@@ -20,7 +20,7 @@ export const Start = () => {
   const code = searchParams.get('code');
   useEffect(() => {
     if (code) {
-      oauthSignInFn({ code, redirect_uri: YandexOAuthRedirectUri });
+      oauthSignInFn({ code, redirect_uri: yandexOauthRedirectUri });
     }
   }, [code]);
 

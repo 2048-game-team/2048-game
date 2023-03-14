@@ -1,10 +1,10 @@
-import { BASE_URL } from 'root/const';
+import { baseUrl } from 'shared/envConsts';
 
 export const startServiceWorker = () => {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register(`${BASE_URL}/sw.js`)
+        .register(`${baseUrl}/sw.js`)
         .catch((error: string) => {
           console.log('SW failed: ', error);
         });

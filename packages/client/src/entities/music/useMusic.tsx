@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import { $envData } from 'app/model';
-
-let baseUrl: string;
-$envData.watch(env => ({ baseUrl } = env));
+import { baseUrl } from 'shared/envConsts';
 
 interface MusicProps {
   url: string;

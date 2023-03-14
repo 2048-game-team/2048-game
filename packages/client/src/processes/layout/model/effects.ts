@@ -5,10 +5,7 @@ import { practicumApi } from 'shared/api/api';
 import { Theme } from 'entities/ui';
 import { apiPath } from 'shared/apiServer/apiPath';
 import { UserThemePayload } from 'processes/layout/types';
-import { $envData } from 'app/model';
-
-let serverUrl: string;
-$envData.watch(env => ({ serverUrl } = env));
+import { serverUrl } from 'shared/envConsts';
 
 export const getUserFx = createEffect<void, UserResponse, AxiosError>(
   async () => {

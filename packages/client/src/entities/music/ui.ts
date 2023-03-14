@@ -1,8 +1,5 @@
 import { soundUrl } from 'entities/music';
-import { $envData } from 'app/model';
-
-let baseUrl: string;
-$envData.watch(env => ({ baseUrl } = env));
+import { baseUrl } from 'shared/envConsts';
 
 class Sfx {
   private clickSound: HTMLAudioElement | undefined;

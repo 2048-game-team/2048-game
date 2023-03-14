@@ -7,10 +7,7 @@ import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
 import { oauthSignIn } from 'processes/layout/model/model';
 import { useEvent } from 'effector-react/ssr';
-import { $envData } from 'app/model';
-
-let yandexOauthRedirectUri: string;
-$envData.watch(env => ({ yandexOauthRedirectUri } = env));
+import { yandexOauthRedirectUri } from 'shared/envConsts';
 
 export const Start = () => {
   const oauthSignInFn = useEvent(oauthSignIn);

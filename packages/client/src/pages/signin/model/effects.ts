@@ -2,11 +2,7 @@ import { createEffect } from 'effector';
 import { SignInRequest, YandexServiceIdListParams } from 'shared/api/swagger';
 import { AxiosError } from 'axios';
 import { practicumApi } from 'shared/api/api';
-import { $envData } from 'app/model';
-
-let yandexOauthRedirectUri: string;
-let yandexOauthUrl: string;
-$envData.watch(env => ({ yandexOauthRedirectUri, yandexOauthUrl } = env));
+import { yandexOauthRedirectUri, yandexOauthUrl } from 'shared/envConsts';
 
 export const signInFx = createEffect<SignInRequest, void, AxiosError>(
   async signInRequest => {

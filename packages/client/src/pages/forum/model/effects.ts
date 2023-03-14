@@ -2,10 +2,7 @@ import { createEffect } from 'effector';
 import axios, { AxiosError } from 'axios';
 import { ForumData, NewLike, NewMessage, NewTopic } from 'pages/forum';
 import { apiPath } from 'shared/apiServer/apiPath';
-import { $envData } from 'app/model';
-
-let serverUrl: string;
-$envData.watch(env => ({ serverUrl } = env));
+import { serverUrl } from 'shared/envConsts';
 
 export const getForumDataFx = createEffect<void, ForumData, AxiosError>(
   async () => {

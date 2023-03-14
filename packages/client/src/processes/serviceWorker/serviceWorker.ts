@@ -1,7 +1,4 @@
-import { $envData } from 'app/model';
-
-let baseUrl: string;
-$envData.watch(env => ({ baseUrl } = env));
+import { baseUrl } from 'shared/envConsts';
 
 export const startServiceWorker = () => {
   if ('serviceWorker' in navigator) {

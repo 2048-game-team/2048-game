@@ -15,7 +15,7 @@ import { it, expect, describe } from 'vitest';
 let undoRedoPossible: IUndoRedoPossible;
 $undoRedoPossible?.watch(data => (undoRedoPossible = data));
 
-describe("undo redo tests", () => {
+describe('undo redo tests', () => {
   it('Undo/redo possibility test1', () => {
     createNewGame(testDimension, testDimension);
     expect(undoRedoPossible.canUndo).toEqual(false);

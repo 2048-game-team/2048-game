@@ -1,4 +1,4 @@
-import {vi} from 'vitest';
+import { vi } from 'vitest';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 Object.defineProperty(window, 'matchMedia', {
@@ -13,4 +13,4 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
-})
+});

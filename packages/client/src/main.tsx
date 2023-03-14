@@ -14,7 +14,7 @@ const scope = fork({ values: window.__INITIAL_STATE__ });
 
 ReactDOM.hydrateRoot(
   document.querySelector('#root') as HTMLElement,
-  <AppWithProviders scope={scope}/>
+  <AppWithProviders scope={scope} />
 );
 
 startServiceWorker();

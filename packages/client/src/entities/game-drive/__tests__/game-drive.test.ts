@@ -14,7 +14,7 @@ export const compare = <T>(a: T, b: T) => {
   return JSON.stringify(a) === JSON.stringify(b);
 };
 
-describe("game drive test", () => {
+describe('game drive test', () => {
   it('Init board test', () => {
     createNewGame(testDimension, testDimension);
     const chipSum = gameData?.boardData.reduce(
@@ -34,7 +34,9 @@ describe("game drive test", () => {
     setGame({ boardData: setRows, score: 0 });
 
     for (let i = 0; i < testDimension; i++)
-      expect(compare<number[]>(gameData?.boardData[i], setRows[i])).toEqual(true);
+      expect(compare<number[]>(gameData?.boardData[i], setRows[i])).toEqual(
+        true
+      );
   });
 
   it('Try left movement', () => {

@@ -11,7 +11,7 @@ import {
   XSSScript,
   injureUserResponse,
 } from './const';
-import { expect, it, beforeAll, afterEach, afterAll } from 'vitest'
+import { expect, it, beforeAll, afterEach, afterAll } from 'vitest';
 const scope = fork();
 
 const server = setupServer(
@@ -36,9 +36,7 @@ it('XSS vulnerability check', async () => {
   console.log(logRedirectTest);
   expect(logMessages[logMessages.length - 1]).toEqual(logRedirectTest);
 
-  const { container } = render(
-    <AppWithProviders scope={scope} location="/"/>
-  );
+  const { container } = render(<AppWithProviders scope={scope} location="/" />);
 
   const avatar = container.getElementsByClassName('ant-avatar-circle')[0];
   expect(avatar).toBeDefined();

@@ -20,11 +20,11 @@ services:
     image: {{ env.GAME_IMAGE }}
     restart: always
     ports:
-      - "4000:4000"
+      - "3001:3001"
     environment:
       VITE_ROOT_PATH: {{ env.ROOT_PATH }}
       VITE_GAME_URL: {{ env.GAME_URL }}
-      SERVER_PORT: {{ env.SERVER_PORT }}
+      SERVER_PORT: 3001
       DATABASE_URL: postgresql://{{ env.POSTGRES_USER }}:{{ env.POSTGRES_PASSWORD }}@postgres/{{ env.POSTGRES_DB }}
     depends_on:
       - postgres

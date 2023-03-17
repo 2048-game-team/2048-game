@@ -98,6 +98,6 @@ jobs:
           vm-disk-size: 30Gb
           vm-core-fraction: 20
           vm-zone-id: ru-central1-a
-          vm-subnet-id: enpg2fh82beal1rfkk7q
+          vm-subnet-id: e9b4gqv3rc1cp5h2kto2
           docker-compose-path: './yandex-cloud/docker-compose.yaml'
           user-data-path: './yandex-cloud/user-data.yaml'

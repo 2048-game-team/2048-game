@@ -7,9 +7,9 @@ on:
       - main
 
 env:
-  CR_REGISTRY: 2048-game-team
-  GAME_IMAGE: ghcr.io/2048-game-team/game:${{ github.sha }}
-  NGINX_IMAGE: ghcr.io/2048-game-team/nginx:${{ github.sha }}
+  CR_REGISTRY: crp34ugjiqb19ajibgh3
+  GAME_IMAGE: cr.yandex/crp34ugjiqb19ajibgh3/game:${{ github.sha }}
+  NGINX_IMAGE: cr.yandex/crp34ugjiqb19ajibgh3/nginx:${{ github.sha }}
 
 jobs:
   build-game:
@@ -28,20 +28,19 @@ jobs:
           echo VITE_BACKEND_URL=${{ vars.BACKEND_URL }} >> .env
           cat .env
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Login to Yandex Cloud Container Registry
+        id: login-cr
+        uses: yc-actions/yc-cr-login@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to GitHub Container Registry
         env:
           CR_REPOSITORY: game
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t ghcr.io/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . -f Dockerfile.server
-          docker push ghcr.io/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . -f Dockerfile.server
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
 
   build-nginx:
     runs-on: ubuntu-latest
@@ -52,20 +51,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Login to Yandex Cloud Container Registry
+        id: login-cr
+        uses: yc-actions/yc-cr-login@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to GitHub Container Registry
         env:
           CR_REPOSITORY: nginx
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t ghcr.io/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . 
-          docker push ghcr.io/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . 
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
 
   update-coi:
     needs: [ build-game, build-nginx ]
@@ -83,33 +81,24 @@ jobs:
         env:
           GAME_IMAGE: ${{ env.GAME_IMAGE }}
           NGINX_IMAGE: ${{ env.NGINX_IMAGE }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-          FRONTEND_URL: ${{ vars.FRONTEND_URL }}
-          BACKEND_URL: ${{ vars.BACKEND_URL }}
-          PAYTURE_URL: ${{ vars.PAYTURE_URL }}
-          PAYTURE_TERMINAL_RUB: ${{ vars.PAYTURE_TERMINAL_RUB }}
-          PAYTURE_TERMINAL_USD: ${{ vars.PAYTURE_TERMINAL_USD }}
-          PAYTURE_TERMINAL_PASSWORD: ${{ secrets.PAYTURE_TERMINAL_PASSWORD }}
-          NALOG_INN: ${{ vars.NALOG_INN }}
-          NALOG_PASSWORD: ${{ secrets.NALOG_PASSWORD }}
-          YOOKASSA_ID: ${{ vars.YOOKASSA_ID }}
-          YOOKASSA_SECRET: ${{ secrets.YOOKASSA_SECRET }}
-          SERVICE_KEY_ID: ${{ vars.SERVICE_KEY_ID }}
-          SERVICE_KEY_SECRET: ${{ secrets.SERVICE_KEY_SECRET }}
           NGINX_CERT: ${{ secrets.NGINX_CERT }}
           NGINX_CERT_KEY: ${{ secrets.NGINX_CERT_KEY }}
-          YC_GROUP_ID: ${{ secrets.YC_GROUP_ID }}
+          ROOT_PATH: ${{ vars.ROOT_PATH }}
+          GAME_URL: ${{ vars.GAME_URL }}
+          BACKEND_URL: ${{ vars.BACKEND_URL }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          folder-id: b1g4s4k8tj83buc1hdoq
-          vm-name: just-study
+          folder-id: b1gra6bd9kellk83pnff
+          vm-name: game-2048
           vm-service-account-id: aje38cdteqcfo55pe02h
           vm-cores: 2
           vm-memory: 2GB
           vm-disk-size: 30Gb
-          vm-core-fraction: 50
+          vm-core-fraction: 20
           vm-zone-id: ru-central1-a
-          vm-subnet-id: e9b0mid7cobe4c9paohd
+          vm-subnet-id: enpg2fh82beal1rfkk7q
           docker-compose-path: './yandex-cloud/docker-compose.yaml'
           user-data-path: './yandex-cloud/user-data.yaml'

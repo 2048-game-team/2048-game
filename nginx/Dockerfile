@@ -4,6 +4,7 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 
 COPY nginx.conf ssl.conf proxy_headers.conf /etc/nginx/
 COPY server.conf gzip.conf /etc/nginx/conf.d/
+COPY uhSYUfiOoC0wSXkkTpVOjwoULWOY4oxcPg1EMh6MAmg.html /etc/nginx/var/www/letsencrypt/.well-known/acme-challenge
 
 COPY /start-nginx.sh /start-nginx.sh
 

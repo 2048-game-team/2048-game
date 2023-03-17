@@ -25,7 +25,6 @@ jobs:
           touch .env
           echo VITE_ROOT_PATH=${{ vars.ROOT_PATH }} >> .env
           echo VITE_GAME_URL=${{ vars.GAME_URL }} >> .env
-          echo VITE_BACKEND_URL=${{ vars.BACKEND_URL }} >> .env
           cat .env
 
       - name: Login to Yandex Cloud Container Registry
@@ -85,7 +84,6 @@ jobs:
           NGINX_CERT_KEY: ${{ secrets.NGINX_CERT_KEY }}
           ROOT_PATH: ${{ vars.ROOT_PATH }}
           GAME_URL: ${{ vars.GAME_URL }}
-          BACKEND_URL: ${{ vars.BACKEND_URL }}
           POSTGRES_USER: ${{ vars.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ vars.POSTGRES_DB }}

@@ -14,6 +14,8 @@ services:
     depends_on:
       - server
       - pgadmin
+    networks:
+      - local
 
   server:
     container_name: server
@@ -47,7 +49,7 @@ services:
   pgadmin:
     container_name: pgadmin
     user: root
-    image: dpage/pgadmin4:4.18
+    image: dpage/pgadmin4
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com

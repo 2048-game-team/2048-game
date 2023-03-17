@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env?.VITE_ROOT_PATH || '/';
+export const BASE_URL = '/';
 export const YANDEX_OAUTH_URL = 'https://oauth.yandex.ru/authorize';
 export const YANDEX_OAUTH_REDIRECT_URL =
   process.env.VITE_GAME_URL || 'http://localhost:3000';

@@ -40,7 +40,7 @@ services:
       POSTGRES_USER: {{ env.POSTGRES_USER }}
       POSTGRES_DB: {{ env.POSTGRES_DB }}
     volumes:
-      - ./tmp/pgdata:/var/lib/postgresql/data
+      - /tmp/pgdata:/var/lib/postgresql/data
     networks:
       - local
 

@@ -16,7 +16,7 @@ services:
       - pgadmin
 
   server:
-    container_name: prakticum-server
+    container_name: server
     image: {{ env.GAME_IMAGE }}
     restart: always
     ports:

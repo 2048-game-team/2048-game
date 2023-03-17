@@ -92,7 +92,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           folder-id: b1gra6bd9kellk83pnff
           vm-name: game-2048
-          vm-service-account-id: aje38cdteqcfo55pe02h
+          vm-service-account-id: aje5e1ruh215irb8rsb0
           vm-cores: 2
           vm-memory: 2GB
           vm-disk-size: 30Gb

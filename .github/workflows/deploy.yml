@@ -1,0 +1,104 @@
+name: Deploy to Yandex Cloud
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feat/deploy
+
+env:
+  CR_REGISTRY: crp34ugjiqb19ajibgh3
+  GAME_IMAGE: cr.yandex/crp34ugjiqb19ajibgh3/game:${{ github.sha }}
+  NGINX_IMAGE: cr.yandex/crp34ugjiqb19ajibgh3/nginx:${{ github.sha }}
+
+jobs:
+  build-game:
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo VITE_ROOT_PATH=${{ vars.ROOT_PATH }} >> .env
+          echo VITE_GAME_URL=${{ vars.GAME_URL }} >> .env
+          cat .env
+
+      - name: Login to Yandex Cloud Container Registry
+        id: login-cr
+        uses: yc-actions/yc-cr-login@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Build, tag, and push image to GitHub Container Registry
+        env:
+          CR_REPOSITORY: game
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . -f Dockerfile.server
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+
+  build-nginx:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nginx
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Yandex Cloud Container Registry
+        id: login-cr
+        uses: yc-actions/yc-cr-login@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Build, tag, and push image to GitHub Container Registry
+        env:
+          CR_REPOSITORY: nginx
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG . 
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+
+  update-coi:
+    needs: [ build-game, build-nginx ]
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: ${{ vars.GAME_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy COI VM
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v1.2.0
+        env:
+          GAME_IMAGE: ${{ env.GAME_IMAGE }}
+          NGINX_IMAGE: ${{ env.NGINX_IMAGE }}
+          NGINX_CERT: ${{ secrets.NGINX_CERT }}
+          NGINX_CERT_KEY: ${{ secrets.NGINX_CERT_KEY }}
+          ROOT_PATH: ${{ vars.ROOT_PATH }}
+          GAME_URL: ${{ vars.GAME_URL }}
+          POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: b1gra6bd9kellk83pnff
+          vm-name: game-2048
+          vm-service-account-id: aje5e1ruh215irb8rsb0
+          vm-cores: 2
+          vm-memory: 2GB
+          vm-disk-size: 30Gb
+          vm-core-fraction: 20
+          vm-zone-id: ru-central1-a
+          vm-subnet-id: e9b4gqv3rc1cp5h2kto2
+          docker-compose-path: './yandex-cloud/docker-compose.yaml'
+          user-data-path: './yandex-cloud/user-data.yaml'

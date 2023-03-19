@@ -6,21 +6,12 @@ import { FC, PropsWithChildren } from 'react';
 
 export const UndoRedoButtons: FC<PropsWithChildren> = () => {
   const { canUndo, canRedo } = useUnit($undoRedoPossible);
-
-  const undoHandler = () => {
-    undo();
-  };
-
-  const redoHandler = () => {
-    redo();
-  };
-
   return (
     <Space>
-      <Button disabled={!canUndo} onClick={undoHandler}>
+      <Button disabled={!canUndo} onClick={undo}>
         Undo
       </Button>
-      <Button disabled={!canRedo} onClick={redoHandler}>
+      <Button disabled={!canRedo} onClick={redo}>
         Redo
       </Button>
     </Space>

@@ -7,7 +7,7 @@ import './model/init';
 import { useEvent, useUnit } from 'effector-react/ssr';
 import { oauthGetServiceId, signin, signInFx } from './model';
 import { ButtonYandex, SpaceButtons, SpaceYandex } from './styles';
-import { YandexOAuthRedirectUri } from 'root/const';
+import { YANDEX_OAUTH_REDIRECT_URL } from 'root/const';
 import { YandexIcon } from 'pages/signin/yandexIcon';
 
 export const SignIn: FC = () => {
@@ -25,7 +25,7 @@ export const SignIn: FC = () => {
   };
 
   const handleOauth = () => {
-    oauthGetServiceIdFn({ redirect_uri: YandexOAuthRedirectUri });
+    oauthGetServiceIdFn({ redirect_uri: YANDEX_OAUTH_REDIRECT_URL });
   };
 
   return (

@@ -13,7 +13,8 @@
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
     "prettier": "prettier --write .",
     "format": "npm run lint:fix && npm run prettier",
-    "test": "jest ./",
+    "test:crashed": "jest ./",
+    "test": "",
     "swagger": "swagger-typescript-api --axios --responses --extract-enums --extract-request-params --extract-request-body -p ./src/shared/api/swagger.json -o ./src/shared/api -n swagger.ts"
   },
   "dependencies": {

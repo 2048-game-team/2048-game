@@ -1,24 +1,28 @@
-import { UserResponse } from 'shared/api/swagger';
 import { RATING_FIELD_NAME } from 'pages/leaderboard/consts';
-import { Dispatch, SetStateAction } from 'react';
+
+interface User {
+  name?: string;
+  avatar?: string;
+}
 
 export type RowUserProps = {
-  userId: number;
+  user: User;
 };
 
 export interface LeaderboardData {
-  userId?: number;
+  user: User;
   [RATING_FIELD_NAME]: number;
 }
 
 export interface LeaderboardItem {
   key: number;
-  userId: number;
+  user: User;
   points: number;
 }
 
-export interface GetUserByIdGateProps {
-  userId: number;
-  userFn: Dispatch<SetStateAction<UserResponse | undefined>>;
-  loadingFn: Dispatch<SetStateAction<boolean>>;
+export interface LeaderboardResponse {
+  data: {
+    user: User;
+    [RATING_FIELD_NAME]: number;
+  };
 }

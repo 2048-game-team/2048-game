@@ -1,5 +1,5 @@
 import { soundUrl } from 'entities/music';
-import { baseUrl } from 'shared/envConsts';
+import { BASE_URL } from 'shared/envConsts';
 
 class Sfx {
   private clickSound: HTMLAudioElement | undefined;
@@ -8,7 +8,7 @@ class Sfx {
   playClick(volume: number) {
     if (volume === 0) return;
     if (!this.clickSound) {
-      this.clickSound = new Audio(`${baseUrl}${soundUrl.click}`);
+      this.clickSound = new Audio(`${BASE_URL}${soundUrl.click}`);
     }
     this.clickSound.volume = volume;
     if (this.clickSound.paused) {
@@ -21,7 +21,7 @@ class Sfx {
   playFinish(volume: number) {
     if (volume === 0) return;
     if (!this.finishSound) {
-      this.finishSound = new Audio(`${baseUrl}${soundUrl.finish}`);
+      this.finishSound = new Audio(`${BASE_URL}${soundUrl.finish}`);
     }
     this.finishSound.volume = 1;
     this.finishSound.play();

@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: {{ env.NGINX_IMAGE }}
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    environment:
+      NGINX_CERT: {{ env.NGINX_CERT }}
+      NGINX_CERT_KEY: {{ env.NGINX_CERT_KEY }}
+    depends_on:
+      - server
+      - pgadmin
+    networks:
+      - local
+
+  server:
+    image: {{ env.GAME_IMAGE }}
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      VITE_ROOT_PATH: {{ env.ROOT_PATH }}
+      VITE_GAME_URL: {{ env.GAME_URL }}
+      SERVER_PORT: 3001
+      DATABASE_URL: postgresql://{{ env.POSTGRES_USER }}:{{ env.POSTGRES_PASSWORD }}@postgres/{{ env.POSTGRES_DB }}
+    depends_on:
+      - postgres
+    networks:
+      - local
+
+  postgres:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: {{ env.POSTGRES_PASSWORD }}
+      POSTGRES_USER: {{ env.POSTGRES_USER }}
+      POSTGRES_DB: {{ env.POSTGRES_DB }}
+    volumes:
+      - /tmp/pgdata:/var/lib/postgresql/data
+    networks:
+      - local
+
+  pgadmin:
+    user: root
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_LISTEN_PORT: 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - /tmp/pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge

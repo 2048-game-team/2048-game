@@ -1,21 +1,18 @@
-import {Array2D, Cell} from 'entities/game-drive';
+import { Array2D, Cell } from 'entities/game-drive';
+import { getColor } from './getColor';
 import {
   BORDER,
-  FONT_STYLE,
+  FONT_STYLE_BIG,
+  FONT_STYLE_MEDIUM,
+  FONT_STYLE_SMALL,
   FIELD_COLOR,
-  TEXT_COLOR,
-  CELL_COLORS
+  TEXT_COLOR
 } from './const';
 
 const canvas: any = {
   width: null,
   height: null,
 }
-
-let thisCtx: any = null;
-
-const cells: Array<Cell> = [];
-const speed = 2;
 
 const roundRect = (
   ctx: CanvasRenderingContext2D,
@@ -36,17 +33,22 @@ const roundRect = (
   return ctx;
 }
 
-const calculateCellWidthAndHeight = (
+const calculateSizes = (
   gameState: Array2D,
   width: number,
-  height: number
+  height: number,
 ) => {
   const rows = gameState.length;
   const cols = gameState[0].length;
   const border = BORDER;
   const cellHeigth = (height - border * (rows + 1)) / rows;
   const cellWidth = (width - border * (cols + 1)) / cols;
-  return { cellHeigth, cellWidth };
+  const maxSize = Math.max(rows, cols);
+  const fontName = 
+    maxSize < 5 ? FONT_STYLE_BIG :
+    maxSize < 7 ? FONT_STYLE_MEDIUM : 
+    FONT_STYLE_SMALL;
+  return { cellHeigth, cellWidth, fontName };
 };
 
 const drawBackground = (
@@ -55,86 +57,35 @@ const drawBackground = (
   height: number
 ) => {
   ctx.fillStyle = FIELD_COLOR;
-  roundRect(ctx, 0, 0, width, height, 10);
-  ctx.fill();
+  ctx.fillRect(0, 0, width, height);
 };
 
 const drawCell = (
   ctx: CanvasRenderingContext2D,
-  cell: Cell
+  cell: Cell,
+  fontName: string,
 ) => {
-  getColor(ctx, cell.value);
-
-  //анимация только для ячеек с числом
-  /*if(cell.value != 0) {
-    roundRect(ctx, cell.x, cell.y, cell.width, cell.height, 10);
-
-    if(cell.width < cell.maxWidth) {
-      cell.width += speed;
-    }
-    if (cell.height < cell.maxHeight) {
-      cell.height += speed;
-    }
-  } else {*/
-    roundRect(ctx, cell.x, cell.y, cell.maxWidth+1, cell.maxHeight+1, 10);
-  //}
+  ctx.fillStyle = getColor(cell.value);
+  roundRect(ctx, cell.x, cell.y, cell.maxWidth+1, cell.maxHeight+1, 10);
   ctx.fill();
 
-  ctx.font = FONT_STYLE;
+  ctx.font = fontName;
   ctx.fillStyle = TEXT_COLOR;
   const textWidth = ctx.measureText(cell.value.toString()).width;
   ctx.fillText(cell.value.toString(), cell.x + ((cell.maxWidth-textWidth)/2), cell.y + (cell.maxHeight/1.7));
 };
 
 const update = () => {
-  thisCtx.clearRect(0, 0, canvas.width, canvas.height);
+  console.log("update")
+  /*thisCtx.clearRect(0, 0, canvas.width, canvas.height);
 
   cells.forEach((item) => {
     drawCell(thisCtx, item);
   })
-  requestAnimationFrame(update);
+  requestAnimationFrame(update);*/
 }
 
-const getColor = (ctx: CanvasRenderingContext2D, value: number) => {
-  switch (value) {
-    case 2:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_2;
-      break;
-    case 4:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_4;
-      break;
-    case 8:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_8;
-      break;
-    case 16:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_16;
-      break;
-    case 32:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_32;
-      break;
-    case 64:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_64;
-      break;
-    case 128:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_128;
-      break;
-    case 256:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_256;
-      break;
-    case 512:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_512;
-      break;
-    case 1024:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_1024;
-      break;
-    case 2048:
-      ctx.fillStyle = CELL_COLORS.CELL_COLOR_2048;
-      break;
-    default:
-      ctx.fillStyle = CELL_COLORS.ZERO_CELL_COLOR;
-      break;
-  }
-}
+
 
 export const drawGame = (
   ctx: CanvasRenderingContext2D,
@@ -142,7 +93,7 @@ export const drawGame = (
   width: number,
   height: number
 ): void => {
-  thisCtx = ctx;
+  
   canvas.width = width;
   canvas.height = height;
 
@@ -152,7 +103,7 @@ export const drawGame = (
     return;
   }
 
-  const { cellHeigth, cellWidth } = calculateCellWidthAndHeight(
+  const { cellHeigth, cellWidth, fontName } = calculateSizes(
     gameState,
     width,
     height
@@ -162,6 +113,7 @@ export const drawGame = (
     row.forEach((cellValue, cellIndex) => {
       const x = BORDER + (BORDER + cellWidth) * cellIndex;
       const y = BORDER + (BORDER + cellHeigth) * rowIndex;
+      // drawCell(ctx, x, y, cellWidth, cellHeigth, cellValue);
       const cell = {
         x: x,
         y: y,
@@ -171,9 +123,15 @@ export const drawGame = (
         maxWidth: cellWidth,
         maxHeight: cellHeigth,
       };
-      cells.push(cell);
+      drawCell(ctx, cell, fontName);
     });
   });
 
-  update();
+  //thisCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+ /* cells.forEach((item) => {
+    drawCell(ctx, item);
+  })*/
+
+  //update();
 };

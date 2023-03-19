@@ -22,8 +22,6 @@ export enum Movements {
 export type Cell = {
   x: number,
   y: number,
-  width: number,
-  height: number,
   value: number,
   maxWidth: number,
   maxHeight: number,

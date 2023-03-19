@@ -66,7 +66,7 @@ const drawCell = (
   getColor(ctx, cell.value);
 
   //анимация только для ячеек с числом
-  if(cell.value != 0) {
+  /*if(cell.value != 0) {
     roundRect(ctx, cell.x, cell.y, cell.width, cell.height, 10);
 
     if(cell.width < cell.maxWidth) {
@@ -75,9 +75,9 @@ const drawCell = (
     if (cell.height < cell.maxHeight) {
       cell.height += speed;
     }
-  } else {
+  } else {*/
     roundRect(ctx, cell.x, cell.y, cell.maxWidth+1, cell.maxHeight+1, 10);
-  }
+  //}
   ctx.fill();
 
   ctx.font = FONT_STYLE;

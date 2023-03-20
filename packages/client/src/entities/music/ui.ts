@@ -1,5 +1,5 @@
 import { soundUrl } from 'entities/music';
-import { BASE_URL } from 'root/const';
+import { BASE_URL } from 'client/const';
 
 class Sfx {
   private clickSound: HTMLAudioElement | undefined;

@@ -7,8 +7,8 @@ import './model/init';
 import { useEvent, useUnit } from 'effector-react/ssr';
 import { oauthGetServiceId, signin, signInFx } from './model';
 import { ButtonYandex, SpaceButtons, SpaceYandex } from './styles';
-import { YANDEX_OAUTH_REDIRECT_URL } from 'root/const';
 import { YandexIcon } from 'pages/signin/yandexIcon';
+import { YANDEX_OAUTH_REDIRECT_URL } from 'client/const';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();

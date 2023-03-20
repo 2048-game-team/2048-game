@@ -9,7 +9,7 @@ const STATIC_URLS = [
   '/teamPhotos/noimage.jpg',
   '/sounds/background.mp3',
   '/sounds/click.mp3',
-  '/sounds/finish.mp3',
+  '/sounds/finish.wav',
 ];
 
 self.addEventListener('install', async event => {

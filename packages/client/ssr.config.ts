@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.VITE_ROOT_PATH,
+  base: `${process.env.VITE_ROOT_PATH}/`,
   plugins: [react(), tsconfigPaths()],
   build: {
     lib: {

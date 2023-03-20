@@ -7,3 +7,4 @@ dist-ssr
 tmp
 yarn-error.log
 .eslint-cache
+*.log

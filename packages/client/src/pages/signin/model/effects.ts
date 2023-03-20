@@ -2,7 +2,7 @@ import { createEffect } from 'effector';
 import { SignInRequest, YandexServiceIdListParams } from 'shared/api/swagger';
 import { AxiosError } from 'axios';
 import { practicumApi } from 'shared/api/api';
-import { YANDEX_OAUTH_REDIRECT_URL, YANDEX_OAUTH_URL } from 'shared/envConsts';
+import { YANDEX_OAUTH_REDIRECT_URL, YANDEX_OAUTH_URL } from 'client/const';
 
 export const signInFx = createEffect<SignInRequest, void, AxiosError>(
   async signInRequest => {

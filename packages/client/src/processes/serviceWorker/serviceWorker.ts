@@ -1,4 +1,4 @@
-import { BASE_URL } from 'shared/envConsts';
+import { BASE_URL } from 'client/const';
 
 export const startServiceWorker = () => {
   if ('serviceWorker' in navigator) {

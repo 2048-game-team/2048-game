@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BASE_URL } from 'shared/envConsts';
+import { BASE_URL } from 'client/const';
 
 interface MusicProps {
   url: string;

@@ -7,7 +7,7 @@ import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
 import { oauthSignIn } from 'processes/layout/model/model';
 import { useEvent } from 'effector-react/ssr';
-import { YANDEX_OAUTH_REDIRECT_URL } from 'shared/envConsts';
+import { YANDEX_OAUTH_REDIRECT_URL } from 'client/const';
 
 export const Start = () => {
   const oauthSignInFn = useEvent(oauthSignIn);

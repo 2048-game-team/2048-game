@@ -9,12 +9,10 @@ export const GameCanvas: FC<PropsWithChildren> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { gameWidth, gameHeight, gameRows, gameCols, soundVolume } =
     useUnit($settings);
-
   useEffect(() => {
     createNewGame(gameRows, gameCols);
     const ctx: CanvasRenderingContext2D | null | undefined =
       canvasRef.current?.getContext('2d');
-
     if (ctx) {
       const unwatch = $gameData.watch(store => {
         drawGame(ctx, store.boardData, gameWidth, gameHeight);

@@ -19,6 +19,14 @@ export enum Movements {
   Bottom = 'bottom',
 }
 
+export type Cell = {
+  x: number;
+  y: number;
+  value: number;
+  maxWidth: number;
+  maxHeight: number;
+};
+
 export type CellList = { row: number; col: number }[];
 
 export interface IMovementResult {

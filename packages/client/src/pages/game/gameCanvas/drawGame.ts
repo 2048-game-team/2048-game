@@ -10,7 +10,10 @@ import {
   TEXT_COLOR,
 } from './const';
 
-const canvas: any = {
+const canvas: {
+  width: number | null,
+  height: number | null
+} = {
   width: null,
   height: null,
 };

@@ -5,9 +5,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { routesPath } from 'processes/routes';
 import gameLogo from './gameLogo.gif';
 import { aboutGameText } from './const';
-import { YANDEX_OAUTH_REDIRECT_URL } from 'root/const';
 import { oauthSignIn } from 'processes/layout/model/model';
 import { useEvent } from 'effector-react/ssr';
+import { YANDEX_OAUTH_REDIRECT_URL } from 'client/const';
 
 export const Start = () => {
   const oauthSignInFn = useEvent(oauthSignIn);

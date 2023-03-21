@@ -20,12 +20,12 @@ export enum Movements {
 }
 
 export type Cell = {
-  x: number,
-  y: number,
-  value: number,
-  maxWidth: number,
-  maxHeight: number,
-}
+  x: number;
+  y: number;
+  value: number;
+  maxWidth: number;
+  maxHeight: number;
+};
 
 export type CellList = { row: number; col: number }[];
 

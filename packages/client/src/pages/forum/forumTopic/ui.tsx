@@ -24,6 +24,7 @@ export const ForumTopic: FC = () => {
     setModalOpen(true);
   };
 
+  console.log('forumData=', forumData);
   if (!forumData || forumData.length === 0) {
     return <Typography.Title>Форум пока пустой</Typography.Title>;
   }

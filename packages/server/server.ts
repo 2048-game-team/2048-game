@@ -8,13 +8,14 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import { BASE_URL, API_URL } from './src/consts';
+import { API_URL } from './src/consts';
 import { topics } from './src/router/topics';
 import { messages } from './src/router/messages';
 import { likes } from './src/router/likes';
 import { themes } from './src/router/themes';
 import { errorMiddleware } from './src/middlewares/error';
 
+const BASE_URL = process.env.VITE_ROOT_PATH || '/';
 const isDev = () => process.env.NODE_ENV === 'development';
 
 const app = express();
@@ -85,6 +86,7 @@ export async function startServer() {
           path.resolve(srcPath, 'index.html'),
           'utf-8'
         );
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         template = await vite!.transformIndexHtml(url, template);
       }
 
@@ -93,6 +95,7 @@ export async function startServer() {
       if (!isDev()) {
         ssr = await import(ssrClientPath);
       } else {
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         ssr = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'));
       }
 
@@ -113,6 +116,7 @@ export async function startServer() {
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       if (isDev()) {
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         vite!.ssrFixStacktrace(e as Error);
       }
       next(e);

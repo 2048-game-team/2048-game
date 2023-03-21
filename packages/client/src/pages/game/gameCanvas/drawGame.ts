@@ -11,8 +11,8 @@ import {
 } from './const';
 
 const canvas: {
-  width: number | null,
-  height: number | null
+  width: number | null;
+  height: number | null;
 } = {
   width: null,
   height: null,

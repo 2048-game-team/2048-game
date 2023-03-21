@@ -49,7 +49,6 @@ export async function startServer() {
   }
 
   if (!isDev()) {
-    console.log('BASE_URL=', BASE_URL);
     app.use(
       `${BASE_URL}/assets`,
       express.static(path.resolve(distPath, 'assets'))
